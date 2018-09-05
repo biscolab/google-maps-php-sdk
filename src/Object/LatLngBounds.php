@@ -1,11 +1,11 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * GoogleMapsApi - LatLngBounds.php
+ * Google Maps PHP - LatLngBounds.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
- * Initial version created on: 31/8/2018
- * MIT license: https://github.com/biscolab/google-maps-php-sdk/blob/master/LICENSE
+ * Initial version created on: 5/9/2018
+ * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
 namespace Biscolab\GoogleMaps\Object;
