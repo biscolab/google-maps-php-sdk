@@ -1,0 +1,9 @@
+/local
+vendor/
+.idea/
+tests/private/
+/composer.lock
+/composer.local.*
+/composer.phar
+/coverage.clover
+.DS_Store

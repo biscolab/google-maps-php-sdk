@@ -1,2 +1,2 @@
-# google-maps-php-sdk
-Google Maps PHP SDK
+# Google Maps PHP
+Google Maps PHP - Documentation coming soon
