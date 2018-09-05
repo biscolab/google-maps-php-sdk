@@ -7,3 +7,6 @@ tests/private/
 /composer.phar
 /coverage.clover
 .DS_Store
+build/
+cache/
+config/
