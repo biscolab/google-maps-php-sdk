@@ -88,7 +88,7 @@ abstract class AbstractObject {
 			case 'array':
 				return $field_value;
 			default:
-				return new $field_type($field_value);
+				return ($field_value instanceof $field_type) ? $field_value : new $field_type($field_value);
 		}
 	}
 
