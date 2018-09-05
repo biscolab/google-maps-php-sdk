@@ -58,7 +58,7 @@ class LatLng extends AbstractObject {
 	}
 
 	/**
-	 * @param string $lat
+	 * @param float $lat
 	 *
 	 * @return LatLng
 	 */
@@ -70,7 +70,7 @@ class LatLng extends AbstractObject {
 	}
 
 	/**
-	 * @param string $lng
+	 * @param float $lng
 	 *
 	 * @return LatLng
 	 */
