@@ -35,4 +35,9 @@ class GoogleMapsRequestFields {
 	 * string: address
 	 */
 	const ADDRESS = 'address';
+
+	/**
+	 * string: place_id
+	 */
+	const PLACE_ID = 'place_id';
 }
