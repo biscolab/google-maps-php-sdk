@@ -29,9 +29,9 @@ abstract class AbstractCollection {
 	/**
 	 * AbstractCollection constructor.
 	 *
-	 * @param array $items
+	 * @param null|array $items
 	 */
-	public function __construct(array $items) {
+	public function __construct(?array $items = []) {
 
 		$this->setItems($items);
 	}
@@ -41,10 +41,12 @@ abstract class AbstractCollection {
 	 *
 	 * @return AbstractCollection
 	 */
-	protected function setItems(array $items) {
+	protected function setItems(?array $items = []) {
 
-		foreach ($items as $item) {
-			$this->addItem($item);
+		if (is_array($items) && count($items)) {
+			foreach ($items as $item) {
+				$this->addItem($item);
+			}
 		}
 
 		return $this;
