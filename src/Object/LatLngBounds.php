@@ -44,6 +44,7 @@ class LatLngBounds extends AbstractObject {
 	 */
 	public function setNortheast(LatLng $northeast): LatLngBounds {
 
+		// TODO check validity against southwest
 		$this->northeast = $northeast;
 
 		return $this;
@@ -64,6 +65,7 @@ class LatLngBounds extends AbstractObject {
 	 */
 	public function setSouthwest(LatLng $southwest): LatLngBounds {
 
+		// TODO check validity against northeast
 		$this->southwest = $southwest;
 
 		return $this;
