@@ -19,22 +19,22 @@ namespace Biscolab\GoogleMaps\Values;
 class GeometryLocationTypeValues {
 
 	/**
-	 * string: rooftop
+	 * string: ROOFTOP
 	 */
 	const ROOFTOP = 'ROOFTOP';
 
 	/**
-	 * string: range_interpolated
+	 * string: RANGE_INTERPOLATED
 	 */
 	const RANGE_INTERPOLATED = 'RANGE_INTERPOLATED';
 
 	/**
-	 * string: geometric_center
+	 * string: GEOMETRIC_CENTER
 	 */
 	const GEOMETRIC_CENTER = 'GEOMETRIC_CENTER';
 
 	/**
-	 * string: approximate
+	 * string: APPROXIMATE
 	 */
 	const APPROXIMATE = 'APPROXIMATE';
 }

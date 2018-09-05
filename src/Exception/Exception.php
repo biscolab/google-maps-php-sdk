@@ -10,6 +10,10 @@
 
 namespace Biscolab\GoogleMaps\Exception;
 
+/**
+ * Class Exception
+ * @package Biscolab\GoogleMaps\Exception
+ */
 class Exception extends \Exception {
 
 }

@@ -17,6 +17,10 @@ use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsClient;
 use Biscolab\GoogleMaps\Http\GoogleMapsRequest;
 
+/**
+ * Class GoogleMapsApi
+ * @package Biscolab\GoogleMaps
+ */
 class GoogleMapsApi {
 
 	/**
