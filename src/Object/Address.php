@@ -25,6 +25,6 @@ class Address extends AbstractCollection {
 	 */
 	protected function parseItem($item) {
 
-		return new AddressComponent($item);
+		return ($item instanceof AddressComponent) ? $item : new AddressComponent($item);
 	}
 }
