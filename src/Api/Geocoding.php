@@ -59,6 +59,20 @@ class Geocoding extends Api {
 	}
 
 	/**
+	 * @param string $place_id
+	 *
+	 * @return GoogleMapsResultsCollection
+	 */
+	public function getByPlaceId(string $place_id): GoogleMapsResultsCollection {
+
+		$request = $this->createRequest([
+			GoogleMapsRequestFields::PLACE_ID => $place_id
+		]);
+
+		return $this->getResultsCollections($request);
+	}
+
+	/**
 	 * @param GoogleMapsRequest $request
 	 *
 	 * @return GoogleMapsResultsCollection
