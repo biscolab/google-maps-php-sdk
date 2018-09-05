@@ -57,7 +57,7 @@ abstract class AbstractCollection {
 	 *
 	 * @return AbstractCollection
 	 */
-	protected function addItem($item) {
+	public function addItem($item) {
 
 		$item = $this->parseItem($item);
 		array_push($this->items, $item);
