@@ -13,12 +13,8 @@ namespace Biscolab\geocode\Tests;
 use Biscolab\GoogleMaps\Api\Geocoding;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
 use Biscolab\GoogleMaps\Exception\RequestException;
-use Biscolab\GoogleMaps\Fields\LatLngFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\Result\GeocodingResultsCollection;
-use Biscolab\GoogleMaps\Object\Geometry;
-use Biscolab\GoogleMaps\Object\LatLng;
-use Biscolab\GoogleMaps\Object\Location;
 use Biscolab\GoogleMaps\Values\GoogleMapsResponseStatusValues;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
@@ -204,42 +200,6 @@ class GoogleMapsGeocodingTest extends TestCase {
 		$this->assertEquals(8, $address->count());
 
 		$this->assertEquals(200, $response->getHttpStatusCode());
-
-	}
-
-	public function testGeometrySetter() {
-
-		$geometry = new Geometry();
-
-		$geometry->setLocation(new Location([
-			LatLngFields::LAT => 20,
-			LatLngFields::LNG => 33,
-		]));
-
-		$this->assertEquals(new Location([
-			LatLngFields::LAT => 20,
-			LatLngFields::LNG => 33,
-		]), $geometry->getLocation());
-
-		$this->assertEquals(20, $geometry->getLocation()->getLat());
-		$this->assertEquals(33, $geometry->getLocation()->getLng());
-
-	}
-
-	public function testLatLngSetter() {
-
-		$lat_lng = new LatLng();
-
-		$lat_lng->setLat(-50);
-		$lat_lng->setLng(-100);
-
-		$this->assertEquals(new LatLng([
-			LatLngFields::LAT => -50,
-			LatLngFields::LNG => -100,
-		]), $lat_lng);
-
-		$this->assertEquals(-50, $lat_lng->getLat());
-		$this->assertEquals(-100, $lat_lng->getLng());
 
 	}
 

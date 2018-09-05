@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * Google Maps PHP - GeometryTest.php
+ * Google Maps PHP - LatLngTest.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
  * Initial version created on: 5/9/2018
@@ -11,29 +11,32 @@
 namespace Biscolab\geocode\Tests;
 
 use Biscolab\GoogleMaps\Fields\LatLngFields;
-use Biscolab\GoogleMaps\Object\Geometry;
-use Biscolab\GoogleMaps\Object\Location;
+use Biscolab\GoogleMaps\Object\LatLng;
 use PHPUnit\Framework\TestCase;
 
-class GeometryTest extends TestCase {
+/**
+ * Class LatLngTest
+ * @package Biscolab\geocode\Tests
+ */
+class LatLngTest extends TestCase {
 
+	/**
+	 * @test
+	 */
+	public function testLatLngSetterGetter() {
 
-	public function testGeometrySetterGetter() {
+		$lat_lng = new LatLng();
 
-		$geometry = new Geometry();
+		$lat_lng->setLat(-50.09);
+		$lat_lng->setLng(-100);
 
-		$geometry->setLocation(new Location([
-			LatLngFields::LAT => 20,
-			LatLngFields::LNG => 33,
-		]));
+		$this->assertEquals(new LatLng([
+			LatLngFields::LAT => -50.09,
+			LatLngFields::LNG => -100,
+		]), $lat_lng);
 
-		$this->assertEquals(new Location([
-			LatLngFields::LAT => 20,
-			LatLngFields::LNG => 33,
-		]), $geometry->getLocation());
-
-		$this->assertEquals(20, $geometry->getLocation()->getLat());
-		$this->assertEquals(33, $geometry->getLocation()->getLng());
+		$this->assertEquals(-50.09, $lat_lng->getLat());
+		$this->assertEquals(-100, $lat_lng->getLng());
 
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * Google Maps PHP - GoogleMapsApiTest.php
+ * Google Maps PHP - LocationTest.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
  * Initial version created on: 5/9/2018
@@ -10,22 +10,33 @@
 
 namespace Biscolab\geocode\Tests;
 
-use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
-use Biscolab\GoogleMaps\GoogleMapsApi;
+use Biscolab\GoogleMaps\Fields\LatLngFields;
+use Biscolab\GoogleMaps\Object\Location;
 use PHPUnit\Framework\TestCase;
 
-class GoogleMapsApiTest extends TestCase {
+/**
+ * Class LocationTest
+ * @package Biscolab\geocode\Tests
+ */
+class LocationTest extends TestCase {
 
 	/**
 	 * @test
 	 */
-	public function checkApiKeyTest() {
+	public function testLocationSetterGetter() {
 
-		$gm = new GoogleMapsApi([
-			GoogleMapsApiConfigFields::SERVICE_ENDPOINT => 'geocode',
-			GoogleMapsApiConfigFields::KEY              => 'test_key'
-		]);
-		$this->assertEquals($gm->getKey(), 'test_key');
-		$this->assertEquals($gm->getServiceEndpoint(), 'geocode');
+		$lat_lng = new Location();
+
+		$lat_lng->setLat(-50.09);
+		$lat_lng->setLng(-100);
+
+		$this->assertEquals(new Location([
+			LatLngFields::LAT => -50.09,
+			LatLngFields::LNG => -100,
+		]), $lat_lng);
+
+		$this->assertEquals(-50.09, $lat_lng->getLat());
+		$this->assertEquals(-100, $lat_lng->getLng());
+
 	}
 }
