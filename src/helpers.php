@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * Google Maps PHP - functions.php
+ * Google Maps PHP - helpers.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
  * Initial version created on: 7/9/2018
@@ -17,7 +17,7 @@ namespace Biscolab\GoogleMaps;
  */
 function camel2Snake(string $camel): string {
 
-	return strtolower(implode('_', preg_split('/(?=[A-Z])/', $camel)));
+	return preg_replace('/^_/', '', strtolower(implode('_', preg_split('/(?=[A-Z])/', $camel))));
 }
 
 /**
