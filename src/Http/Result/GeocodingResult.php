@@ -19,6 +19,17 @@ use Biscolab\GoogleMaps\Object\Geometry;
  * Class GeocodingResult
  *
  * Standard and Reverse Geocoding have the same Response/Result format
+ *
+ * @method Address getAddressComponents
+ * @method string getFormattedAddress
+ * @method Geometry getGeometry
+ * @method string getPlaceId
+ * @method array getTypes
+ * @method GeocodingResult setAddressComponents($args)
+ * @method GeocodingResult setFormattedAddress($args)
+ * @method GeocodingResult setGeometry($args)
+ * @method GeocodingResult setPlaceId($args)
+ * @method GeocodingResult setTypes($args)
  * @package Biscolab\GoogleMaps\Http\Result
  */
 class GeocodingResult extends GoogleMapsResult {
@@ -62,97 +73,9 @@ class GeocodingResult extends GoogleMapsResult {
 	/**
 	 * @return Address
 	 */
-	public function getAddressComponents(): Address {
-
-		return $this->address_components;
-	}
-
-	/**
-	 * @return Address
-	 */
 	public function getAddress(): Address {
 
 		return $this->getAddressComponents();
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getFormattedAddress(): string {
-
-		return $this->formatted_address;
-	}
-
-	/**
-	 * @param string $formatted_address
-	 *
-	 * @return GeocodingResult
-	 */
-	public function setFormattedAddress(string $formatted_address): GeocodingResult {
-
-		$this->formatted_address = $formatted_address;
-
-		return $this;
-	}
-
-	/**
-	 * @return Geometry
-	 */
-	public function getGeometry(): Geometry {
-
-		return $this->geometry;
-	}
-
-	/**
-	 * @param Geometry $geometry
-	 *
-	 * @return GeocodingResult
-	 */
-	public function setGeometry(Geometry $geometry): GeocodingResult {
-
-		$this->geometry = $geometry;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getPlaceId(): string {
-
-		return $this->place_id;
-	}
-
-	/**
-	 * @param string $place_id
-	 *
-	 * @return GeocodingResult
-	 */
-	public function setPlaceId(string $place_id): GeocodingResult {
-
-		$this->place_id = $place_id;
-
-		return $this;
-	}
-
-	/**
-	 * @return array
-	 */
-	public function getTypes(): array {
-
-		return $this->types;
-	}
-
-	/**
-	 * @param array $types
-	 *
-	 * @return GeocodingResult
-	 */
-	public function setTypes(array $types): GeocodingResult {
-
-		$this->types = $types;
-
-		return $this;
 	}
 
 }
