@@ -27,5 +27,5 @@ function camel2Snake(string $camel): string {
  */
 function snake2Camel(string $snake): string {
 
-	return ucwords($snake, '_');
+	return lcfirst(preg_replace('/_/', '', ucwords($snake, '_')));
 }
