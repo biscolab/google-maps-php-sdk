@@ -39,6 +39,9 @@
         "psr-4": {
             "Biscolab\\GoogleMaps\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
     
