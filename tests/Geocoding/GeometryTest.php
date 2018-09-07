@@ -57,6 +57,28 @@ class GeometryTest extends TestCase {
 	}
 
 	/**
+	 * @test
+	 */
+	public function testLocationSetterGetterViaArray() {
+
+		$geometry = $this->geometry;
+
+		$geometry->setLocation([
+			LatLngFields::LAT => 20,
+			LatLngFields::LNG => 33,
+		]);
+
+		$this->assertEquals(new Location([
+			LatLngFields::LAT => 20,
+			LatLngFields::LNG => 33,
+		]), $geometry->getLocation());
+
+		$this->assertEquals(20, $geometry->getLocation()->getLat());
+		$this->assertEquals(33, $geometry->getLocation()->getLng());
+
+	}
+
+	/**
 	 * @tets
 	 */
 	public function testLocationTypeSetterGetter() {
