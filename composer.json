@@ -30,12 +30,18 @@
     "autoload": {
         "psr-4": {
             "Biscolab\\GoogleMaps\\": "src/"
-        }
+        },
+        "files": [
+            "src/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Biscolab\\GoogleMaps\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
     

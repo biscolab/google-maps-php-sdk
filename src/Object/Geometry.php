@@ -15,6 +15,12 @@ use Biscolab\GoogleMaps\Fields\GeometryFields;
 
 /**
  * Class Geometry
+ * @method Location getLocation
+ * @method Viewport getViewport
+ * @method string getLocationType
+ * @method Geometry setLocation($args)
+ * @method Geometry setViewport($args)
+ * @method Geometry setLocationType($args)
  * @package Biscolab\GoogleMaps\Object
  */
 class Geometry extends AbstractObject {
@@ -42,65 +48,4 @@ class Geometry extends AbstractObject {
 		GeometryFields::VIEWPORT      => Viewport::class,
 		GeometryFields::LOCATION_TYPE => 'string'
 	];
-
-	/**
-	 * @return Location
-	 */
-	public function getLocation(): Location {
-
-		return $this->location;
-	}
-
-	/**
-	 * @return Viewport
-	 */
-	public function getViewport(): Viewport {
-
-		return $this->viewport;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getLocationType(): string {
-
-		return $this->location_type;
-	}
-
-	/**
-	 * @param Location $location
-	 *
-	 * @return Geometry
-	 */
-	public function setLocation(Location $location): Geometry {
-
-		$this->location = $location;
-
-		return $this;
-	}
-
-	/**
-	 * @param Viewport $viewport
-	 *
-	 * @return Geometry
-	 */
-	public function setViewport(Viewport $viewport): Geometry {
-
-		$this->viewport = $viewport;
-
-		return $this;
-	}
-
-	/**
-	 * @param string $location_type
-	 *
-	 * @return Geometry
-	 */
-	public function setLocationType(string $location_type): Geometry {
-
-		$this->location_type = $location_type;
-
-		return $this;
-	}
-
 }

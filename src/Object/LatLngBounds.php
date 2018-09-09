@@ -15,6 +15,8 @@ use Biscolab\GoogleMaps\Fields\LatLngBoundsFields;
 
 /**
  * Class LatLngBounds
+ * @method LatLng setLat($args)
+ * @method LatLng setLng($args)
  * @package Biscolab\GoogleMaps\Object
  */
 class LatLngBounds extends AbstractObject {
@@ -36,47 +38,5 @@ class LatLngBounds extends AbstractObject {
 		LatLngBoundsFields::NORTHEAST => LatLng::class,
 		LatLngBoundsFields::SOUTHWEST => LatLng::class
 	];
-
-	/**
-	 * @param LatLng $northeast
-	 *
-	 * @return LatLngBounds
-	 */
-	public function setNortheast(LatLng $northeast): LatLngBounds {
-
-		// TODO check validity against southwest
-		$this->northeast = $northeast;
-
-		return $this;
-	}
-
-	/**
-	 * @return LatLng
-	 */
-	public function getNortheast(): LatLng {
-
-		return $this->northeast;
-	}
-
-	/**
-	 * @param LatLng $southwest
-	 *
-	 * @return LatLngBounds
-	 */
-	public function setSouthwest(LatLng $southwest): LatLngBounds {
-
-		// TODO check validity against northeast
-		$this->southwest = $southwest;
-
-		return $this;
-	}
-
-	/**
-	 * @return LatLng
-	 */
-	public function getSouthwest(): LatLng {
-
-		return $this->southwest;
-	}
 
 }

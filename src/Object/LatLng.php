@@ -15,6 +15,8 @@ use Biscolab\GoogleMaps\Fields\LatLngFields;
 
 /**
  * Class LatLng
+ * @method LatLng setLat($args)
+ * @method LatLng setLng($args)
  * @package Biscolab\GoogleMaps\Object
  */
 class LatLng extends AbstractObject {
@@ -55,30 +57,6 @@ class LatLng extends AbstractObject {
 	public function getLng(): string {
 
 		return $this->lng ?? 0;
-	}
-
-	/**
-	 * @param float $lat
-	 *
-	 * @return LatLng
-	 */
-	public function setLat(float $lat): LatLng {
-
-		$this->lat = $lat;
-
-		return $this;
-	}
-
-	/**
-	 * @param float $lng
-	 *
-	 * @return LatLng
-	 */
-	public function setLng(float $lng): LatLng {
-
-		$this->lng = $lng;
-
-		return $this;
 	}
 
 	/**
