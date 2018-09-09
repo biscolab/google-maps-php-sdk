@@ -15,9 +15,11 @@ use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
 use Biscolab\GoogleMaps\Exception\RequestException;
 use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\Result\GeocodingResultsCollection;
+use function Biscolab\GoogleMaps\snake2Camel;
 use Biscolab\GoogleMaps\Values\GoogleMapsResponseStatusValues;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
+use function Biscolab\GoogleMaps\camel2Snake;
 
 class GoogleMapsGeocodingTest extends TestCase {
 
@@ -207,6 +209,16 @@ class GoogleMapsGeocodingTest extends TestCase {
 
 		$this->expectException(RequestException::class);
 		new GoogleMapsResponse($this->mock_response_ko);
+	}
+
+	public function testCamelToSnake() {
+
+		$this->assertEquals('test_field_name', camel2Snake('testFieldName'));
+	}
+
+	public function testSnakeToCamel() {
+
+		$this->assertEquals('testFieldName', snake2Camel('test_field_name'));
 	}
 
 }
