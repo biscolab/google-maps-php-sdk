@@ -11,6 +11,7 @@
 namespace Biscolab\GoogleMaps\Abstracts;
 
 use Biscolab\GoogleMaps\Exception\Exception;
+use function Biscolab\GoogleMaps\camel2Snake;
 
 /**
  * Class AbstractObject
@@ -55,8 +56,7 @@ abstract class AbstractObject {
 				if ($this->isFieldRequired($field_name)) {
 					$this->addError('Missing "' . $field_name . '" in ' . static::class);
 				}
-			}
-			else {
+			} else {
 				$this->$field_name = $this->parseFieldValue($field_type, $args[$field_name]);
 			}
 		}
@@ -71,6 +71,18 @@ abstract class AbstractObject {
 	protected function isFieldRequired(string $field_name): bool {
 
 		return in_array($field_name, $this->required);
+	}
+
+	/**
+	 * @param string $error
+	 *
+	 * @return array
+	 */
+	protected function addError(string $error): array {
+
+		array_push($this->errors, $error);
+
+		return $this->errors;
 	}
 
 	/**
@@ -93,18 +105,6 @@ abstract class AbstractObject {
 	}
 
 	/**
-	 * @param string $error
-	 *
-	 * @return array
-	 */
-	protected function addError(string $error): array {
-
-		array_push($this->errors, $error);
-
-		return $this->errors;
-	}
-
-	/**
 	 * @throws Exception
 	 */
 	protected function throwErrors() {
@@ -112,6 +112,14 @@ abstract class AbstractObject {
 		if (count($this->errors)) {
 			throw new Exception(implode(', ', $this->errors));
 		}
+	}
+
+	/**
+	 * @return string
+	 */
+	public function toJson(): string {
+
+		return json_encode($this->toArray());
 	}
 
 	/**
@@ -134,17 +142,37 @@ abstract class AbstractObject {
 	/**
 	 * @return string
 	 */
-	public function toJson(): string {
-
-		return json_encode($this->toArray());
-	}
-
-	/**
-	 * @return string
-	 */
 	public function __toString(): string {
 
 		return implode(',', $this->toArray());
+	}
+
+	/**
+	 * @param $name
+	 * @param $arguments
+	 *
+	 * @return mixed
+	 */
+	public function __call($name, $arguments) {
+
+		// TODO: Implement __call() method.
+		$action = null;
+		preg_match('/(?<=(g|s)et)([A-Za-z0-9])\w+/', $name, $match);
+
+		$camel_field = (empty($match[0])) ? null : $match[0];
+
+		$snake_field = camel2Snake($camel_field);
+
+		$field_type = (empty($this->typeCheck[$snake_field])) ? null : $this->typeCheck[$snake_field];
+
+		if (!empty($match[1]) && $field_type) {
+			switch ($match[1]) {
+				case 's':
+					return $this->$snake_field = $this->parseFieldValue($field_type, current($arguments));
+				case 'g':
+					return $this->$snake_field;
+			}
+		}
 	}
 
 }
