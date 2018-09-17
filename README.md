@@ -4,6 +4,7 @@
 
 Google Maps PHP (unofficial library) - **Documentation coming soon**.
 This provide simple functions to work with Google Maps APIs. You can find further informations in [Google Maps Platform Documentation](https://developers.google.com/maps/documentation/)
+
 Google Maps provide many services, actually at this moment this package implements only **Geocoding** service but others will be available soon.
 
 ## Google Maps Services
