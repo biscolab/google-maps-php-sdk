@@ -15,6 +15,12 @@ use Biscolab\GoogleMaps\Fields\AddressComponentFields;
 
 /**
  * Class AddressComponent
+ * @method AddressComponent setLongName(string $args)
+ * @method AddressComponent setShortName(string $args)
+ * @method AddressComponent setTypes(array $args)
+ * @method string getLongName()
+ * @method string getShortName()
+ * @method array getTypes()
  * @package Biscolab\GoogleMaps\Object
  */
 class AddressComponent extends AbstractObject {
