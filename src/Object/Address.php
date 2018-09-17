@@ -15,6 +15,8 @@ use Biscolab\GoogleMaps\Abstracts\AbstractCollection;
 /**
  * Class Address
  * @package Biscolab\GoogleMaps\Object
+ *
+ * @see https://developers.google.com/maps/documentation/geocoding/intro#Types
  */
 class Address extends AbstractCollection {
 
