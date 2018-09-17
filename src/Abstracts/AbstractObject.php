@@ -155,11 +155,9 @@ abstract class AbstractObject {
 	 */
 	public function __call($name, $arguments) {
 
-		// TODO: Implement __call() method.
-		$action = null;
 		preg_match('/(?<=(g|s)et)([A-Za-z0-9])\w+/', $name, $match);
 
-		$camel_field = (empty($match[0])) ? null : $match[0];
+		$camel_field = (empty($match[0])) ? '' : $match[0];
 
 		$snake_field = camel2Snake($camel_field);
 
