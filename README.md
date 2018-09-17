@@ -7,16 +7,24 @@ This provide simple functions to work with Google Maps APIs. You can find furthe
 
 Google Maps provide many services, actually at this moment this package implements only **Geocoding** service but others will be available soon.
 
+## Reference
+Go to [complete reference](https://biscolab.com/google-maps-php-reference/)
+
 ## Google Maps Services
 
-* Geocoding (ready)
+### Ready
+* Geocoding (:ballot_box_with_check:)
+
+### ASAP
 * Directions (soon)
 * Distance Matrix (soon)
 * Elevation (soon)
-* Geolocation (not scheduled)
 * Places (soon)
 * Road (soon)
 * Time Zone (soon)
+
+### Not scheduled
+* Geolocation (not scheduled)
 
 ## Installation
 
@@ -41,8 +49,8 @@ use Biscolab\GoogleMaps\Api\Geocoding;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
 
 $geocoding = new Geocoding([
-			GoogleMapsApiConfigFields::KEY => 'YOUR_API_KEY'
-		]);
+	GoogleMapsApiConfigFields::KEY => 'YOUR_API_KEY'
+]);
 ```
 
 ### Get results
@@ -84,9 +92,6 @@ Every result had the following methods to retrieve member variables:
 * getGeometry (return Geometry)
 * getPlaceId (return string)
 * getTypes (return array)
-
-## Reference
-Go to [complete reference](https://biscolab.com/google-maps-php-reference/)
 
 ## Test
 
