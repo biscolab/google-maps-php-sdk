@@ -22,14 +22,19 @@ use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 abstract class Api {
 
 	/**
+	 * @var string
+	 */
+	const SERVICE_ENDPOINT = null;
+
+	/**
 	 * @var GoogleMapsApi
 	 */
-	protected $googleMapsApi = null;
+	protected $google_maps_api = null;
 
 	/**
 	 * @var string
 	 */
-	const SERVICE_ENDPOINT = null;
+	protected $result_collection = '';
 
 	/**
 	 * Api constructor.
@@ -43,23 +48,15 @@ abstract class Api {
 	}
 
 	/**
-	 * @return GoogleMapsApi
-	 */
-	public function getGoogleMapsApi(): GoogleMapsApi {
-
-		return $this->googleMapsApi;
-	}
-
-	/**
-	 * @param GoogleMapsApi $googleMapsApi
+	 * @param array $config
 	 *
-	 * @return Api
+	 * @return array
 	 */
-	public function setGoogleMapsApi(GoogleMapsApi $googleMapsApi): Api {
+	protected function getServiceConfig(array $config = []): array {
 
-		$this->googleMapsApi = $googleMapsApi;
-
-		return $this;
+		return array_merge($config, [
+			GoogleMapsApiConfigFields::SERVICE_ENDPOINT => $this->getServiceEndpoint()
+		]);
 	}
 
 	/**
@@ -71,15 +68,23 @@ abstract class Api {
 	}
 
 	/**
-	 * @param array $config
-	 *
-	 * @return array
+	 * @return GoogleMapsApi
 	 */
-	protected function getServiceConfig(array $config = []): array {
+	public function getGoogleMapsApi(): GoogleMapsApi {
 
-		return array_merge($config, [
-			GoogleMapsApiConfigFields::SERVICE_ENDPOINT => $this->getServiceEndpoint()
-		]);
+		return $this->google_maps_api;
+	}
+
+	/**
+	 * @param GoogleMapsApi $google_maps_api
+	 *
+	 * @return Api
+	 */
+	public function setGoogleMapsApi(GoogleMapsApi $google_maps_api): Api {
+
+		$this->google_maps_api = $google_maps_api;
+
+		return $this;
 	}
 
 	/**
