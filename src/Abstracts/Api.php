@@ -87,12 +87,22 @@ abstract class Api {
 	 *
 	 * @return mixed
 	 */
-	abstract public function createRequest(array $params): GoogleMapsRequest;
+	public function createRequest(array $params): GoogleMapsRequest {
+
+		return new GoogleMapsRequest($params);
+	}
 
 	/**
 	 * @param GoogleMapsRequest $request
 	 *
 	 * @return GoogleMapsResultsCollection
 	 */
-	abstract public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection;
+	public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection {
+
+		$results = $this->getGoogleMapsApi()->get($request)->getResults();
+
+		$result_collection_class = $this->result_collection;
+
+		return new $result_collection_class($results);
+	}
 }
