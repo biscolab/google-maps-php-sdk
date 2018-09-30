@@ -40,4 +40,9 @@ class GoogleMapsRequestFields {
 	 * string: place_id
 	 */
 	const PLACE_ID = 'place_id';
+
+	/**
+	 * string: locations
+	 */
+	const LOCATIONS = 'locations';
 }
