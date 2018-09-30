@@ -1,6 +1,6 @@
 # Google Maps PHP SDK
 
-[![Packagist version](https://img.shields.io/packagist/v/biscolab/google-maps-php-sdk.svg)](https://packagist.org/packages/biscolab/google-maps-php-sdk) [![Scrutinizer](https://img.shields.io/scrutinizer/g/biscolab/google-maps-php-sdk.svg)](https://scrutinizer-ci.com/g/biscolab/google-maps-php-sdk/)
+[![Packagist version](https://img.shields.io/packagist/v/biscolab/google-maps-php-sdk.svg)](https://packagist.org/packages/biscolab/google-maps-php-sdk) [![Scrutinizer](https://img.shields.io/scrutinizer/g/biscolab/google-maps-php-sdk.svg)](https://scrutinizer-ci.com/g/biscolab/google-maps-php-sdk/) [![Build Status](https://travis-ci.org/biscolab/google-maps-php-sdk.svg?branch=master)](https://travis-ci.org/biscolab/google-maps-php-sdk)
 
 Google Maps PHP (unofficial library) - **Documentation coming soon**.
 This provide simple functions to work with Google Maps APIs. You can find further informations in [Google Maps Platform Documentation](https://developers.google.com/maps/documentation/)
