@@ -31,6 +31,11 @@ class Geocoding extends Api {
 	const SERVICE_ENDPOINT = 'geocode';
 
 	/**
+	 * @var string
+	 */
+	protected $result_collection = GeocodingResultsCollection::class;
+
+	/**
 	 * @param string $literal_address
 	 *
 	 * @return GoogleMapsResultsCollection
@@ -70,28 +75,6 @@ class Geocoding extends Api {
 		]);
 
 		return $this->getResultsCollections($request);
-	}
-
-	/**
-	 * @param GoogleMapsRequest $request
-	 *
-	 * @return GoogleMapsResultsCollection
-	 */
-	public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection {
-
-		$results = $this->getGoogleMapsApi()->get($request)->getResults();
-
-		return new GeocodingResultsCollection($results);
-	}
-
-	/**
-	 * @param array $params
-	 *
-	 * @return GoogleMapsRequest
-	 */
-	public function createRequest(array $params): GoogleMapsRequest {
-
-		return new GoogleMapsRequest($params);
 	}
 
 }

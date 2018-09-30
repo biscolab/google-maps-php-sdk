@@ -18,4 +18,20 @@ use Biscolab\GoogleMaps\Abstracts\AbstractCollection;
  */
 class GoogleMapsResultsCollection extends AbstractCollection {
 
+	/**
+	 * @var string
+	 */
+	protected $item_class = GoogleMapsResult::class;
+
+	/**
+	 * @param $item
+	 *
+	 * @return GeocodingResult
+	 */
+	protected function parseItem($item) {
+
+		$item_class = $this->item_class;
+
+		return new $item_class($item);
+	}
 }

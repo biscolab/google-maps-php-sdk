@@ -22,14 +22,19 @@ use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 abstract class Api {
 
 	/**
+	 * @var string
+	 */
+	const SERVICE_ENDPOINT = null;
+
+	/**
 	 * @var GoogleMapsApi
 	 */
-	protected $googleMapsApi = null;
+	protected $google_maps_api = null;
 
 	/**
 	 * @var string
 	 */
-	const SERVICE_ENDPOINT = null;
+	protected $result_collection = '';
 
 	/**
 	 * Api constructor.
@@ -40,34 +45,6 @@ abstract class Api {
 
 		$service_config = $this->getServiceConfig($config);
 		$this->setGoogleMapsApi(new GoogleMapsApi($service_config));
-	}
-
-	/**
-	 * @return GoogleMapsApi
-	 */
-	public function getGoogleMapsApi(): GoogleMapsApi {
-
-		return $this->googleMapsApi;
-	}
-
-	/**
-	 * @param GoogleMapsApi $googleMapsApi
-	 *
-	 * @return Api
-	 */
-	public function setGoogleMapsApi(GoogleMapsApi $googleMapsApi): Api {
-
-		$this->googleMapsApi = $googleMapsApi;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getServiceEndpoint(): string {
-
-		return static::SERVICE_ENDPOINT;
 	}
 
 	/**
@@ -83,16 +60,54 @@ abstract class Api {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function getServiceEndpoint(): string {
+
+		return static::SERVICE_ENDPOINT;
+	}
+
+	/**
+	 * @return GoogleMapsApi
+	 */
+	public function getGoogleMapsApi(): GoogleMapsApi {
+
+		return $this->google_maps_api;
+	}
+
+	/**
+	 * @param GoogleMapsApi $google_maps_api
+	 *
+	 * @return Api
+	 */
+	public function setGoogleMapsApi(GoogleMapsApi $google_maps_api): Api {
+
+		$this->google_maps_api = $google_maps_api;
+
+		return $this;
+	}
+
+	/**
 	 * @param array $params
 	 *
 	 * @return mixed
 	 */
-	abstract public function createRequest(array $params): GoogleMapsRequest;
+	public function createRequest(array $params): GoogleMapsRequest {
+
+		return new GoogleMapsRequest($params);
+	}
 
 	/**
 	 * @param GoogleMapsRequest $request
 	 *
 	 * @return GoogleMapsResultsCollection
 	 */
-	abstract public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection;
+	public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection {
+
+		$results = $this->getGoogleMapsApi()->get($request)->getResults();
+
+		$result_collection_class = $this->result_collection;
+
+		return new $result_collection_class($results);
+	}
 }
