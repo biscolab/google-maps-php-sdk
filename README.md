@@ -3,6 +3,7 @@
 ![Packagist version](https://img.shields.io/packagist/v/biscolab/google-maps-php-sdk.svg) [![Scrutinizer](https://img.shields.io/scrutinizer/g/biscolab/google-maps-php-sdk.svg)](https://scrutinizer-ci.com/g/biscolab/google-maps-php-sdk/)
 
 Google Maps PHP (unofficial library) - **Documentation coming soon**.
+
 This provide simple functions to work with Google Maps APIs. You can find further informations in [Google Maps Platform Documentation](https://developers.google.com/maps/documentation/)
 
 Google Maps provide many services, actually at this moment this package implements only **Geocoding** service but others will be available soon.
@@ -13,12 +14,13 @@ Go to [complete reference](https://biscolab.com/google-maps-php-reference/)
 ## Google Maps Services
 
 ### Ready
-* Geocoding (:ballot_box_with_check:)
+* Geocoding :ballot_box_with_check:
+* Elevation :ballot_box_with_check: (only Positional Requests)
 
 ### ASAP
+* Elevation (Sampled Path Requests - NEXT)
 * Directions (soon)
 * Distance Matrix (soon)
-* Elevation (soon)
 * Places (soon)
 * Road (soon)
 * Time Zone (soon)
