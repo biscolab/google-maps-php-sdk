@@ -19,12 +19,7 @@ use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 class GeocodingResultsCollection extends GoogleMapsResultsCollection {
 
 	/**
-	 * @param $item
-	 *
-	 * @return GeocodingResult
+	 * @var string
 	 */
-	protected function parseItem($item) {
-
-		return new GeocodingResult($item);
-	}
+	protected $item_class = GeocodingResult::class;
 }
