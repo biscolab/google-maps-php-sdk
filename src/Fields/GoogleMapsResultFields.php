@@ -56,4 +56,14 @@ class GoogleMapsResultFields {
 	 */
 	const LOCATION = 'location';
 
+	/**
+	 * string elevation
+	 */
+	const ELEVATION = 'elevation';
+
+	/**
+	 * string resolution
+	 */
+	const RESOLUTION = 'resolution';
+
 }
