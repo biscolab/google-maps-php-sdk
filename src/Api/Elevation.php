@@ -11,6 +11,7 @@
 namespace Biscolab\GoogleMaps\Api;
 
 use Biscolab\GoogleMaps\Abstracts\Api;
+use Biscolab\GoogleMaps\Exception\RequestException;
 use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 use Biscolab\GoogleMaps\Http\Result\ElevationResultsCollection;
@@ -41,9 +42,9 @@ class Elevation extends Api {
 	 * @param LatLng|string|array $locations
 	 * This parameter takes either a single location or multiple locations passed as an array or as an encoded polyline
 	 *
-	 * @since 0.3.0
-	 *
 	 * @return GoogleMapsResultsCollection
+	 *
+	 * @since 0.3.0
 	 */
 	public function getByLocations($locations): GoogleMapsResultsCollection {
 
@@ -57,11 +58,11 @@ class Elevation extends Api {
 	}
 
 	/**
-	 * @param $locations
-	 *
-	 * @since   0.3.0
+	 * @param array|string $locations
 	 *
 	 * @return string
+	 *
+	 * @since   0.3.0
 	 */
 	public function parseLocations($locations): string {
 
@@ -73,6 +74,40 @@ class Elevation extends Api {
 		}
 
 		return (string)$locations;
+	}
+
+	/**
+	 * Sampled Path Requests
+	 *
+	 * @param array|string $path
+	 * This parameter takes either a multiple locations passed as an array or as an encoded polyline
+	 *
+	 * @param int          $samples
+	 * This will be the number of results as well
+	 *
+	 * @throws RequestException
+	 * @return GoogleMapsResultsCollection
+	 *
+	 * @since 0.4.0
+	 */
+	public function getBySampledPath($path, int $samples): GoogleMapsResultsCollection {
+
+		if (is_array($path) && count($path) < 2) {
+			throw new RequestException('The number of items provided in the path must be greater than 1 (One)');
+		}
+
+		if ($samples <= 0) {
+			throw new RequestException('The number of samples must be greater than 0 (Zero)');
+		}
+
+		$path = $this->parseLocations($path);
+
+		$request = $this->createRequest([
+			GoogleMapsRequestFields::PATH    => $path,
+			GoogleMapsRequestFields::SAMPLES => $samples,
+		]);
+
+		return $this->getResultsCollections($request);
 	}
 
 }
