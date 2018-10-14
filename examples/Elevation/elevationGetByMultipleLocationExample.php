@@ -38,11 +38,12 @@ $locations = [
 $results = $elevation->getByLocations($locations);
 
 // Get number of results
-$results->count();
+$number_of_results = $results->count();
 
 // Get first result
 /** @var \Biscolab\GoogleMaps\Http\Result\ElevationResult $first_result */
 $first_result = $results->current();
+/** @var \Biscolab\GoogleMaps\Http\Result\ElevationResult $last_result */
 $last_result = $results->last();
 
 // Get elevation of first result
@@ -55,8 +56,8 @@ $first_resolution = $first_result->getResolution();
 
 // Get elevation of last result
 // should be 2013.5008544922
-$last_elevation = $first_result->getElevation();
+$last_elevation = $last_result->getElevation();
 
 // Get resolution of last result
 // should be 152.70323181152
-$last_resolution = $first_result->getResolution();
+$last_resolution = $last_result->getResolution();
