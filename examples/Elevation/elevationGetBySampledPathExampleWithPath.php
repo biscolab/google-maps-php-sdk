@@ -64,5 +64,3 @@ $last_elevation = $last_result->getElevation();
 // Get resolution of last result
 // should be 152.70323181152
 $last_resolution = $last_result->getResolution();
-
-print_r($results);
