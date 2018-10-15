@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * Google Maps PHP - elevationGetBySampledPathExample.php
+ * Google Maps PHP - elevationGetBySampledPathExampleWithArray.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
  * Initial version created on: 14/10/2018
