@@ -1,10 +1,10 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * Google Maps PHP - elevationGetByMultipleLocationExample.php
+ * Google Maps PHP - elevationGetBySampledPathWithPolylineExample.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
- * Initial version created on: 30/9/2018
+ * Initial version created on: 14/10/2018
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
@@ -25,17 +25,10 @@ $elevation = new Elevation([
 // Change with the Location object you want to analyze
 // From Google official documentation you can try with "39.73915360,-104.9847034"
 // see https://developers.google.com/maps/documentation/geocoding/start
-$locations = [
-	new Location([
-		LatLngFields::LAT => 39.73915360,
-		LatLngFields::LNG => -104.9847034,
-	]),
-	new Location([
-		LatLngFields::LAT => 50.123,
-		LatLngFields::LNG => 99.456,
-	])
-];
-$results = $elevation->getByLocations($locations);
+$path = 'enc:gfo}EtohhUxD@bAxJmGF';
+
+// The response will contains 5 results
+$results = $elevation->getBySampledPath($path, 5);
 
 // Get number of results
 $number_of_results = $results->count();
@@ -47,17 +40,17 @@ $first_result = $results->current();
 $last_result = $results->last();
 
 // Get elevation of first result
-// should be 1608.637939453125
+// should be -52.799583435059
 $first_elevation = $first_result->getElevation();
 
 // Get resolution of first result
-// should be 4.771975994110107
+// should be 19.08790397644
 $first_resolution = $first_result->getResolution();
 
 // Get elevation of last result
-// should be 2013.5008544922
+// should be -56.311859130859
 $last_elevation = $last_result->getElevation();
 
 // Get resolution of last result
-// should be 152.70323181152
+// should be 19.08790397644
 $last_resolution = $last_result->getResolution();

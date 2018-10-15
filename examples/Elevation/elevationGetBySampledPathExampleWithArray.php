@@ -1,10 +1,10 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * Google Maps PHP - elevationGetByMultipleLocationExample.php
+ * Google Maps PHP - elevationGetBySampledPathExampleWithArray.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
- * Initial version created on: 30/9/2018
+ * Initial version created on: 14/10/2018
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
@@ -25,7 +25,7 @@ $elevation = new Elevation([
 // Change with the Location object you want to analyze
 // From Google official documentation you can try with "39.73915360,-104.9847034"
 // see https://developers.google.com/maps/documentation/geocoding/start
-$locations = [
+$path = [
 	new Location([
 		LatLngFields::LAT => 39.73915360,
 		LatLngFields::LNG => -104.9847034,
@@ -35,7 +35,9 @@ $locations = [
 		LatLngFields::LNG => 99.456,
 	])
 ];
-$results = $elevation->getByLocations($locations);
+
+// The response will contains 5 results
+$results = $elevation->getBySampledPath($path, 5);
 
 // Get number of results
 $number_of_results = $results->count();
