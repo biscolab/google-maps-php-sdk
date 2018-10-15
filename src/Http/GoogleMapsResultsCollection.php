@@ -26,9 +26,9 @@ class GoogleMapsResultsCollection extends AbstractCollection {
 	/**
 	 * @param $item
 	 *
-	 * @return GeocodingResult
+	 * @return GoogleMapsResult
 	 */
-	protected function parseItem($item) {
+	protected function parseItem($item): GoogleMapsResult {
 
 		$item_class = $this->item_class;
 
