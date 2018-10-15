@@ -11,7 +11,7 @@
 namespace Biscolab\GoogleMaps\Api;
 
 use Biscolab\GoogleMaps\Abstracts\Api;
-use Biscolab\GoogleMaps\Exception\RequestException;
+use Biscolab\GoogleMaps\Exception\InvalidArgumentException;
 use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 use Biscolab\GoogleMaps\Http\Result\ElevationResultsCollection;
@@ -85,7 +85,7 @@ class Elevation extends Api {
 	 * @param int          $samples
 	 * This will be the number of results as well
 	 *
-	 * @throws RequestException
+	 * @throws InvalidArgumentException
 	 * @return GoogleMapsResultsCollection
 	 *
 	 * @since 0.4.0
@@ -93,11 +93,11 @@ class Elevation extends Api {
 	public function getBySampledPath($path, int $samples): GoogleMapsResultsCollection {
 
 		if (is_array($path) && count($path) < 2) {
-			throw new RequestException('The number of items provided in the path must be greater than 1 (One)');
+			throw new InvalidArgumentException('The number of items provided in the path must be greater than 1 (One)');
 		}
 
 		if ($samples <= 0) {
-			throw new RequestException('The number of samples must be greater than 0 (Zero)');
+			throw new InvalidArgumentException('The number of samples must be greater than 0 (Zero)');
 		}
 
 		$path = $this->parseLocations($path);
