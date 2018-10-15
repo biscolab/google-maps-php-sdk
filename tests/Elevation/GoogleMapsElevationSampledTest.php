@@ -1,10 +1,10 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * Google Maps PHP - GoogleMapsElevationTest.php
+ * Google Maps PHP - GoogleMapsElevationSampledTest.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
- * Initial version created on: 28/9/2018
+ * Initial version created on: 15/10/2018
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
@@ -12,16 +12,15 @@ namespace Biscolab\geocode\Tests;
 
 use Biscolab\GoogleMaps\Api\Elevation;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
-use Biscolab\GoogleMaps\Exception\RequestException;
+use Biscolab\GoogleMaps\Exception\InvalidArgumentException;
 use Biscolab\GoogleMaps\Fields\LatLngFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\Result\ElevationResultsCollection;
 use Biscolab\GoogleMaps\Object\Location;
-use Biscolab\GoogleMaps\Values\GoogleMapsResponseStatusValues;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
-class GoogleMapsElevationTest extends TestCase {
+class GoogleMapsElevationSampledTest extends TestCase {
 
 	/**
 	 * @var Elevation
@@ -61,13 +60,25 @@ class GoogleMapsElevationTest extends TestCase {
 						'lng' => -104.9847034,
 					],
 				],
+				1 => [
+					'elevation'  => -1825.4562988281,
+					'resolution' => 610.81292724609,
+					'location'   => [
+						'lat' => 77.046330732548,
+						'lng' => -160.05321067231,
+					],
+				],
+				2 => [
+					'elevation'  => 2013.5008544922,
+					'resolution' => 152.70323181152,
+					'location'   => [
+						'lat' => 50.123,
+						'lng' => 99.456,
+					],
+				],
 			],
 			'status'  => 'OK',
 		];
-
-		$default_response_KO = array_merge($default_response_OK, [
-			'status' => GoogleMapsResponseStatusValues::REQUEST_DENIED
-		]);
 
 		// Elevation with API key
 		// Remember to associate a valid payment method to your project
@@ -75,55 +86,10 @@ class GoogleMapsElevationTest extends TestCase {
 			GoogleMapsApiConfigFields::KEY => 'MyKey'
 		]);
 
-		// Elevation with sensor
-		$this->elevation_with_sensor = new Elevation([
-			GoogleMapsApiConfigFields::SENSOR => 'true'
-		]);
-
-		// Elevation with NO API key
-		$this->elevation_no_key = new Elevation();
-
 		$this->mock_response_ok = new Response(200, [], \GuzzleHttp\json_encode($default_response_OK));
-		$this->mock_response_ko = new Response(200, [], \GuzzleHttp\json_encode($default_response_KO));
 	}
 
-	public function testCheckElevationConfig() {
-
-		$this->assertEquals(Elevation::SERVICE_ENDPOINT, $this->elevation_with_key->getGoogleMapsApi()->getServiceEndpoint());
-		$this->assertEquals('MyKey', $this->elevation_with_key->getGoogleMapsApi()->getKey());
-		$this->assertEquals('', $this->elevation_no_key->getGoogleMapsApi()->getKey());
-	}
-
-	public function testCheckElevationConfigWithSensor() {
-
-		$this->assertEquals('true', $this->elevation_with_sensor->getGoogleMapsApi()->getSensor());
-	}
-
-	public function testParseLocationsSingle() {
-		$parsed_locations = $this->elevation_with_key->parseLocations(new Location([
-			LatLngFields::LAT => 39.73915360,
-			LatLngFields::LNG => -104.98470340,
-		]));
-
-		$this->assertEquals('39.7391536,-104.9847034', $parsed_locations);
-	}
-
-	public function testParseLocationsMulti() {
-		$parsed_locations = $this->elevation_with_key->parseLocations([
-			new Location([
-				LatLngFields::LAT => 39.73915360,
-				LatLngFields::LNG => -104.98470340,
-			]),
-			new Location([
-				LatLngFields::LAT => 50.123,
-				LatLngFields::LNG => 99.456,
-			])
-		]);
-
-		$this->assertEquals('39.7391536,-104.9847034|50.123,99.456', $parsed_locations);
-	}
-
-	public function testCheckElevationResponseOk() {
+	public function testCheckElevationSampledResponseOk() {
 
 		$response = new GoogleMapsResponse($this->mock_response_ok);
 
@@ -131,6 +97,8 @@ class GoogleMapsElevationTest extends TestCase {
 		$result = new ElevationResultsCollection($response->getResults());
 
 		$this->assertNotNull($result);
+
+		$this->assertEquals(3, $result->count());
 
 		$array_result = $result->first()->toArray();
 		// Response array keys
@@ -142,10 +110,28 @@ class GoogleMapsElevationTest extends TestCase {
 
 	}
 
-	public function testResponseKO() {
+	public function testExceptionIfPathItemsLessThanTwo() {
 
-		$this->expectException(RequestException::class);
-		new GoogleMapsResponse($this->mock_response_ko);
+		$this->expectException(InvalidArgumentException::class);
+		$this->elevation_with_key->getBySampledPath([
+			new Location([
+				LatLngFields::LAT => 39.73915360,
+				LatLngFields::LNG => -104.9847034,
+			])], 2);
+	}
+
+	public function testExceptionIfSamplesLessThanOne() {
+
+		$this->expectException(InvalidArgumentException::class);
+		$this->elevation_with_key->getBySampledPath([
+			new Location([
+				LatLngFields::LAT => 39.73915360,
+				LatLngFields::LNG => -104.9847034,
+			],
+			new Location([
+				LatLngFields::LAT => 50.123,
+				LatLngFields::LNG => 99.456,
+			]))], 0);
 	}
 
 }
