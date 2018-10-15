@@ -17,6 +17,7 @@ use Biscolab\GoogleMaps\Fields\LatLngFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\Result\ElevationResultsCollection;
 use Biscolab\GoogleMaps\Object\Location;
+use Biscolab\GoogleMaps\Object\Path;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
@@ -110,7 +111,7 @@ class GoogleMapsElevationSampledTest extends TestCase {
 
 	}
 
-	public function testExceptionIfPathItemsLessThanTwo() {
+	public function testExceptionIfPathItemsLessThanTwoArray() {
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->elevation_with_key->getBySampledPath([
@@ -118,6 +119,17 @@ class GoogleMapsElevationSampledTest extends TestCase {
 				LatLngFields::LAT => 39.73915360,
 				LatLngFields::LNG => -104.9847034,
 			])], 2);
+	}
+
+	public function testExceptionIfPathItemsLessThanTwoPath() {
+
+		$this->expectException(InvalidArgumentException::class);
+		$path = new Path([
+			new Location([
+				LatLngFields::LAT => 39.73915360,
+				LatLngFields::LNG => -104.9847034,
+			])]);
+		$this->elevation_with_key->getBySampledPath($path, 2);
 	}
 
 	public function testExceptionIfSamplesLessThanOne() {
