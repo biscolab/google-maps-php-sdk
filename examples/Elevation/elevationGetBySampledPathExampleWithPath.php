@@ -1,10 +1,10 @@
 <?php
 /**
  * Copyright (c) 2018 - present
- * Google Maps PHP - elevationGetByMultipleLocationExample.php
+ * Google Maps PHP - elevationGetBySampledPathExampleWithPath.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
- * Initial version created on: 30/9/2018
+ * Initial version created on: 15/10/2018
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
@@ -12,6 +12,7 @@ use Biscolab\GoogleMaps\Api\Elevation;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
 use Biscolab\GoogleMaps\Fields\LatLngFields;
 use Biscolab\GoogleMaps\Object\Location;
+use Biscolab\GoogleMaps\Object\Path;
 
 // Run "composer install" command or change with your actual autoload.php file
 require '../../vendor/autoload.php';
@@ -25,7 +26,7 @@ $elevation = new Elevation([
 // Change with the Location object you want to analyze
 // From Google official documentation you can try with "39.73915360,-104.9847034"
 // see https://developers.google.com/maps/documentation/geocoding/start
-$locations = [
+$path = new Path([
 	new Location([
 		LatLngFields::LAT => 39.73915360,
 		LatLngFields::LNG => -104.9847034,
@@ -34,8 +35,10 @@ $locations = [
 		LatLngFields::LAT => 50.123,
 		LatLngFields::LNG => 99.456,
 	])
-];
-$results = $elevation->getByLocations($locations);
+]);
+
+// The response will contains 5 results
+$results = $elevation->getBySampledPath($path, 5);
 
 // Get number of results
 $number_of_results = $results->count();

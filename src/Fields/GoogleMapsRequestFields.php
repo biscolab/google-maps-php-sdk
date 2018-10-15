@@ -45,4 +45,14 @@ class GoogleMapsRequestFields {
 	 * string: locations
 	 */
 	const LOCATIONS = 'locations';
+
+	/**
+	 * string: path
+	 */
+	const PATH = 'path';
+
+	/**
+	 * string: samples
+	 */
+	const SAMPLES = 'samples';
 }
