@@ -16,6 +16,7 @@ use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 use Biscolab\GoogleMaps\Http\Result\ElevationResultsCollection;
 use Biscolab\GoogleMaps\Object\LatLng;
+use Biscolab\GoogleMaps\Object\Path;
 
 /**
  * Class Elevation
@@ -66,6 +67,10 @@ class Elevation extends Api {
 	 */
 	public function parseLocations($locations): string {
 
+		if($locations instanceof Path) {
+			$locations = $locations->toArray();
+		}
+
 		if (is_array($locations)) {
 			$locations = implode('|', array_map(function ($item) {
 
@@ -92,7 +97,8 @@ class Elevation extends Api {
 	 */
 	public function getBySampledPath($path, int $samples): GoogleMapsResultsCollection {
 
-		if (is_array($path) && count($path) < 2) {
+		if ((is_array($path) && count($path) < 2) ||
+			$path instanceof Path && $path->count() < 2) {
 			throw new InvalidArgumentException('The number of items provided in the path must be greater than 1 (One)');
 		}
 
