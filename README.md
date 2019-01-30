@@ -8,7 +8,7 @@ This provide simple functions to work with Google Maps APIs. You can find furthe
 Google Maps provide many services, actually at this moment this package implements only **Geocoding** service but others will be available soon.
 
 ## Reference & Documentation
-Go to [complete reference](https://biscolab.com/google-maps-php-reference/) or read [documentation](https://gmaps.biscolab.com/)
+Go to [complete reference](https://biscolab.com/google-maps-php-reference/) or read [documentation](https://gmaps-php-docs.biscolab.com/)
 
 ## Google Maps Services
 
