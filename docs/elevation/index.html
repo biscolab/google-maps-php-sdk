@@ -1,0 +1,126 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Elevation · Google Maps PHP SDK</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The Elevation API provides elevation data for all locations on the surface of the earth, including depth locations on the ocean floor (which return negative values)."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Elevation · Google Maps PHP SDK"/><meta property="og:type" content="website"/><meta property="og:url" content="https://gmaps.biscolab.com//index.html"/><meta property="og:description" content="The Elevation API provides elevation data for all locations on the surface of the earth, including depth locations on the ocean floor (which return negative values)."/><meta property="og:image" content="https://gmaps.biscolab.com/img/biscolab_white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://gmaps.biscolab.com/img/biscolab_white.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/biscolab_white.svg" alt="Google Maps PHP SDK"/><h2 class="headerTitleWithLogo">Google Maps PHP SDK</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="https://biscolab.com/google-maps-php-reference/" target="_self">API</a></li><li class=""><a href="https://github.com/biscolab/google-maps-php-sdk" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Services</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/getting-started">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/docs/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/get-api-key">Get API key</a></li><li class="navListItem"><a class="navItem" href="/docs/testing">Run test</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Services</h3><ul><li class="navListItem"><a class="navItem" href="/docs/geocoding">Geocoding</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/elevation">Elevation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Help</h3><ul><li class="navListItem"><a class="navItem" href="/docs/examples">Examples</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Elevation</h1></header><article><div><span><p>The Elevation API provides elevation data for all locations on the surface of the earth, including depth locations on the ocean floor (which return negative values).</p>
+<p>There are two types of request:</p>
+<ul>
+<li>Positional Requests</li>
+<li>Sampled Path Requests</li>
+</ul>
+<p>At the moment this package support only <strong>Positional Requests</strong> but I'm working on <strong>Sampled Path Requests</strong> and it will be available soon.</p>
+<p><a href="https://developers.google.com/maps/documentation/elevation/start" target="_blank">Official Google Elevation documentation</a></p>
+<h2><a class="anchor" aria-hidden="true" id="initialize-elevation-object"></a><a href="#initialize-elevation-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Initialize Elevation Object</h2>
+<p>First of all replace <code>YOUR_API_KEY</code> with your actual API key.</p>
+<pre><code class="hljs css language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Api</span>\<span class="hljs-title">Elevation</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Enum</span>\<span class="hljs-title">GoogleMapsApiConfigFields</span>;
+
+$elevation = <span class="hljs-keyword">new</span> Elevation([
+    GoogleMapsApiConfigFields::KEY =&gt; <span class="hljs-string">'YOUR_API_KEY'</span>
+]);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="get-results-positional-requests"></a><a href="#get-results-positional-requests" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get results (Positional Requests)</h2>
+<p>First of all you have to prepare the <code>locations</code> variable, it can be a single <code>Location</code> object, an array of <code>Location</code> objects or a polyline string.</p>
+<h3><a class="anchor" aria-hidden="true" id="single-location-object"></a><a href="#single-location-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Single Location object</h3>
+<p>Create a Location object using latitude and longitude.</p>
+<pre><code class="hljs css language-php"><span class="hljs-comment">// get results by single Location object</span>
+$locations = <span class="hljs-keyword">new</span> Location([
+    LatLngFields::LAT =&gt; <span class="hljs-number">39.73915360</span>,
+    LatLngFields::LNG =&gt; <span class="hljs-number">-104.9847034</span>,
+]);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="array-of-location-objects"></a><a href="#array-of-location-objects" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Array of Location objects</h3>
+<p>Using multiple Location objects inside an array</p>
+<pre><code class="hljs css language-php"><span class="hljs-comment">// or by multiple Location objects</span>
+$locations = [
+    <span class="hljs-keyword">new</span> Location([
+        LatLngFields::LAT =&gt; <span class="hljs-number">39.73915360</span>,
+        LatLngFields::LNG =&gt; <span class="hljs-number">-104.9847034</span>,
+    ]),
+    <span class="hljs-comment">// ... more locations</span>
+    <span class="hljs-keyword">new</span> Location([
+        LatLngFields::LAT =&gt; <span class="hljs-number">50.123</span>,
+        LatLngFields::LNG =&gt; <span class="hljs-number">99.456</span>,
+    ])
+];
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="polyline-encoded-string"></a><a href="#polyline-encoded-string" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Polyline encoded string</h3>
+<p>Encode a location using the <a href="https://developers.google.com/maps/documentation/utilities/polylinealgorithm" target="_blank">Encoded Polyline Algorithm Format</a></p>
+<pre><code class="hljs css language-php"><span class="hljs-comment">// or by polyline</span>
+$locations = <span class="hljs-string">'enc:gfo}EtohhU'</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="make-api-call"></a><a href="#make-api-call" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Make API call</h3>
+<pre><code class="hljs css language-php"><span class="hljs-comment">// make API call</span>
+$results = $elevation-&gt;getByLocations($locations);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="get-results-sampled-path-requests"></a><a href="#get-results-sampled-path-requests" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get results (Sampled Path Requests)</h2>
+<p>First of all you have to prepare the <code>path</code> variable, it can be an array of <code>Location</code> objects or a polyline string.</p>
+<h3><a class="anchor" aria-hidden="true" id="array-of-location-objects-1"></a><a href="#array-of-location-objects-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Array of Location objects</h3>
+<p>Using multiple Location objects inside an array</p>
+<pre><code class="hljs css language-php"><span class="hljs-comment">// or by multiple Location objects</span>
+$path = [
+    <span class="hljs-keyword">new</span> Location([
+        LatLngFields::LAT =&gt; <span class="hljs-number">39.73915360</span>,
+        LatLngFields::LNG =&gt; <span class="hljs-number">-104.9847034</span>,
+    ]),
+    <span class="hljs-comment">// ... more locations</span>
+    <span class="hljs-keyword">new</span> Location([
+        LatLngFields::LAT =&gt; <span class="hljs-number">50.123</span>,
+        LatLngFields::LNG =&gt; <span class="hljs-number">99.456</span>,
+    ])
+];
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="polyline-encoded-string-1"></a><a href="#polyline-encoded-string-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Polyline encoded string</h3>
+<p>Encode a location using the <a href="https://developers.google.com/maps/documentation/elevation/intro#Paths" target="_blank">Encoded Polyline Algorithm Format</a></p>
+<pre><code class="hljs css language-php"><span class="hljs-comment">// or by polyline</span>
+$path = <span class="hljs-string">'enc:gfo}EtohhUxD@bAxJmGF'</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="make-api-call-1"></a><a href="#make-api-call-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Make API call</h3>
+<pre><code class="hljs css language-php"><span class="hljs-comment">// make API call</span>
+$samples = <span class="hljs-number">5</span>; <span class="hljs-comment">// must be int &gt; 0</span>
+$results = $elevation-&gt;getBySampledPath($path, $samples);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="use-results"></a><a href="#use-results" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use results</h2>
+<p>Results is/are a <code>Biscolab\GoogleMaps\Http\ElevationResultsCollection</code> object.<br>
+First thing you should know how many results there are in your <code>ElevationResultsCollection</code> using <code>count</code> method.</p>
+<pre><code class="hljs css language-php">$number_of_results = $results-&gt;count();
+</code></pre>
+<p>To retrieve the first result you can use the <code>first</code> method:</p>
+<pre><code class="hljs css language-php">$first_result = $results-&gt;first();
+</code></pre>
+<p>Every result had the following methods to retrieve member variables:</p>
+<ul>
+<li><code>$first_result-&gt;getLocation()</code> (return Location)</li>
+<li><code>$first_result-&gt;getElevation()</code> (return float)</li>
+<li><code>$first_result-&gt;getResolution()</code> (return float)</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/geocoding"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/examples"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#initialize-elevation-object">Initialize Elevation Object</a></li><li><a href="#get-results-positional-requests">Get results (Positional Requests)</a><ul class="toc-headings"><li><a href="#single-location-object">Single Location object</a></li><li><a href="#array-of-location-objects">Array of Location objects</a></li><li><a href="#polyline-encoded-string">Polyline encoded string</a></li><li><a href="#make-api-call">Make API call</a></li></ul></li><li><a href="#get-results-sampled-path-requests">Get results (Sampled Path Requests)</a><ul class="toc-headings"><li><a href="#array-of-location-objects-1">Array of Location objects</a></li><li><a href="#polyline-encoded-string-1">Polyline encoded string</a></li><li><a href="#make-api-call-1">Make API call</a></li></ul></li><li><a href="#use-results">Use results</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/biscolab_white.svg" alt="Google Maps PHP SDK" width="32" height="32"/></a><div><h5>Docs</h5><a href="/docs/getting-started">Getting Started</a><a href="/docs/geocoding">Geocoding</a><a href="/docs/elevation">Elevation</a></div><div><h5>Community</h5><a href="https://biscolab.com/google-maps-php-reference" target="_blank">Complete reference</a><a href="https://github.com/biscolab/google-maps-php-sdk/issues" target="_blank">Issue tracker</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/biscolab/google-maps-php-sdk" aria-label="Star biscolab/google-maps-php-sdk on GitHub">Github</a></div></section><section class="copyright">Copyright © 2019 Roberto Belotti</section></footer></div></body></html>
