@@ -10,7 +10,7 @@
 
 namespace Biscolab\GoogleMaps\Http;
 
-use Biscolab\GoogleMaps\Enum\GoogleMapsRequestMethodValues;
+use Biscolab\GoogleMaps\Values\GoogleMapsRequestMethodValues;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 
