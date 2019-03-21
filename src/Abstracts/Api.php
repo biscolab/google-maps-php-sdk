@@ -64,7 +64,7 @@ abstract class Api {
 	 */
 	public function getServiceEndpoint(): string {
 
-		return static::SERVICE_ENDPOINT;
+		return static::SERVICE_ENDPOINT ?? '';
 	}
 
 	/**

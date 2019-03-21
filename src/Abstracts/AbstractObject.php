@@ -41,6 +41,10 @@ abstract class AbstractObject {
 	 */
 	public function __construct(?array $args = []) {
 
+		if(is_null($args)) {
+			$args = [];
+		}
+
 		$this->setArgs($args);
 	}
 

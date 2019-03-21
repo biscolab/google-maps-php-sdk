@@ -138,7 +138,7 @@ abstract class AbstractCollection {
 
 		$this->index = ($index < $this->count()) ? $index : $this->getLastIndex();
 
-		return $this->get($this->index);
+		return $this->get(intval($this->index));
 	}
 
 	/**

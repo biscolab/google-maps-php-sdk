@@ -85,7 +85,7 @@ class GoogleMapsApi {
 		$this->setKey($key);
 
 		// Set "sensor"
-		$sensor = (empty($config[GoogleMapsApiConfigFields::SENSOR])) ? '' : $config[GoogleMapsApiConfigFields::SENSOR];
+		$sensor = (empty($config[GoogleMapsApiConfigFields::SENSOR])) ? false : $config[GoogleMapsApiConfigFields::SENSOR];
 		$this->setSensor($sensor);
 
 		// Set the endpoint
@@ -127,14 +127,17 @@ class GoogleMapsApi {
 	/**
 	 * Set sensor parameter
 	 *
-	 * @param bool $sensor
+	 * @param bool|string $sensor
 	 *
 	 * @return GoogleMapsApi
 	 */
-	public function setSensor(bool $sensor): GoogleMapsApi {
+	public function setSensor($sensor): GoogleMapsApi {
 
 		if ($sensor === false) {
 			$sensor = 'false';
+		}
+		else {
+			$sensor = 'true';
 		}
 		$this->sensor = $sensor;
 
