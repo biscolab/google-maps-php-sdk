@@ -15,13 +15,14 @@ use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
 use Biscolab\GoogleMaps\Exception\RequestException;
 use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\Result\GeocodingResultsCollection;
-use function Biscolab\GoogleMaps\snake2Camel;
 use Biscolab\GoogleMaps\Values\GoogleMapsResponseStatusValues;
 use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 use function Biscolab\GoogleMaps\camel2Snake;
+use function Biscolab\GoogleMaps\snake2Camel;
 
-class GoogleMapsGeocodingTest extends TestCase {
+class GoogleMapsGeocodingTest extends TestCase
+{
 
 	/**
 	 * @var Geocoding
@@ -48,7 +49,8 @@ class GoogleMapsGeocodingTest extends TestCase {
 	 */
 	protected $mock_response_ko;
 
-	public function setUp() {
+	public function setUp()
+	{
 
 		// This is the sample value from Google Maps official documentation
 		$default_response_OK = [
@@ -167,19 +169,23 @@ class GoogleMapsGeocodingTest extends TestCase {
 		$this->mock_response_ko = new Response(200, [], \GuzzleHttp\json_encode($default_response_KO));
 	}
 
-	public function testCheckGeocodingConfig() {
+	public function testCheckGeocodingConfig()
+	{
 
-		$this->assertEquals(Geocoding::SERVICE_ENDPOINT, $this->geocoding_with_key->getGoogleMapsApi()->getServiceEndpoint());
+		$this->assertEquals(Geocoding::SERVICE_ENDPOINT,
+			$this->geocoding_with_key->getGoogleMapsApi()->getServiceEndpoint());
 		$this->assertEquals('MyKey', $this->geocoding_with_key->getGoogleMapsApi()->getKey());
 		$this->assertEquals('', $this->geocoding_no_key->getGoogleMapsApi()->getKey());
 	}
 
-	public function testCheckGeocodingConfigWithSensor() {
+	public function testCheckGeocodingConfigWithSensor()
+	{
 
 		$this->assertEquals('true', $this->geocoding_with_sensor->getGoogleMapsApi()->getSensor());
 	}
 
-	public function testCheckGeocodingResponseOk() {
+	public function testCheckGeocodingResponseOk()
+	{
 
 		$response = new GoogleMapsResponse($this->mock_response_ok);
 
@@ -205,18 +211,21 @@ class GoogleMapsGeocodingTest extends TestCase {
 
 	}
 
-	public function testResponseKO() {
+	public function testResponseKO()
+	{
 
 		$this->expectException(RequestException::class);
 		new GoogleMapsResponse($this->mock_response_ko);
 	}
 
-	public function testCamelToSnake() {
+	public function testCamelToSnake()
+	{
 
 		$this->assertEquals('test_field_name', camel2Snake('testFieldName'));
 	}
 
-	public function testSnakeToCamel() {
+	public function testSnakeToCamel()
+	{
 
 		$this->assertEquals('testFieldName', snake2Camel('test_field_name'));
 	}

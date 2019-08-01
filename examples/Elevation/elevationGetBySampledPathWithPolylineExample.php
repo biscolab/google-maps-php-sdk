@@ -10,8 +10,6 @@
 
 use Biscolab\GoogleMaps\Api\Elevation;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
-use Biscolab\GoogleMaps\Fields\LatLngFields;
-use Biscolab\GoogleMaps\Object\Location;
 
 // Run "composer install" command or change with your actual autoload.php file
 require '../../vendor/autoload.php';

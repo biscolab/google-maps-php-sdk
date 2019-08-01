@@ -16,7 +16,8 @@ use Biscolab\GoogleMaps\Object\AbstractObject;
  * Class GoogleMapsRequest
  * @package Biscolab\GoogleMaps\Http
  */
-class GoogleMapsRequest {
+class GoogleMapsRequest
+{
 
 	/**
 	 * @var array
@@ -28,7 +29,8 @@ class GoogleMapsRequest {
 	 *
 	 * @param array $params
 	 */
-	public function __construct(array $params = []) {
+	public function __construct(array $params = [])
+	{
 
 		if ($params) {
 			foreach ($params as $param_name => $param_value) {
@@ -43,7 +45,8 @@ class GoogleMapsRequest {
 	 *
 	 * @return GoogleMapsRequest
 	 */
-	public function addParam(string $param_name, $param_value): GoogleMapsRequest {
+	public function addParam(string $param_name, $param_value): GoogleMapsRequest
+	{
 
 		$this->params[$param_name] = $param_value;
 
@@ -53,7 +56,8 @@ class GoogleMapsRequest {
 	/**
 	 * @return string
 	 */
-	public function getQuery(): string {
+	public function getQuery(): string
+	{
 
 		$params = [];
 

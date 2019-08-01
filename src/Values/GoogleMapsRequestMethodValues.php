@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Values;
  * Class GoogleMapsRequestMethodValues
  * @package Biscolab\GoogleMaps\Enum
  */
-class GoogleMapsRequestMethodValues {
+class GoogleMapsRequestMethodValues
+{
 
 	/**
 	 * string: get

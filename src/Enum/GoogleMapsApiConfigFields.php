@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Enum;
  * Class GoogleMapsApiConfigFields
  * @package Biscolab\Geocoding\Enum
  */
-class GoogleMapsApiConfigFields {
+class GoogleMapsApiConfigFields
+{
 
 	/**
 	 * string: key

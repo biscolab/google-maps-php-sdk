@@ -17,7 +17,8 @@ use function Biscolab\GoogleMaps\camel2Snake;
  * Class AbstractObject
  * @package Biscolab\GoogleMaps\Abstracts
  */
-abstract class AbstractObject {
+abstract class AbstractObject
+{
 
 	/**
 	 * @var array
@@ -39,9 +40,10 @@ abstract class AbstractObject {
 	 *
 	 * @param array $args
 	 */
-	public function __construct(?array $args = []) {
+	public function __construct(?array $args = [])
+	{
 
-		if(is_null($args)) {
+		if (is_null($args)) {
 			$args = [];
 		}
 
@@ -53,7 +55,8 @@ abstract class AbstractObject {
 	 *
 	 * @throws Exception
 	 */
-	protected function setArgs(array $args) {
+	protected function setArgs(array $args)
+	{
 
 		foreach ($this->typeCheck as $field_name => $field_type) {
 			if (empty($args[$field_name]) || is_null($args[$field_name])) {
@@ -72,7 +75,8 @@ abstract class AbstractObject {
 	 *
 	 * @return bool
 	 */
-	protected function isFieldRequired(string $field_name): bool {
+	protected function isFieldRequired(string $field_name): bool
+	{
 
 		return in_array($field_name, $this->required);
 	}
@@ -82,7 +86,8 @@ abstract class AbstractObject {
 	 *
 	 * @return array
 	 */
-	protected function addError(string $error): array {
+	protected function addError(string $error): array
+	{
 
 		array_push($this->errors, $error);
 
@@ -95,7 +100,8 @@ abstract class AbstractObject {
 	 *
 	 * @return mixed
 	 */
-	protected function parseFieldValue(string $field_type, $field_value) {
+	protected function parseFieldValue(string $field_type, $field_value)
+	{
 
 		switch ($field_type) {
 			case 'string':
@@ -111,7 +117,8 @@ abstract class AbstractObject {
 	/**
 	 * @throws Exception
 	 */
-	protected function throwErrors() {
+	protected function throwErrors()
+	{
 
 		if (count($this->errors)) {
 			throw new Exception(implode(', ', $this->errors));
@@ -121,7 +128,8 @@ abstract class AbstractObject {
 	/**
 	 * @return string
 	 */
-	public function toJson(): string {
+	public function toJson(): string
+	{
 
 		return json_encode($this->toArray());
 	}
@@ -129,7 +137,8 @@ abstract class AbstractObject {
 	/**
 	 * @return array
 	 */
-	public function toArray(): array {
+	public function toArray(): array
+	{
 
 		$fields = get_object_vars($this);
 
@@ -146,7 +155,8 @@ abstract class AbstractObject {
 	/**
 	 * @return string
 	 */
-	public function __toString(): string {
+	public function __toString(): string
+	{
 
 		return implode(',', $this->toArray());
 	}
@@ -157,7 +167,8 @@ abstract class AbstractObject {
 	 *
 	 * @return mixed
 	 */
-	public function __call($name, $arguments) {
+	public function __call($name, $arguments)
+	{
 
 		preg_match('/(?<=(g|s)et)([A-Za-z0-9])\w+/', $name, $match);
 

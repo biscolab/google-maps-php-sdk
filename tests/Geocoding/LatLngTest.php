@@ -18,12 +18,14 @@ use PHPUnit\Framework\TestCase;
  * Class LatLngTest
  * @package Biscolab\geocode\Tests
  */
-class LatLngTest extends TestCase {
+class LatLngTest extends TestCase
+{
 
 	/**
 	 * @test
 	 */
-	public function testLatLngSetterGetter() {
+	public function testLatLngSetterGetter()
+	{
 
 		$lat_lng = new LatLng();
 

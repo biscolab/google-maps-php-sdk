@@ -14,7 +14,8 @@ use Biscolab\GoogleMaps\Values\GoogleMapsRequestMethodValues;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 
-class GoogleMapsClient {
+class GoogleMapsClient
+{
 
 	/**
 	 * @var Client
@@ -24,7 +25,8 @@ class GoogleMapsClient {
 	/**
 	 * GeocoderClient constructor.
 	 */
-	public function __construct() {
+	public function __construct()
+	{
 
 		$this->setClient(new Client());
 	}
@@ -34,7 +36,8 @@ class GoogleMapsClient {
 	 *
 	 * @return GoogleMapsClient
 	 */
-	public function setClient($client) {
+	public function setClient($client)
+	{
 
 		$this->client = $client;
 
@@ -47,7 +50,8 @@ class GoogleMapsClient {
 	 *
 	 * @return \Biscolab\GoogleMaps\Http\GoogleMapsResponse
 	 */
-	public function get(string $url, ?string $query = null): GoogleMapsResponse {
+	public function get(string $url, ?string $query = null): GoogleMapsResponse
+	{
 
 		$client_params = $query ? [
 			'query' => $query

@@ -19,7 +19,8 @@ use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
  * Class Api
  * @package Biscolab\GoogleMaps\Abstracts
  */
-abstract class Api {
+abstract class Api
+{
 
 	/**
 	 * @var string
@@ -41,7 +42,8 @@ abstract class Api {
 	 *
 	 * @param array $config
 	 */
-	public function __construct(array $config = []) {
+	public function __construct(array $config = [])
+	{
 
 		$service_config = $this->getServiceConfig($config);
 		$this->setGoogleMapsApi(new GoogleMapsApi($service_config));
@@ -52,7 +54,8 @@ abstract class Api {
 	 *
 	 * @return array
 	 */
-	protected function getServiceConfig(array $config = []): array {
+	protected function getServiceConfig(array $config = []): array
+	{
 
 		return array_merge($config, [
 			GoogleMapsApiConfigFields::SERVICE_ENDPOINT => $this->getServiceEndpoint()
@@ -62,29 +65,10 @@ abstract class Api {
 	/**
 	 * @return string
 	 */
-	public function getServiceEndpoint(): string {
+	public function getServiceEndpoint(): string
+	{
 
 		return static::SERVICE_ENDPOINT ?? '';
-	}
-
-	/**
-	 * @return GoogleMapsApi
-	 */
-	public function getGoogleMapsApi(): GoogleMapsApi {
-
-		return $this->google_maps_api;
-	}
-
-	/**
-	 * @param GoogleMapsApi $google_maps_api
-	 *
-	 * @return Api
-	 */
-	public function setGoogleMapsApi(GoogleMapsApi $google_maps_api): Api {
-
-		$this->google_maps_api = $google_maps_api;
-
-		return $this;
 	}
 
 	/**
@@ -92,7 +76,8 @@ abstract class Api {
 	 *
 	 * @return mixed
 	 */
-	public function createRequest(array $params): GoogleMapsRequest {
+	public function createRequest(array $params): GoogleMapsRequest
+	{
 
 		return new GoogleMapsRequest($params);
 	}
@@ -102,12 +87,35 @@ abstract class Api {
 	 *
 	 * @return GoogleMapsResultsCollection
 	 */
-	public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection {
+	public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection
+	{
 
 		$results = $this->getGoogleMapsApi()->get($request)->getResults();
 
 		$result_collection_class = $this->result_collection;
 
 		return new $result_collection_class($results);
+	}
+
+	/**
+	 * @return GoogleMapsApi
+	 */
+	public function getGoogleMapsApi(): GoogleMapsApi
+	{
+
+		return $this->google_maps_api;
+	}
+
+	/**
+	 * @param GoogleMapsApi $google_maps_api
+	 *
+	 * @return Api
+	 */
+	public function setGoogleMapsApi(GoogleMapsApi $google_maps_api): Api
+	{
+
+		$this->google_maps_api = $google_maps_api;
+
+		return $this;
 	}
 }

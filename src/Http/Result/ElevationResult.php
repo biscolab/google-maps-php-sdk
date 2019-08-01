@@ -27,7 +27,8 @@ use Biscolab\GoogleMaps\Object\Location;
  *
  * @since   0.3.0
  */
-class ElevationResult extends GoogleMapsResult {
+class ElevationResult extends GoogleMapsResult
+{
 
 	/**
 	 * @var float

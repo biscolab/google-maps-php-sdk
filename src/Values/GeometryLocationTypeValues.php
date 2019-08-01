@@ -16,7 +16,8 @@ namespace Biscolab\GoogleMaps\Values;
  *
  * @see     https://developers.google.com/maps/documentation/geocoding/intro
  */
-class GeometryLocationTypeValues {
+class GeometryLocationTypeValues
+{
 
 	/**
 	 * string: ROOFTOP

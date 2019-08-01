@@ -20,7 +20,8 @@ use GuzzleHttp\Psr7\Response;
  * Class GoogleMapsResponse
  * @package Biscolab\GoogleMaps\Http
  */
-class GoogleMapsResponse {
+class GoogleMapsResponse
+{
 
 	/**
 	 * @var Response
@@ -57,7 +58,8 @@ class GoogleMapsResponse {
 	 *
 	 * @param Response $response
 	 */
-	public function __construct(Response $response) {
+	public function __construct(Response $response)
+	{
 
 		$this->setResponse($response);
 
@@ -71,7 +73,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return GoogleMapsResponse
 	 */
-	public function setResponse(Response $response): GoogleMapsResponse {
+	public function setResponse(Response $response): GoogleMapsResponse
+	{
 
 		$this->response = $response;
 
@@ -84,7 +87,8 @@ class GoogleMapsResponse {
 	 * @throws RequestException
 	 * @throws ResponseException
 	 */
-	protected function parseResponse(): GoogleMapsResponse {
+	protected function parseResponse(): GoogleMapsResponse
+	{
 
 		$json_response = $this->response->getBody()->getContents();
 		$array_response = $this->toArray($json_response);
@@ -113,22 +117,12 @@ class GoogleMapsResponse {
 	}
 
 	/**
-	 * Check HTTP status code (silent/No exceptions!)
-	 * @return int
-	 */
-	protected function checkHttpStatusCode(): int {
-
-		$this->http_status_code = $this->response->getStatusCode();
-
-		return $this->http_status_code;
-	}
-
-	/**
 	 * @param string $json_response
 	 *
 	 * @return array
 	 */
-	public function toArray(string $json_response): array {
+	public function toArray(string $json_response): array
+	{
 
 		$this->array_response = json_decode($json_response, true);
 
@@ -136,29 +130,10 @@ class GoogleMapsResponse {
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getResults() {
-
-		return $this->results;
-	}
-
-	/**
-	 * @param array $results
-	 *
-	 * @return $this
-	 */
-	public function setResults(array $results) {
-
-		$this->results = $results;
-
-		return $this;
-	}
-
-	/**
 	 * @return string
 	 */
-	public function getStatus(): string {
+	public function getStatus(): string
+	{
 
 		return $this->status;
 	}
@@ -168,7 +143,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return GoogleMapsResponse
 	 */
-	public function setStatus(string $status) {
+	public function setStatus(string $status)
+	{
 
 		$this->status = $status;
 
@@ -176,9 +152,44 @@ class GoogleMapsResponse {
 	}
 
 	/**
+	 * Check HTTP status code (silent/No exceptions!)
+	 * @return int
+	 */
+	protected function checkHttpStatusCode(): int
+	{
+
+		$this->http_status_code = $this->response->getStatusCode();
+
+		return $this->http_status_code;
+	}
+
+	/**
 	 * @return array
 	 */
-	public function getArrayResponse(): array {
+	public function getResults()
+	{
+
+		return $this->results;
+	}
+
+	/**
+	 * @param array $results
+	 *
+	 * @return $this
+	 */
+	public function setResults(array $results)
+	{
+
+		$this->results = $results;
+
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getArrayResponse(): array
+	{
 
 		return $this->array_response;
 	}
@@ -188,7 +199,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return GoogleMapsResponse
 	 */
-	public function setArrayResponse(array $array_response): GoogleMapsResponse {
+	public function setArrayResponse(array $array_response): GoogleMapsResponse
+	{
 
 		$this->array_response = $array_response;
 
@@ -198,7 +210,8 @@ class GoogleMapsResponse {
 	/**
 	 * @return mixed
 	 */
-	public function getErrorMessage() {
+	public function getErrorMessage()
+	{
 
 		return $this->error_message;
 	}
@@ -208,7 +221,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return GoogleMapsResponse
 	 */
-	public function setErrorMessage($error_message): GoogleMapsResponse {
+	public function setErrorMessage($error_message): GoogleMapsResponse
+	{
 
 		$this->error_message = $error_message;
 
@@ -218,7 +232,8 @@ class GoogleMapsResponse {
 	/**
 	 * @return int
 	 */
-	public function getHttpStatusCode(): int {
+	public function getHttpStatusCode(): int
+	{
 
 		return intval($this->http_status_code);
 	}

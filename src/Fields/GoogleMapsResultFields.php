@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Fields;
  * Class GoogleMapsResponseFields
  * @package Biscolab\GoogleMaps\Enum
  */
-class GoogleMapsResultFields {
+class GoogleMapsResultFields
+{
 
 	/**
 	 * string address_components

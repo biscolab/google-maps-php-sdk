@@ -25,7 +25,8 @@ use Biscolab\GoogleMaps\Object\Path;
  * @since   0.3.0
  * @see     https://developers.google.com/maps/documentation/elevation/start
  */
-class Elevation extends Api {
+class Elevation extends Api
+{
 
 	/**
 	 * @var string
@@ -47,7 +48,8 @@ class Elevation extends Api {
 	 *
 	 * @since 0.3.0
 	 */
-	public function getByLocations($locations): GoogleMapsResultsCollection {
+	public function getByLocations($locations): GoogleMapsResultsCollection
+	{
 
 		$locations = $this->parseLocations($locations);
 
@@ -65,9 +67,10 @@ class Elevation extends Api {
 	 *
 	 * @since   0.3.0
 	 */
-	public function parseLocations($locations): string {
+	public function parseLocations($locations): string
+	{
 
-		if($locations instanceof Path) {
+		if ($locations instanceof Path) {
 			$locations = $locations->toArray();
 		}
 
@@ -95,7 +98,8 @@ class Elevation extends Api {
 	 *
 	 * @since 0.4.0
 	 */
-	public function getBySampledPath($path, int $samples): GoogleMapsResultsCollection {
+	public function getBySampledPath($path, int $samples): GoogleMapsResultsCollection
+	{
 
 		if ((is_array($path) && count($path) < 2) ||
 			$path instanceof Path && $path->count() < 2) {

@@ -14,12 +14,14 @@ use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
 use Biscolab\GoogleMaps\GoogleMapsApi;
 use PHPUnit\Framework\TestCase;
 
-class GoogleMapsApiTest extends TestCase {
+class GoogleMapsApiTest extends TestCase
+{
 
 	/**
 	 * @test
 	 */
-	public function checkApiKeyTest() {
+	public function checkApiKeyTest()
+	{
 
 		$gm = new GoogleMapsApi([
 			GoogleMapsApiConfigFields::SERVICE_ENDPOINT => 'geocode',

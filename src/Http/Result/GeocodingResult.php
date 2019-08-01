@@ -32,7 +32,8 @@ use Biscolab\GoogleMaps\Object\Geometry;
  * @method GeocodingResult setTypes($args)
  * @package Biscolab\GoogleMaps\Http\Result
  */
-class GeocodingResult extends GoogleMapsResult {
+class GeocodingResult extends GoogleMapsResult
+{
 
 	/**
 	 * @var Address
@@ -73,7 +74,8 @@ class GeocodingResult extends GoogleMapsResult {
 	/**
 	 * @return Address
 	 */
-	public function getAddress(): Address {
+	public function getAddress(): Address
+	{
 
 		return $this->getAddressComponents();
 	}

@@ -23,7 +23,8 @@ use Biscolab\GoogleMaps\Object\LatLng;
  *
  * @see     https://developers.google.com/maps/documentation/geocoding/start
  */
-class Geocoding extends Api {
+class Geocoding extends Api
+{
 
 	/**
 	 * @var string
@@ -40,7 +41,8 @@ class Geocoding extends Api {
 	 *
 	 * @return GoogleMapsResultsCollection
 	 */
-	public function getByAddress(string $literal_address): GoogleMapsResultsCollection {
+	public function getByAddress(string $literal_address): GoogleMapsResultsCollection
+	{
 
 		$request = new GoogleMapsRequest([
 			GoogleMapsRequestFields::ADDRESS => $literal_address
@@ -54,7 +56,8 @@ class Geocoding extends Api {
 	 *
 	 * @return GoogleMapsResultsCollection
 	 */
-	public function getReverse(LatLng $latlng): GoogleMapsResultsCollection {
+	public function getReverse(LatLng $latlng): GoogleMapsResultsCollection
+	{
 
 		$request = $this->createRequest([
 			GoogleMapsRequestFields::LATLNG => $latlng
@@ -68,7 +71,8 @@ class Geocoding extends Api {
 	 *
 	 * @return GoogleMapsResultsCollection
 	 */
-	public function getByPlaceId(string $place_id): GoogleMapsResultsCollection {
+	public function getByPlaceId(string $place_id): GoogleMapsResultsCollection
+	{
 
 		$request = $this->createRequest([
 			GoogleMapsRequestFields::PLACE_ID => $place_id

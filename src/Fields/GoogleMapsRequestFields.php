@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Fields;
  * Class GoogleMapsRequestFields
  * @package Biscolab\GoogleMaps\Fields
  */
-class GoogleMapsRequestFields {
+class GoogleMapsRequestFields
+{
 
 	/**
 	 * string: key
