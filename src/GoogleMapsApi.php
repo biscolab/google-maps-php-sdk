@@ -164,11 +164,15 @@ class GoogleMapsApi
 
 	/**
 	 * @param string $service_endpoint
+	 *
+	 * @return GoogleMapsApi
 	 */
-	public function setServiceEndpoint(string $service_endpoint)
+	public function setServiceEndpoint(string $service_endpoint): GoogleMapsApi
 	{
 
 		$this->service_endpoint = $service_endpoint;
+
+		return $this;
 	}
 
 	/**
