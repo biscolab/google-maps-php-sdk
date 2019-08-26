@@ -10,3 +10,4 @@ tests/private/
 build/
 cache/
 config/
+phpunit.xml

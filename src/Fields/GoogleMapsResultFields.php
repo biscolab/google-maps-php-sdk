@@ -18,53 +18,125 @@ class GoogleMapsResultFields
 {
 
 	/**
-	 * string address_components
+	 * @var string address_components
 	 */
 	const ADDRESS_COMPONENTS = 'address_components';
 
 	/**
-	 * string formatted_address
+	 * @var string formatted_address
 	 */
 	const FORMATTED_ADDRESS = 'formatted_address';
 
 	/**
-	 * string geometry
+	 * @var string geometry
 	 */
 	const GEOMETRY = 'geometry';
 
 	/**
-	 * string viewport
+	 * @var string viewport
 	 */
 	const VIEWPORT = 'viewport';
 
 	/**
-	 * string place_id
+	 * @var string place_id
 	 */
 	const PLACE_ID = 'place_id';
 
 	/**
-	 * string location_type
+	 * @var string location_type
 	 */
 	const LOCATION_TYPE = 'location_type';
 
 	/**
-	 * string types
+	 * @var string types
 	 */
 	const TYPES = 'types';
 
 	/**
-	 * string location
+	 * @var string location
 	 */
 	const LOCATION = 'location';
 
 	/**
-	 * string elevation
+	 * @var string elevation
 	 */
 	const ELEVATION = 'elevation';
 
 	/**
-	 * string resolution
+	 * @var string resolution
 	 */
 	const RESOLUTION = 'resolution';
+
+	/**
+	 * @var string icon
+	 * @since 0.5.0
+	 */
+	const ICON = 'icon';
+
+	/**
+	 * @var string id
+	 * @since 0.5.0
+	 */
+	const ID = 'id';
+
+	/**
+	 * @var string name
+	 * @since 0.5.0
+	 */
+	const NAME = 'name';
+
+	/**
+	 * @var string photos
+	 * @since 0.5.0
+	 */
+	const PHOTOS = 'photos';
+
+	/**
+	 * @var string reference
+	 * @since 0.5.0
+	 */
+	const REFERENCE = 'reference';
+
+	/**
+	 * @var string vicinity
+	 * @since 0.5.0
+	 */
+	const VICINITY = 'vicinity';
+
+	/**
+	 * @var string opening_hours
+	 * @since 0.5.0
+	 */
+	const OPENING_HOURS = 'opening_hours';
+
+	/**
+	 * @var string price_level
+	 * @since 0.5.0
+	 */
+	const PRICE_LEVEL = 'price_level';
+
+	/**
+	 * @var string rating
+	 * @since 0.5.0
+	 */
+	const RATING = 'rating';
+
+	/**
+	 * @var string permanently_closed
+	 * @since 0.5.0
+	 */
+	const PERMANENTLY_CLOSED = 'permanently_closed';
+
+	/**
+	 * @var string plus_code
+	 * @since 0.5.0
+	 */
+	const PLUS_CODE = 'plus_code';
+
+	/**
+	 * @var string next_page_token
+	 * @since 0.5.0
+	 */
+	const NEXT_PAGE_TOKEN = 'next_page_token';
 
 }
