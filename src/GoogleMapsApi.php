@@ -136,12 +136,21 @@ class GoogleMapsApi
 	public function getUrl(): string
 	{
 
+		$url_chunks = [];
 		$service_endpoint = $this->getServiceEndpoint();
 		if (!$service_endpoint) {
 			throw new RequestException('Service name missing!');
 		}
 
-		return $this->api_url . $service_endpoint . '/' . GoogleMapsResponseFormat::JSON;
+		$request_endpoint = $this->request->getEndpoint();
+		array_push($url_chunks, $this->api_url . $service_endpoint);
+
+		if($request_endpoint) {
+			array_push($url_chunks, $request_endpoint);
+		}
+
+		array_push($url_chunks, GoogleMapsResponseFormat::JSON);
+		return implode("/", $url_chunks);
 	}
 
 	/**
