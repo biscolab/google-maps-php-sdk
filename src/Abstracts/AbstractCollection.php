@@ -14,7 +14,7 @@ namespace Biscolab\GoogleMaps\Abstracts;
  * Class AbstractCollection
  * @package Biscolab\GoogleMaps\Abstracts
  */
-abstract class AbstractCollection
+abstract class AbstractCollection implements \Iterator
 {
 
 	/**
@@ -149,6 +149,50 @@ abstract class AbstractCollection
 	{
 
 		return $this->seek();
+	}
+
+	/**
+	 * Move index to next position and return current element
+	 *
+	 * @return mixed|null
+	 */
+	public function next()
+	{
+
+		return $this->seek(++$this->index);
+	}
+
+	/**
+	 * Return current key/index
+	 *
+	 * @return mixed|null
+	 */
+	public function key()
+	{
+
+		return $this->index;
+	}
+
+	/**
+	 * Return current key/index
+	 *
+	 * @return mixed|null
+	 */
+	public function valid()
+	{
+
+		return !empty($this->current());
+	}
+
+	/**
+	 * Move index to first position and return current element
+	 *
+	 * @return mixed|null
+	 */
+	public function rewind()
+	{
+
+		return $this->first();
 	}
 
 	/**
