@@ -11,8 +11,10 @@
 namespace Biscolab\GoogleMaps\Abstracts;
 
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
+use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\GoogleMapsApi;
 use Biscolab\GoogleMaps\Http\GoogleMapsRequest;
+use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 
 /**
@@ -36,6 +38,16 @@ abstract class Api
 	 * @var string
 	 */
 	protected $result_collection = '';
+
+	/**
+	 * @var GoogleMapsResponse
+	 */
+	protected $response;
+
+	/**
+	 * @var GoogleMapsRequest
+	 */
+	protected $request;
 
 	/**
 	 * Api constructor.
@@ -72,29 +84,55 @@ abstract class Api
 	}
 
 	/**
-	 * @param array $params
-	 *
-	 * @return mixed
-	 */
-	public function createRequest(array $params): GoogleMapsRequest
-	{
-
-		return new GoogleMapsRequest($params);
-	}
-
-	/**
-	 * @param GoogleMapsRequest $request
+	 * @param array       $params
+	 * @param null|string $endpoint
 	 *
 	 * @return GoogleMapsResultsCollection
 	 */
-	public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection
+	public function callApi(array $params, ?string $endpoint = null): GoogleMapsResultsCollection
 	{
 
-		$results = $this->getGoogleMapsApi()->get($request)->getResults();
+		$this->createRequest($params, $endpoint);
+
+		return $this->getResultsCollections();
+	}
+
+	/**
+	 * @param array       $params
+	 * @param null|string $endpoint since 0.5.0
+	 *
+	 * @return GoogleMapsRequest
+	 */
+	public function createRequest(array $params, ?string $endpoint = null): GoogleMapsRequest
+	{
+
+		$this->request = new GoogleMapsRequest($params, $endpoint);;
+
+		return $this->request;
+	}
+
+	/**
+	 * @return GoogleMapsResultsCollection
+	 */
+	public function getResultsCollections(): GoogleMapsResultsCollection
+	{
+
+		$results = $this->getResponse()->getResults();
 
 		$result_collection_class = $this->result_collection;
 
 		return new $result_collection_class($results);
+	}
+
+	/**
+	 * @return GoogleMapsResponse
+	 */
+	public function getResponse(): GoogleMapsResponse
+	{
+
+		$this->response = $this->getGoogleMapsApi()->get($this->request);
+
+		return $this->response;
 	}
 
 	/**
@@ -117,5 +155,27 @@ abstract class Api
 		$this->google_maps_api = $google_maps_api;
 
 		return $this;
+	}
+
+	/**
+	 * @return GoogleMapsResultsCollection
+	 */
+	public function getNextPage(): GoogleMapsResultsCollection
+	{
+
+		if ($this->responseHasNewPage()) {
+			$this->request->setParam(GoogleMapsRequestFields::NEXT_PAGE_TOKEN, $this->response->getNextPageToken());
+		}
+
+		return $this->getResultsCollections();
+	}
+
+	/**
+	 * @return bool
+	 */
+	public function responseHasNewPage(): bool
+	{
+
+		return ($this->response instanceof GoogleMapsResponse) ? $this->response->getNextPageToken() : false;
 	}
 }
