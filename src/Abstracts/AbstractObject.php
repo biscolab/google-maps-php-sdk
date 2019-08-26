@@ -108,6 +108,7 @@ abstract class AbstractObject
 			case 'int':
 			case 'float':
 			case 'array':
+			case 'json':
 				return $field_value;
 			default:
 				return ($field_value instanceof $field_type) ? $field_value : new $field_type($field_value);
