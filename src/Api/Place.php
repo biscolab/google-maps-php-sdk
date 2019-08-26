@@ -77,9 +77,7 @@ class Place extends Api
 	public function makeApiCall(array $params, string $endpoint): GoogleMapsResultsCollection
 	{
 
-		$request = $this->createRequest($params, $endpoint);
-
-		return $this->getResultsCollections($request);
+		return $this->callApi($params, $endpoint);
 	}
 
 	/**
@@ -116,7 +114,7 @@ class Place extends Api
 			empty($params[GoogleMapsRequestFields::NAME]) &&
 			empty($params[GoogleMapsRequestFields::TYPE])
 		) {
-			throw new InvalidArgumentException('If ' . GoogleMapsRequestFields::RANKBY . ' is set as "' . RankByValues::DISTANCE . '" one or more of '.GoogleMapsRequestFields::KEYWORD.', '.GoogleMapsRequestFields::NAME.', '.GoogleMapsRequestFields::TYPE.' fields are required');
+			throw new InvalidArgumentException('If ' . GoogleMapsRequestFields::RANKBY . ' is set as "' . RankByValues::DISTANCE . '" one or more of ' . GoogleMapsRequestFields::KEYWORD . ', ' . GoogleMapsRequestFields::NAME . ', ' . GoogleMapsRequestFields::TYPE . ' fields are required');
 		}
 
 		return $this->makeApiCall($params, PlaceServicesEndpoints::NEARBYSEARCH);

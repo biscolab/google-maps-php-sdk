@@ -53,11 +53,9 @@ class Elevation extends Api
 
 		$locations = $this->parseLocations($locations);
 
-		$request = $this->createRequest([
+		return $this->callApi([
 			GoogleMapsRequestFields::LOCATIONS => $locations
 		]);
-
-		return $this->getResultsCollections($request);
 	}
 
 	/**
@@ -112,12 +110,10 @@ class Elevation extends Api
 
 		$path = $this->parseLocations($path);
 
-		$request = $this->createRequest([
+		return $this->callApi([
 			GoogleMapsRequestFields::PATH    => $path,
 			GoogleMapsRequestFields::SAMPLES => $samples,
 		]);
-
-		return $this->getResultsCollections($request);
 	}
 
 }

@@ -12,7 +12,6 @@ namespace Biscolab\GoogleMaps\Api;
 
 use Biscolab\GoogleMaps\Abstracts\Api;
 use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
-use Biscolab\GoogleMaps\Http\GoogleMapsRequest;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 use Biscolab\GoogleMaps\Http\Result\GeocodingResultsCollection;
 use Biscolab\GoogleMaps\Object\LatLng;
@@ -44,11 +43,9 @@ class Geocoding extends Api
 	public function getByAddress(string $literal_address): GoogleMapsResultsCollection
 	{
 
-		$request = new GoogleMapsRequest([
+		return $this->callApi([
 			GoogleMapsRequestFields::ADDRESS => $literal_address
 		]);
-
-		return $this->getResultsCollections($request);
 	}
 
 	/**
@@ -59,11 +56,9 @@ class Geocoding extends Api
 	public function getReverse(LatLng $latlng): GoogleMapsResultsCollection
 	{
 
-		$request = $this->createRequest([
+		return $this->callApi([
 			GoogleMapsRequestFields::LATLNG => $latlng
 		]);
-
-		return $this->getResultsCollections($request);
 	}
 
 	/**
@@ -74,11 +69,9 @@ class Geocoding extends Api
 	public function getByPlaceId(string $place_id): GoogleMapsResultsCollection
 	{
 
-		$request = $this->createRequest([
+		return $this->callApi([
 			GoogleMapsRequestFields::PLACE_ID => $place_id
 		]);
-
-		return $this->getResultsCollections($request);
 	}
 
 }
