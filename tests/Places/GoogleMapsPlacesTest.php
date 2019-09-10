@@ -382,6 +382,9 @@ class GoogleMapsPlacesTest extends TestCase
 		$this->assertEquals(20, $result->count());
 		$this->assertEquals("ChIJP3Sa8ziYEmsRUKgyFmh9AQM", $result->current()->getPlaceId());
 		$this->assertTrue($this->place_with_key->responseHasNewPage());
+
+		$result_second_page = $this->place_with_key->getNextPage();
+		$this->assertEquals(20, $result_second_page->count());
 	}
 
 	/**
@@ -533,10 +536,10 @@ class GoogleMapsPlacesTest extends TestCase
 		$this->assertTrue(is_string($first_result->getIcon()));
 		$this->assertTrue(is_string($first_result->getId()));
 		$this->assertTrue(is_string($first_result->getPlaceId()));
-		$this->assertTrue(is_null($first_result->getReference()));
+		$this->assertEquals("", $first_result->getReference());
 		$this->assertTrue(is_array($first_result->getTypes()));
 		$this->assertTrue(is_array($first_result->getOpeningHours()));
-		$this->assertTrue(is_null($first_result->getPriceLevel()));
+		$this->assertEquals(0, $first_result->getPriceLevel());
 		$this->assertTrue(is_numeric($first_result->getRating()));
 		$this->assertTrue(is_bool($first_result->getPermanentlyClose()));
 		$this->assertTrue(is_array($first_result->getPlusCode()));
