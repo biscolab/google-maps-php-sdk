@@ -24,5 +24,5 @@ class PlaceResultsCollection extends GoogleMapsResultsCollection
 	/**
 	 * @var string
 	 */
-	protected $item_class = PlaceResult::class;
+	protected $item_class = PlacesResult::class;
 }
