@@ -14,7 +14,7 @@ namespace Biscolab\GoogleMaps\Abstracts;
  * Class AbstractCollection
  * @package Biscolab\GoogleMaps\Abstracts
  */
-abstract class AbstractCollection implements \Iterator
+abstract class AbstractCollection implements \Iterator, \Countable
 {
 
 	/**
@@ -119,14 +119,14 @@ abstract class AbstractCollection implements \Iterator
 	}
 
 	/**
-	 * Return the current object
+	 * Move index to first position and return current element
 	 *
 	 * @return mixed|null
 	 */
-	public function current()
+	public function first()
 	{
 
-		return $this->get($this->index);
+		return $this->get(0);
 	}
 
 	/**
@@ -138,61 +138,6 @@ abstract class AbstractCollection implements \Iterator
 	{
 
 		return isset($this->items[$index]) ? $this->items[$index] : null;
-	}
-
-	/**
-	 * Move index to first position and return current element
-	 *
-	 * @return mixed|null
-	 */
-	public function first()
-	{
-
-		return $this->seek();
-	}
-
-	/**
-	 * Move index to next position and return current element
-	 *
-	 * @return mixed|null
-	 */
-	public function next()
-	{
-
-		return $this->seek(++$this->index);
-	}
-
-	/**
-	 * Return current key/index
-	 *
-	 * @return mixed|null
-	 */
-	public function key()
-	{
-
-		return $this->index;
-	}
-
-	/**
-	 * Return current key/index
-	 *
-	 * @return mixed|null
-	 */
-	public function valid()
-	{
-
-		return !empty($this->current());
-	}
-
-	/**
-	 * Move index to first position and return current element
-	 *
-	 * @return mixed|null
-	 */
-	public function rewind()
-	{
-
-		return $this->first();
 	}
 
 	/**
@@ -238,7 +183,61 @@ abstract class AbstractCollection implements \Iterator
 	public function last()
 	{
 
-		return $this->seek($this->getLastIndex());
+		return $this->get($this->getLastIndex());
+	}
+
+	/**
+	 *
+	 * @return mixed|null
+	 */
+	public function current()
+	{
+
+		return $this->get($this->index);
+	}
+
+	/**
+	 * Move index to next position and return current element
+	 *
+	 * @return mixed|null
+	 */
+	public function next()
+	{
+
+		++$this->index;
+	}
+
+	/**
+	 * Return current key/index
+	 *
+	 * @return mixed|null
+	 */
+	public function key()
+	{
+
+		return $this->index;
+	}
+
+	/**
+	 * Return current key/index
+	 *
+	 * @return mixed|null
+	 */
+	public function valid()
+	{
+
+		return !empty($this->current());
+	}
+
+	/**
+	 * Move index to first position and return current element
+	 *
+	 * @return mixed|null
+	 */
+	public function rewind()
+	{
+
+		return $this->index = 0;
 	}
 
 }
