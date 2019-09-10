@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Fields;
  * Class LatLngFields
  * @package Biscolab\GoogleMaps\Fields
  */
-class LatLngFields {
+class LatLngFields
+{
 
 	/**
 	 * string - latitude

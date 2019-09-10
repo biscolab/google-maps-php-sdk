@@ -14,6 +14,7 @@ namespace Biscolab\GoogleMaps\Object;
  * Class Location
  * @package Biscolab\GoogleMaps\Object
  */
-class Location extends LatLng {
+class Location extends LatLng
+{
 
 }

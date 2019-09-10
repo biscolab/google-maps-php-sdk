@@ -23,7 +23,8 @@ use Biscolab\GoogleMaps\Fields\GeometryFields;
  * @method Geometry setLocationType($args)
  * @package Biscolab\GoogleMaps\Object
  */
-class Geometry extends AbstractObject {
+class Geometry extends AbstractObject
+{
 
 	/**
 	 * @var Location

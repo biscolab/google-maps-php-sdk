@@ -8,7 +8,7 @@
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
-namespace Biscolab\geocode\Tests;
+namespace Biscolab\geocode\Tests\Elevation;
 
 use Biscolab\GoogleMaps\Api\Elevation;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
@@ -19,9 +19,10 @@ use Biscolab\GoogleMaps\Http\Result\ElevationResultsCollection;
 use Biscolab\GoogleMaps\Object\Location;
 use Biscolab\GoogleMaps\Object\Path;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
+use Biscolab\GoogleMaps\Tests\TestCase;
 
-class GoogleMapsElevationSampledTest extends TestCase {
+class GoogleMapsElevationSampledTest extends TestCase
+{
 
 	/**
 	 * @var Elevation
@@ -48,7 +49,8 @@ class GoogleMapsElevationSampledTest extends TestCase {
 	 */
 	protected $mock_response_ko;
 
-	public function setUp() {
+	public function setUp()
+	{
 
 		// This is the sample value from Google Maps official documentation
 		$default_response_OK = [
@@ -90,7 +92,8 @@ class GoogleMapsElevationSampledTest extends TestCase {
 		$this->mock_response_ok = new Response(200, [], \GuzzleHttp\json_encode($default_response_OK));
 	}
 
-	public function testCheckElevationSampledResponseOk() {
+	public function testCheckElevationSampledResponseOk()
+	{
 
 		$response = new GoogleMapsResponse($this->mock_response_ok);
 
@@ -111,28 +114,33 @@ class GoogleMapsElevationSampledTest extends TestCase {
 
 	}
 
-	public function testExceptionIfPathItemsLessThanTwoArray() {
+	public function testExceptionIfPathItemsLessThanTwoArray()
+	{
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->elevation_with_key->getBySampledPath([
 			new Location([
 				LatLngFields::LAT => 39.73915360,
 				LatLngFields::LNG => -104.9847034,
-			])], 2);
+			])
+		], 2);
 	}
 
-	public function testExceptionIfPathItemsLessThanTwoPath() {
+	public function testExceptionIfPathItemsLessThanTwoPath()
+	{
 
 		$this->expectException(InvalidArgumentException::class);
 		$path = new Path([
 			new Location([
 				LatLngFields::LAT => 39.73915360,
 				LatLngFields::LNG => -104.9847034,
-			])]);
+			])
+		]);
 		$this->elevation_with_key->getBySampledPath($path, 2);
 	}
 
-	public function testExceptionIfSamplesLessThanOne() {
+	public function testExceptionIfSamplesLessThanOne()
+	{
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->elevation_with_key->getBySampledPath([
@@ -140,10 +148,11 @@ class GoogleMapsElevationSampledTest extends TestCase {
 				LatLngFields::LAT => 39.73915360,
 				LatLngFields::LNG => -104.9847034,
 			],
-			new Location([
-				LatLngFields::LAT => 50.123,
-				LatLngFields::LNG => 99.456,
-			]))], 0);
+				new Location([
+					LatLngFields::LAT => 50.123,
+					LatLngFields::LNG => 99.456,
+				]))
+		], 0);
 	}
 
 }

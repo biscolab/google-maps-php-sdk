@@ -14,6 +14,7 @@ namespace Biscolab\GoogleMaps\Exception;
  * Class RequestException
  * @package Biscolab\GoogleMaps\Exception
  */
-class RequestException extends Exception {
+class RequestException extends Exception
+{
 
 }

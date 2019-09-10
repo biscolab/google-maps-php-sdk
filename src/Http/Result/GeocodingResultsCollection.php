@@ -16,7 +16,8 @@ use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
  * Class GeocodingResultsCollection
  * @package Biscolab\GoogleMaps\Http\Result
  */
-class GeocodingResultsCollection extends GoogleMapsResultsCollection {
+class GeocodingResultsCollection extends GoogleMapsResultsCollection
+{
 
 	/**
 	 * @var string

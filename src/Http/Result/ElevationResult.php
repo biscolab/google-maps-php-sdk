@@ -17,9 +17,9 @@ use Biscolab\GoogleMaps\Object\Location;
 /**
  * Class ElevationResult
  *
- * @method float getElevation
- * @method Location getLocation
- * @method float getResolution
+ * @method float getElevation()
+ * @method Location getLocation()
+ * @method float getResolution()
  * @method ElevationResult setElevation($args)
  * @method ElevationResult setLocation($args)
  * @method ElevationResult setResolution($args)
@@ -27,7 +27,8 @@ use Biscolab\GoogleMaps\Object\Location;
  *
  * @since   0.3.0
  */
-class ElevationResult extends GoogleMapsResult {
+class ElevationResult extends GoogleMapsResult
+{
 
 	/**
 	 * @var float

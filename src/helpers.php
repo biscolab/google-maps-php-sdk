@@ -15,7 +15,8 @@ namespace Biscolab\GoogleMaps;
  *
  * @return string
  */
-function camel2Snake(string $camel): string {
+function camel2Snake(string $camel): string
+{
 
 	return preg_replace('/^_/', '', strtolower(implode('_', preg_split('/(?=[A-Z])/', $camel))));
 }
@@ -25,7 +26,8 @@ function camel2Snake(string $camel): string {
  *
  * @return string
  */
-function snake2Camel(string $snake): string {
+function snake2Camel(string $snake): string
+{
 
 	return lcfirst(preg_replace('/_/', '', ucwords($snake, '_')));
 }

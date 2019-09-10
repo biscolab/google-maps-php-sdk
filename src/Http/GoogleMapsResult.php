@@ -16,6 +16,7 @@ use Biscolab\GoogleMaps\Abstracts\AbstractObject;
  * Class GoogleMapsResult
  * @package Biscolab\GoogleMaps\Http
  */
-abstract class GoogleMapsResult extends AbstractObject {
+abstract class GoogleMapsResult extends AbstractObject
+{
 
 }

@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Fields;
  * Class LatLngBoundsFields
  * @package Biscolab\GoogleMaps\Fields
  */
-class LatLngBoundsFields {
+class LatLngBoundsFields
+{
 
 	/**
 	 * string : northeast

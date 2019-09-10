@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Abstracts;
  * Class AbstractCollection
  * @package Biscolab\GoogleMaps\Abstracts
  */
-abstract class AbstractCollection {
+abstract class AbstractCollection implements \Iterator, \Countable
+{
 
 	/**
 	 * @var array
@@ -31,7 +32,8 @@ abstract class AbstractCollection {
 	 *
 	 * @param null|array $items
 	 */
-	public function __construct(?array $items = []) {
+	public function __construct(?array $items = [])
+	{
 
 		$this->setItems($items);
 	}
@@ -41,7 +43,8 @@ abstract class AbstractCollection {
 	 *
 	 * @return AbstractCollection
 	 */
-	protected function setItems(?array $items = []) {
+	protected function setItems(?array $items = [])
+	{
 
 		if (is_array($items) && count($items)) {
 			foreach ($items as $item) {
@@ -57,7 +60,8 @@ abstract class AbstractCollection {
 	 *
 	 * @return AbstractCollection
 	 */
-	public function addItem($item) {
+	public function addItem($item)
+	{
 
 		$item = $this->parseItem($item);
 		array_push($this->items, $item);
@@ -70,17 +74,59 @@ abstract class AbstractCollection {
 	 *
 	 * @return mixed
 	 */
-	protected function parseItem($item) {
+	protected function parseItem($item)
+	{
 
 		return $item;
 	}
 
 	/**
+	 * @return string
+	 */
+	public function toJson(): string
+	{
+
+		return json_encode($this->toArray());
+	}
+
+	/**
 	 * @return array
 	 */
-	public function toArray(): array {
+	public function toArray(): array
+	{
 
 		return $this->items;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function __toString(): string
+	{
+
+		return implode(',', $this->toArray());
+	}
+
+	/**
+	 * Return the current position of the index
+	 *
+	 * @return int
+	 */
+	public function position(): int
+	{
+
+		return $this->index;
+	}
+
+	/**
+	 * Move index to first position and return current element
+	 *
+	 * @return mixed|null
+	 */
+	public function first()
+	{
+
+		return $this->get(0);
 	}
 
 	/**
@@ -88,43 +134,10 @@ abstract class AbstractCollection {
 	 *
 	 * @return mixed|null
 	 */
-	public function get(int $index) {
+	public function get(int $index)
+	{
 
 		return isset($this->items[$index]) ? $this->items[$index] : null;
-	}
-
-	/**
-	 * @return int
-	 */
-	public function count(): int {
-
-		return count($this->items);
-	}
-
-	/**
-	 * @return string
-	 */
-	public function toJson(): string {
-
-		return json_encode($this->toArray());
-	}
-
-	/**
-	 * @return string
-	 */
-	public function __toString(): string {
-
-		return implode(',', $this->toArray());
-	}
-
-	/**
-	 * @return int
-	 */
-	public function getLastIndex(): int {
-
-		$last_position = $this->count() - 1;
-
-		return ($last_position) < 0 ? 0 : $last_position;
 	}
 
 	/**
@@ -134,41 +147,32 @@ abstract class AbstractCollection {
 	 *
 	 * @return mixed|null
 	 */
-	public function seek(?int $index = 0) {
+	public function seek(?int $index = 0)
+	{
 
 		$this->index = ($index < $this->count()) ? $index : $this->getLastIndex();
 
-		return $this->get($this->index);
+		return $this->get(intval($this->index));
 	}
 
 	/**
-	 * Return the current position of the index
-	 *
 	 * @return int
 	 */
-	public function position(): int {
+	public function count(): int
+	{
 
-		return $this->index;
+		return count($this->items);
 	}
 
 	/**
-	 * Return the current object
-	 *
-	 * @return mixed|null
+	 * @return int
 	 */
-	public function current() {
+	public function getLastIndex(): int
+	{
 
-		return $this->get($this->index);
-	}
+		$last_position = $this->count() - 1;
 
-	/**
-	 * Move index to first position and return current element
-	 *
-	 * @return mixed|null
-	 */
-	public function first() {
-
-		return $this->seek();
+		return ($last_position) < 0 ? 0 : $last_position;
 	}
 
 	/**
@@ -176,9 +180,64 @@ abstract class AbstractCollection {
 	 *
 	 * @return mixed|null
 	 */
-	public function last() {
+	public function last()
+	{
 
-		return $this->seek($this->getLastIndex());
+		return $this->get($this->getLastIndex());
+	}
+
+	/**
+	 *
+	 * @return mixed|null
+	 */
+	public function current()
+	{
+
+		return $this->get($this->index);
+	}
+
+	/**
+	 * Move index to next position and return current element
+	 *
+	 * @return mixed|null
+	 */
+	public function next()
+	{
+
+		++$this->index;
+	}
+
+	/**
+	 * Return current key/index
+	 *
+	 * @return mixed|null
+	 */
+	public function key()
+	{
+
+		return $this->index;
+	}
+
+	/**
+	 * Return current key/index
+	 *
+	 * @return mixed|null
+	 */
+	public function valid()
+	{
+
+		return !empty($this->current());
+	}
+
+	/**
+	 * Move index to first position and return current element
+	 *
+	 * @return mixed|null
+	 */
+	public function rewind()
+	{
+
+		return $this->index = 0;
 	}
 
 }

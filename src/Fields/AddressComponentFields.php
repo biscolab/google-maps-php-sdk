@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Fields;
  * Class AddressComponentFields
  * @package Biscolab\GoogleMaps\Fields
  */
-class AddressComponentFields {
+class AddressComponentFields
+{
 
 	/**
 	 * string: long_name
