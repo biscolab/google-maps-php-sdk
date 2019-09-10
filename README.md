@@ -15,7 +15,7 @@ Go to [complete reference](https://biscolab.com/google-maps-php-reference/) or r
 ### Ready
 * Geocoding :ballot_box_with_check:
 * Elevation :ballot_box_with_check:
-* Places :ballot_box_with_check:
+* Places (Search) :ballot_box_with_check:
 
 ### ASAP
 * Directions (soon)
