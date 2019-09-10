@@ -20,11 +20,11 @@ use Biscolab\GoogleMaps\Object\Geometry;
  *
  * Standard and Reverse Geocoding have the same Response/Result format
  *
- * @method Address getAddressComponents
- * @method string getFormattedAddress
- * @method Geometry getGeometry
- * @method string getPlaceId
- * @method array getTypes
+ * @method Address getAddressComponents()
+ * @method string getFormattedAddress()
+ * @method Geometry getGeometry()
+ * @method string getPlaceId()
+ * @method array getTypes()
  * @method GeocodingResult setAddressComponents($args)
  * @method GeocodingResult setFormattedAddress($args)
  * @method GeocodingResult setGeometry($args)

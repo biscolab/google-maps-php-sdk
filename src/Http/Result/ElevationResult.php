@@ -17,9 +17,9 @@ use Biscolab\GoogleMaps\Object\Location;
 /**
  * Class ElevationResult
  *
- * @method float getElevation
- * @method Location getLocation
- * @method float getResolution
+ * @method float getElevation()
+ * @method Location getLocation()
+ * @method float getResolution()
  * @method ElevationResult setElevation($args)
  * @method ElevationResult setLocation($args)
  * @method ElevationResult setResolution($args)
