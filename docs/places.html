@@ -1,0 +1,217 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Places (Search) · Google Maps PHP SDK</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The Places API allows you to query for place information on a variety of categories, such as: establishments, prominent points of interest, geographic locations, and more. You can search for places either by proximity or a text string (credits: &lt;a href=&quot;https://developers.google.com/places/web-service/search&quot; target=&quot;_blank&quot;&gt;Official Documentation website&lt;/a&gt;."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Places (Search) · Google Maps PHP SDK"/><meta property="og:type" content="website"/><meta property="og:url" content="https://gmaps-php-docs.biscolab.com//index.html"/><meta property="og:description" content="The Places API allows you to query for place information on a variety of categories, such as: establishments, prominent points of interest, geographic locations, and more. You can search for places either by proximity or a text string (credits: &lt;a href=&quot;https://developers.google.com/places/web-service/search&quot; target=&quot;_blank&quot;&gt;Official Documentation website&lt;/a&gt;."/><meta property="og:image" content="https://gmaps-php-docs.biscolab.com/img/biscolab_white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://gmaps-php-docs.biscolab.com/img/biscolab_white.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-5439279-37"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-5439279-37');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/biscolab_white.svg" alt="Google Maps PHP SDK"/><h2 class="headerTitleWithLogo">Google Maps PHP SDK</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="https://biscolab.com/google-maps-php-reference/" target="_self">API</a></li><li class=""><a href="https://github.com/biscolab/google-maps-php-sdk" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Services</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/getting-started">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/docs/get-api-key">Get API key</a></li><li class="navListItem"><a class="navItem" href="/docs/installation">Installation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Services</h3><ul><li class="navListItem"><a class="navItem" href="/docs/geocoding">Geocoding</a></li><li class="navListItem"><a class="navItem" href="/docs/elevation">Elevation</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/places">Places (Search)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Contribute</h3><ul><li class="navListItem"><a class="navItem" href="/docs/contributing">Contributing</a></li><li class="navListItem"><a class="navItem" href="/docs/code-of-conduct">Code of conduct</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Help</h3><ul><li class="navListItem"><a class="navItem" href="/docs/examples">Examples</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">Places (Search)</h1></header><article><div><span><p>The Places API allows you to query for place information on a variety of categories, such as: establishments, prominent points of interest, geographic locations, and more. You can search for places either by proximity or a text string (credits: <a href="https://developers.google.com/places/web-service/search" target="_blank">Official Documentation website</a>.</p>
+<p>There are 3 types of request:</p>
+<ul>
+<li>Find Place requests</li>
+<li>Nearby Search requests</li>
+<li>Text Search requests</li>
+</ul>
+<p><a href="https://developers.google.com/places/web-service/search" target="_blank">Official Google Place documentation</a></p>
+<h2><a class="anchor" aria-hidden="true" id="initialize-places-object"></a><a href="#initialize-places-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Initialize Places Object</h2>
+<p>First of all replace <code>YOUR_API_KEY</code> with your actual API key.</p>
+<pre><code class="hljs css language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Api</span>\<span class="hljs-title">Places</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Enum</span>\<span class="hljs-title">GoogleMapsApiConfigFields</span>;
+
+$place = <span class="hljs-keyword">new</span> Places([
+    GoogleMapsApiConfigFields::KEY =&gt; <span class="hljs-string">'YOUR_API_KEY'</span>
+]);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="find-places-requests"></a><a href="#find-places-requests" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Find Places requests</h2>
+<p>This function takes a text input (name, address or phone number) and returns a place.</p>
+<h3><a class="anchor" aria-hidden="true" id="using-name-or-address"></a><a href="#using-name-or-address" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using name or address</h3>
+<p>Search place using the &quot;name&quot; or &quot;address&quot;.</p>
+<pre><code class="hljs css language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Fields</span>\<span class="hljs-title">GoogleMapsRequestFields</span>;
+
+<span class="hljs-comment">// get results by place's name or address</span>
+$result = $places-&gt;findPlaceByText(<span class="hljs-string">"Museum of Contemporary Art Australia"</span>);
+</code></pre>
+<p><code>findPlaceByText</code> method accepts 3 arguments</p>
+<table>
+<thead>
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>$query</code></td><td><code>string</code></td><td>The address (or the name) specifying which place to search for</td><td>Required</td></tr>
+<tr><td><code>$params</code></td><td><code>array</code></td><td>The list of search params to add to API request</td><td><code>[]</code></td></tr>
+<tr><td><code>$fields</code></td><td><code>array</code></td><td>The fields specifying the types of place data to return</td><td><code>[]</code></td></tr>
+</tbody>
+</table>
+<p>Find further details about request fields (required, types, etc...) here: <a href="https://developers.google.com/places/web-service/search#FindPlaceRequests" target="_blank">https://developers.google.com/places/web-service/search#FindPlaceRequests</a></p>
+<h3><a class="anchor" aria-hidden="true" id="using-phone-number"></a><a href="#using-phone-number" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using phone number</h3>
+<p>Search place using the &quot;phone number&quot;.</p>
+<pre><code class="hljs css language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Fields</span>\<span class="hljs-title">GoogleMapsRequestFields</span>;
+
+<span class="hljs-comment">// get results by place's phone number</span>
+$result = $places-&gt;findPlaceByPhoneNumber(<span class="hljs-string">"+61293744000"</span>);
+</code></pre>
+<p><code>findPlaceByPhoneNumber</code> method accepts 3 arguments</p>
+<table>
+<thead>
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>$number</code></td><td><code>string</code></td><td>The phone number specifying which place to search for</td><td>Required</td></tr>
+<tr><td><code>$params</code></td><td><code>array</code></td><td>The list of search params to add to API request</td><td><code>[]</code></td></tr>
+<tr><td><code>$fields</code></td><td><code>array</code></td><td>The fields specifying the types of place data to return</td><td><code>[]</code></td></tr>
+</tbody>
+</table>
+<p>Find further details about request fields (required, types, etc...) here: <a href="https://developers.google.com/places/web-service/search#FindPlaceRequests" target="_blank">https://developers.google.com/places/web-service/search#FindPlaceRequests</a></p>
+<h2><a class="anchor" aria-hidden="true" id="nearby-search-requests"></a><a href="#nearby-search-requests" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nearby Search requests</h2>
+<p>This function looks for places within a specified area.</p>
+<h3><a class="anchor" aria-hidden="true" id="using-location-radius"></a><a href="#using-location-radius" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using location &amp; radius</h3>
+<pre><code class="hljs css language-php">
+<span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Object</span>\<span class="hljs-title">Location</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Fields</span>\<span class="hljs-title">GoogleMapsRequestFields</span>;
+
+$location = <span class="hljs-keyword">new</span> Location([
+        LatLngFields::LAT =&gt; <span class="hljs-number">-33.8670522</span>,
+        LatLngFields::LNG =&gt; <span class="hljs-number">151.1957362</span>,
+    ]);
+$radius = <span class="hljs-number">1000</span>;
+
+$result = $places-&gt;findNearbyPlaceByRadius($location, $radius);
+</code></pre>
+<p><code>findNearbyPlaceByRadius</code> method accepts 3 arguments</p>
+<table>
+<thead>
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>$location</code></td><td><code>Location</code></td><td>must be instance of <code>Biscolab\GoogleMaps\Object\Location</code> class</td><td>Required</td></tr>
+<tr><td><code>$radius</code></td><td><code>int</code></td><td>defines the distance in meters. Maximum allowed value is 50000.</td><td>Required</td></tr>
+<tr><td><code>$params</code></td><td><code>array</code></td><td>additional parameters to add to API call</td><td><code>[]</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="rank-by-distance"></a><a href="#rank-by-distance" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rank by distance</h3>
+<pre><code class="hljs css language-php">
+<span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Object</span>\<span class="hljs-title">Location</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Fields</span>\<span class="hljs-title">GoogleMapsRequestFields</span>;
+
+$location = <span class="hljs-keyword">new</span> Location([
+        LatLngFields::LAT =&gt; <span class="hljs-number">-33.8670522</span>,
+        LatLngFields::LNG =&gt; <span class="hljs-number">151.1957362</span>,
+    ]);
+
+<span class="hljs-comment">// You MUST set at least one of following values</span>
+$params = [
+    GoogleMapsRequestFields::KEYWORD =&gt; <span class="hljs-string">'a keyword'</span>,
+    GoogleMapsRequestFields::NAME =&gt; <span class="hljs-string">'name of the place you are looking for'</span>,
+    <span class="hljs-comment">// Biscolab\GoogleMaps\Values\PlaceTypeValues enum class</span>
+    GoogleMapsRequestFields::TYPE =&gt; <span class="hljs-string">'Type of the place you are looking for'</span>
+];
+
+$result = $places-&gt;findNearbyPlaceByDistance($location, $params);
+</code></pre>
+<p><code>findNearbyPlaceByDistance</code> method accepts 2 arguments</p>
+<table>
+<thead>
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>$location</code></td><td><code>Location</code></td><td>must be instance of <code>Biscolab\GoogleMaps\Object\Location</code> class</td><td>Required</td></tr>
+<tr><td><code>$params</code></td><td><code>array</code></td><td>additional parameters to add to API call. You MUST set at least one of following values: <code>keyword</code>, <code>name</code>, <code>type</code></td><td><code>[]</code></td></tr>
+</tbody>
+</table>
+<p>Find further details about request fields (required, types, etc...) here: <a href="https://developers.google.com/places/web-service/search#PlaceSearchRequests" target="_blank">https://developers.google.com/places/web-service/search#PlaceSearchRequests</a></p>
+<h2><a class="anchor" aria-hidden="true" id="text-search-request"></a><a href="#text-search-request" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Text Search request</h2>
+<p>This service returns information about a set of places based on a string.</p>
+<h3><a class="anchor" aria-hidden="true" id="search-by-query"></a><a href="#search-by-query" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Search by query</h3>
+<pre><code class="hljs css language-php">
+<span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Fields</span>\<span class="hljs-title">GoogleMapsRequestFields</span>;
+
+$query = <span class="hljs-string">"restaurants in Sydney"</span>;
+
+$params = [
+    ...
+];
+
+$result = $places-&gt;textSearch($query, $params);
+</code></pre>
+<p><code>textSearch</code> method accepts 2 arguments</p>
+<table>
+<thead>
+<tr><th>Name</th><th>Type</th><th>Description</th><th>Default</th></tr>
+</thead>
+<tbody>
+<tr><td><code>$query</code></td><td><code>string</code></td><td>The text string on which to search, for example: &quot;restaurant&quot; or &quot;123 Main Street&quot;.</td><td>Required</td></tr>
+<tr><td><code>$params</code></td><td><code>array</code></td><td>additional parameters to add to API call</td><td><code>[]</code></td></tr>
+</tbody>
+</table>
+<p>Find further details about request fields (required, types, etc...) here: <a href="https://developers.google.com/places/web-service/search#TextSearchRequests" target="_blank">https://developers.google.com/places/web-service/search#TextSearchRequests</a></p>
+<h2><a class="anchor" aria-hidden="true" id="use-results"></a><a href="#use-results" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use results</h2>
+<p>Results is/are a <code>Biscolab\GoogleMaps\Http\PlaceResultsCollection</code> object.</p>
+<h3><a class="anchor" aria-hidden="true" id="current-page"></a><a href="#current-page" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Current page</h3>
+<p>First thing you should know how many results there are in your <code>PlaceResultsCollection</code> using <code>count</code> method.</p>
+<pre><code class="hljs css language-php">$number_of_results = $results-&gt;count();
+</code></pre>
+<p>To retrieve the first result you can use the <code>first</code> method:</p>
+<pre><code class="hljs css language-php">$first_result = $results-&gt;first();
+</code></pre>
+<p><code>$first_result</code> is an instance of <code>PlaceResult</code> class and has the following methods:</p>
+<table>
+<thead>
+<tr><th>Method name</th><th>Return Type</th></tr>
+</thead>
+<tbody>
+<tr><td><code>getPhotos()</code></td><td><code>PhotoCollection</code></td></tr>
+<tr><td><code>getGeometry()</code></td><td><code>Geometry</code></td></tr>
+<tr><td><code>getFormattedAddress()</code></td><td><code>string</code></td></tr>
+<tr><td><code>getName()</code></td><td><code>string</code></td></tr>
+<tr><td><code>getIcon()</code></td><td><code>string</code></td></tr>
+<tr><td><code>getId()</code></td><td><code>string</code></td></tr>
+<tr><td><code>getPlaceId()</code></td><td><code>string</code></td></tr>
+<tr><td><code>getReference()</code></td><td><code>string</code></td></tr>
+<tr><td><code>getVicinity()</code></td><td><code>string</code></td></tr>
+<tr><td><code>getTypes()</code></td><td><code>array</code></td></tr>
+<tr><td><code>getOpeningHours()</code></td><td><code>array</code></td></tr>
+<tr><td><code>getPriceLevel()</code></td><td><code>int</code></td></tr>
+<tr><td><code>getRating()</code></td><td><code>float</code></td></tr>
+<tr><td><code>getPermanentlyClose()</code></td><td><code>bool</code></td></tr>
+<tr><td><code>getPlusCode()</code></td><td><code>array</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="next-result-page"></a><a href="#next-result-page" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Next result page</h3>
+<p>Results can be paginated. How do you know id a result has more pages?</p>
+<pre><code class="hljs css language-php">
+<span class="hljs-comment">// getNextPage method checks if $result has "next page"</span>
+$next_page_result = $result-&gt;getNextPage();
+
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/elevation"><span class="arrow-prev">← </span><span>Previous</span></a><a class="docs-next button" href="/docs/contributing"><span>Next</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#initialize-places-object">Initialize Places Object</a></li><li><a href="#find-places-requests">Find Places requests</a><ul class="toc-headings"><li><a href="#using-name-or-address">Using name or address</a></li><li><a href="#using-phone-number">Using phone number</a></li></ul></li><li><a href="#nearby-search-requests">Nearby Search requests</a><ul class="toc-headings"><li><a href="#using-location-radius">Using location &amp; radius</a></li><li><a href="#rank-by-distance">Rank by distance</a></li></ul></li><li><a href="#text-search-request">Text Search request</a><ul class="toc-headings"><li><a href="#search-by-query">Search by query</a></li></ul></li><li><a href="#use-results">Use results</a><ul class="toc-headings"><li><a href="#current-page">Current page</a></li><li><a href="#next-result-page">Next result page</a></li></ul></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/biscolab_white.svg" alt="Google Maps PHP SDK" width="32" height="32"/></a><div><h5>Docs</h5><a href="/docs/getting-started">Getting Started</a><a href="/docs/geocoding">Geocoding</a><a href="/docs/elevation">Elevation</a><a href="/docs/places">Place</a></div><div><h5>Community</h5><a href="https://biscolab.com/google-maps-php-reference" target="_blank">Complete reference</a><a href="https://github.com/biscolab/google-maps-php-sdk/issues" target="_blank">Issue tracker</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/biscolab/google-maps-php-sdk" aria-label="Star biscolab/google-maps-php-sdk on GitHub">Github</a></div></section><section class="copyright">Copyright © 2019 Roberto Belotti</section></footer></div></body></html>
