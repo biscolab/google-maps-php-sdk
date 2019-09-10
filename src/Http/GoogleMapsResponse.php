@@ -306,7 +306,7 @@ class GoogleMapsResponse
 	public function getNextPageToken(): string
 	{
 
-		return $this->next_page_token;
+		return $this->next_page_token ?? '';
 	}
 
 	/**
