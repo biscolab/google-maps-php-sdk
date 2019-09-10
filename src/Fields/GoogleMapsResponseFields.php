@@ -14,21 +14,40 @@ namespace Biscolab\GoogleMaps\Fields;
  * Class GoogleMapsResponseFields
  * @package Biscolab\GoogleMaps\Enum
  */
-class GoogleMapsResponseFields {
+class GoogleMapsResponseFields
+{
 
 	/**
-	 * string: results
+	 * @var string results
 	 */
 	const RESULTS = 'results';
 
 	/**
-	 * string: status
+	 * @var string status
 	 */
 	const STATUS = 'status';
 
 	/**
-	 * string: error_message
+	 * @var string error_message
 	 */
 	const ERROR_MESSAGE = 'error_message';
+
+	/**
+	 * @var string candidates
+	 * @since 0.5.0
+	 */
+	const CANDIDATES = 'candidates';
+
+	/**
+	 * @var string html_attributions
+	 * @since 0.5.0
+	 */
+	const HTML_ATTRIBUTIONS = 'html_attributions';
+
+	/**
+	 * @var string next_page_token
+	 * @since 0.5.0
+	 */
+	const NEXT_PAGE_TOKEN = 'next_page_token';
 
 }

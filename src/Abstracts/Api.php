@@ -11,15 +11,18 @@
 namespace Biscolab\GoogleMaps\Abstracts;
 
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
+use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\GoogleMapsApi;
 use Biscolab\GoogleMaps\Http\GoogleMapsRequest;
+use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 
 /**
  * Class Api
  * @package Biscolab\GoogleMaps\Abstracts
  */
-abstract class Api {
+abstract class Api
+{
 
 	/**
 	 * @var string
@@ -37,11 +40,22 @@ abstract class Api {
 	protected $result_collection = '';
 
 	/**
+	 * @var GoogleMapsResponse
+	 */
+	protected $response;
+
+	/**
+	 * @var GoogleMapsRequest
+	 */
+	protected $request;
+
+	/**
 	 * Api constructor.
 	 *
 	 * @param array $config
 	 */
-	public function __construct(array $config = []) {
+	public function __construct(array $config = [])
+	{
 
 		$service_config = $this->getServiceConfig($config);
 		$this->setGoogleMapsApi(new GoogleMapsApi($service_config));
@@ -52,7 +66,8 @@ abstract class Api {
 	 *
 	 * @return array
 	 */
-	protected function getServiceConfig(array $config = []): array {
+	protected function getServiceConfig(array $config = []): array
+	{
 
 		return array_merge($config, [
 			GoogleMapsApiConfigFields::SERVICE_ENDPOINT => $this->getServiceEndpoint()
@@ -62,15 +77,69 @@ abstract class Api {
 	/**
 	 * @return string
 	 */
-	public function getServiceEndpoint(): string {
+	public function getServiceEndpoint(): string
+	{
 
-		return static::SERVICE_ENDPOINT;
+		return static::SERVICE_ENDPOINT ?? '';
+	}
+
+	/**
+	 * @param array       $params
+	 * @param null|string $endpoint
+	 *
+	 * @return GoogleMapsResultsCollection
+	 */
+	public function callApi(array $params, ?string $endpoint = null): GoogleMapsResultsCollection
+	{
+
+		$this->createRequest($params, $endpoint);
+
+		return $this->getResultsCollections();
+	}
+
+	/**
+	 * @param array       $params
+	 * @param null|string $endpoint since 0.5.0
+	 *
+	 * @return GoogleMapsRequest
+	 */
+	public function createRequest(array $params, ?string $endpoint = null): GoogleMapsRequest
+	{
+
+		$this->request = new GoogleMapsRequest($params, $endpoint);;
+
+		return $this->request;
+	}
+
+	/**
+	 * @return GoogleMapsResultsCollection
+	 */
+	public function getResultsCollections(): GoogleMapsResultsCollection
+	{
+
+		$results = $this->getResponse()->getResults();
+
+		$result_collection_class = $this->result_collection;
+
+		return new $result_collection_class($results);
+	}
+
+	/**
+	 * @return GoogleMapsResponse
+	 */
+	public function getResponse(): GoogleMapsResponse
+	{
+
+		$this->response = $this->getGoogleMapsApi()->get($this->request);
+
+		return $this->response;
 	}
 
 	/**
 	 * @return GoogleMapsApi
 	 */
-	public function getGoogleMapsApi(): GoogleMapsApi {
+	public function getGoogleMapsApi(): GoogleMapsApi
+	{
 
 		return $this->google_maps_api;
 	}
@@ -80,7 +149,8 @@ abstract class Api {
 	 *
 	 * @return Api
 	 */
-	public function setGoogleMapsApi(GoogleMapsApi $google_maps_api): Api {
+	public function setGoogleMapsApi(GoogleMapsApi $google_maps_api): Api
+	{
 
 		$this->google_maps_api = $google_maps_api;
 
@@ -88,26 +158,24 @@ abstract class Api {
 	}
 
 	/**
-	 * @param array $params
-	 *
-	 * @return mixed
+	 * @return GoogleMapsResultsCollection
 	 */
-	public function createRequest(array $params): GoogleMapsRequest {
+	public function getNextPage(): GoogleMapsResultsCollection
+	{
 
-		return new GoogleMapsRequest($params);
+		if ($this->responseHasNewPage()) {
+			$this->request->setParam(GoogleMapsRequestFields::NEXT_PAGE_TOKEN, $this->response->getNextPageToken());
+		}
+
+		return $this->getResultsCollections();
 	}
 
 	/**
-	 * @param GoogleMapsRequest $request
-	 *
-	 * @return GoogleMapsResultsCollection
+	 * @return bool
 	 */
-	public function getResultsCollections(GoogleMapsRequest $request): GoogleMapsResultsCollection {
+	public function responseHasNewPage(): bool
+	{
 
-		$results = $this->getGoogleMapsApi()->get($request)->getResults();
-
-		$result_collection_class = $this->result_collection;
-
-		return new $result_collection_class($results);
+		return ($this->response instanceof GoogleMapsResponse) ? $this->response->getNextPageToken() : false;
 	}
 }

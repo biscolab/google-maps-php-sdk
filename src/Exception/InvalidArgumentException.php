@@ -14,6 +14,7 @@ namespace Biscolab\GoogleMaps\Exception;
  * Class InvalidArgumentException
  * @package Biscolab\GoogleMaps\Exception
  */
-class InvalidArgumentException extends Exception {
+class InvalidArgumentException extends Exception
+{
 
 }

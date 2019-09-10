@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Enum;
  * Class GoogleMapsResponseFormat
  * @package Biscolab\GoogleMaps\Enum
  */
-class GoogleMapsResponseFormat {
+class GoogleMapsResponseFormat
+{
 
 	/**
 	 * string: json

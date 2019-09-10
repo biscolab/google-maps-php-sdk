@@ -16,16 +16,18 @@ use Biscolab\GoogleMaps\Abstracts\AbstractCollection;
  * Class Address
  * @package Biscolab\GoogleMaps\Object
  *
- * @see https://developers.google.com/maps/documentation/geocoding/intro#Types
+ * @see     https://developers.google.com/maps/documentation/geocoding/intro#Types
  */
-class Address extends AbstractCollection {
+class Address extends AbstractCollection
+{
 
 	/**
 	 * @param $item
 	 *
 	 * @return AddressComponent
 	 */
-	protected function parseItem($item) {
+	protected function parseItem($item)
+	{
 
 		return ($item instanceof AddressComponent) ? $item : new AddressComponent($item);
 	}

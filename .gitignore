@@ -1,12 +1,28 @@
 /local
 vendor/
+examples/config.php
+
+# Editor
 .idea/
-tests/private/
+
+# Composer
 /composer.lock
 /composer.local.*
 /composer.phar
-/coverage.clover
 .DS_Store
+
+# Sami
 build/
 cache/
 config/
+
+# Unit
+phpunit.xml
+tests/private/
+
+# coverage reports
+coverage.clover
+coverage.xml
+clover.xml
+report/
+clover

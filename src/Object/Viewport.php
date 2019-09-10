@@ -14,6 +14,7 @@ namespace Biscolab\GoogleMaps\Object;
  * Class Viewport
  * @package Biscolab\GoogleMaps\Object
  */
-class Viewport extends LatLngBounds {
+class Viewport extends LatLngBounds
+{
 
 }

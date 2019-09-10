@@ -16,12 +16,24 @@ use Biscolab\GoogleMaps\Exception\RequestException;
 use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsClient;
 use Biscolab\GoogleMaps\Http\GoogleMapsRequest;
+use Biscolab\GoogleMaps\Values\SensorValues;
 
 /**
  * Class GoogleMapsApi
  * @package Biscolab\GoogleMaps
  */
-class GoogleMapsApi {
+class GoogleMapsApi
+{
+
+	/**
+	 * @var GoogleMapsApi
+	 */
+	protected static $instance = null;
+
+	/**
+	 * @var GoogleMapsRequest
+	 */
+	protected $request = null;
 
 	/**
 	 * Google Maps Geocode Service API url
@@ -64,28 +76,19 @@ class GoogleMapsApi {
 	private $type = null;
 
 	/**
-	 * @var GoogleMapsApi
-	 */
-	protected static $instance = null;
-
-	/**
-	 * @var GoogleMapsRequest
-	 */
-	protected $request = null;
-
-	/**
 	 * GoogleMapsApi constructor.
 	 *
 	 * @param array $config
 	 */
-	public function __construct(array $config = []) {
+	public function __construct(array $config = [])
+	{
 
 		// Set "API key"
 		$key = (empty($config[GoogleMapsApiConfigFields::KEY])) ? '' : $config[GoogleMapsApiConfigFields::KEY];
 		$this->setKey($key);
 
 		// Set "sensor"
-		$sensor = (empty($config[GoogleMapsApiConfigFields::SENSOR])) ? '' : $config[GoogleMapsApiConfigFields::SENSOR];
+		$sensor = (empty($config[GoogleMapsApiConfigFields::SENSOR])) ? SensorValues::FALSE : $config[GoogleMapsApiConfigFields::SENSOR];
 		$this->setSensor($sensor);
 
 		// Set the endpoint
@@ -99,134 +102,75 @@ class GoogleMapsApi {
 	/**
 	 * @return string
 	 */
-	public function getApiUrl(): string {
+	public function getApiUrl(): string
+	{
 
 		return $this->api_url;
 	}
 
 	/**
-	 * @param string $key
+	 * Perform the Google Maps API call
 	 *
-	 * @return GoogleMapsApi
-	 */
-	public function setKey(string $key): GoogleMapsApi {
-
-		$this->key = $key;
-
-		return $this;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getKey(): string {
-
-		return $this->key;
-	}
-
-	/**
-	 * Set sensor parameter
+	 * @param GoogleMapsRequest $request
 	 *
-	 * @param bool $sensor
-	 *
-	 * @return GoogleMapsApi
+	 * @return Http\GoogleMapsResponse|string
 	 */
-	public function setSensor(bool $sensor): GoogleMapsApi {
+	public function get(GoogleMapsRequest $request)
+	{
 
-		if ($sensor === false) {
-			$sensor = 'false';
-		}
-		$this->sensor = $sensor;
+		$this->setRequest($request);
 
-		return $this;
-	}
+		$url = $this->getUrl();
 
-	/**
-	 * @return string
-	 */
-	public function getSensor(): string {
+		$query = $this->getQuery();
 
-		return $this->sensor ? 'true' : 'false';
-	}
+		$this->response = $this->getClient()->get($url, $query);
 
-	/**
-	 * @param GoogleMapsClient|null $client
-	 *
-	 * @return GoogleMapsApi
-	 */
-	public function setClient(?GoogleMapsClient $client = null): GoogleMapsApi {
-
-		$this->client = $client ?? new GoogleMapsClient();
-
-		return $this;
-	}
-
-	/**
-	 * @return GoogleMapsClient
-	 */
-	public function getClient() {
-
-		return $this->client;
-	}
-
-	/**
-	 * @return GoogleMapsRequest
-	 */
-	public function getRequest(): GoogleMapsRequest {
-
-		return $this->request;
-	}
-
-	/**
-	 * @return string
-	 */
-	public function getServiceEndpoint(): string {
-
-		return $this->service_endpoint;
-	}
-
-	/**
-	 * @param string $service_endpoint
-	 */
-	public function setServiceEndpoint(string $service_endpoint) {
-
-		$this->service_endpoint = $service_endpoint;
-	}
-
-	/**
-	 * @param string $type
-	 *
-	 * @return GoogleMapsApi
-	 */
-	protected function setType(string $type): GoogleMapsApi {
-
-		$this->type = $type;
-
-		return $this;
+		return $this->response;
 	}
 
 	/**
 	 * @return string
 	 * @throws RequestException
 	 */
-	public function getUrl(): string {
+	public function getUrl(): string
+	{
 
+		$url_chunks = [];
 		$service_endpoint = $this->getServiceEndpoint();
 		if (!$service_endpoint) {
 			throw new RequestException('Service name missing!');
 		}
 
-		return $this->api_url . $service_endpoint . '/' . GoogleMapsResponseFormat::JSON;
+		$request_endpoint = $this->request->getEndpoint();
+		array_push($url_chunks, $this->api_url . $service_endpoint);
+
+		if($request_endpoint) {
+			array_push($url_chunks, $request_endpoint);
+		}
+
+		array_push($url_chunks, GoogleMapsResponseFormat::JSON);
+		return implode("/", $url_chunks);
 	}
 
 	/**
-	 * @param GoogleMapsRequest $request
+	 * @return string
+	 */
+	public function getServiceEndpoint(): string
+	{
+
+		return $this->service_endpoint;
+	}
+
+	/**
+	 * @param string $service_endpoint
 	 *
 	 * @return GoogleMapsApi
 	 */
-	public function setRequest(GoogleMapsRequest $request) {
+	public function setServiceEndpoint(string $service_endpoint): GoogleMapsApi
+	{
 
-		$this->request = $request;
+		$this->service_endpoint = $service_endpoint;
 
 		return $this;
 	}
@@ -234,7 +178,8 @@ class GoogleMapsApi {
 	/**
 	 * @return string
 	 */
-	public function getQuery(): string {
+	public function getQuery(): string
+	{
 
 		$api_query = http_build_query([
 			GoogleMapsRequestFields::KEY    => $this->getKey(),
@@ -250,23 +195,109 @@ class GoogleMapsApi {
 	}
 
 	/**
-	 * Perform the Google Maps API call
+	 * @return string
+	 */
+	public function getKey(): string
+	{
+
+		return $this->key;
+	}
+
+	/**
+	 * @param string $key
 	 *
+	 * @return GoogleMapsApi
+	 */
+	public function setKey(string $key): GoogleMapsApi
+	{
+
+		$this->key = $key;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSensor(): string
+	{
+
+		return $this->sensor ? 'true' : 'false';
+	}
+
+	/**
+	 * Set sensor parameter
+	 *
+	 * @param bool|string $sensor
+	 *
+	 * @return GoogleMapsApi
+	 */
+	public function setSensor($sensor): GoogleMapsApi
+	{
+
+		if ($sensor !== SensorValues::FALSE) {
+			$sensor = SensorValues::TRUE;
+		}
+		$this->sensor = $sensor;
+
+		return $this;
+	}
+
+	/**
+	 * @return GoogleMapsRequest
+	 */
+	public function getRequest(): GoogleMapsRequest
+	{
+
+		return $this->request;
+	}
+
+	/**
 	 * @param GoogleMapsRequest $request
 	 *
-	 * @return Http\GoogleMapsResponse|string
+	 * @return GoogleMapsApi
 	 */
-	public function get(GoogleMapsRequest $request) {
+	public function setRequest(GoogleMapsRequest $request)
+	{
 
-		$this->setRequest($request);
+		$this->request = $request;
 
-		$url = $this->getUrl();
+		return $this;
+	}
 
-		$query = $this->getQuery();
+	/**
+	 * @return GoogleMapsClient
+	 */
+	public function getClient()
+	{
 
-		$this->response = $this->getClient()->get($url, $query);
+		return $this->client;
+	}
 
-		return $this->response;
+	/**
+	 * @param GoogleMapsClient|null $client
+	 *
+	 * @return GoogleMapsApi
+	 */
+	public function setClient(?GoogleMapsClient $client = null): GoogleMapsApi
+	{
+
+		$this->client = $client ?? new GoogleMapsClient();
+
+		return $this;
+	}
+
+	/**
+	 * @param string $type
+	 *
+	 * @return GoogleMapsApi
+	 */
+	protected function setType(string $type): GoogleMapsApi
+	{
+
+		$this->type = $type;
+
+		return $this;
 	}
 
 }
