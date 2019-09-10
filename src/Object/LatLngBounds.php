@@ -19,7 +19,8 @@ use Biscolab\GoogleMaps\Fields\LatLngBoundsFields;
  * @method LatLng setLng($args)
  * @package Biscolab\GoogleMaps\Object
  */
-class LatLngBounds extends AbstractObject {
+class LatLngBounds extends AbstractObject
+{
 
 	/**
 	 * @var LatLng

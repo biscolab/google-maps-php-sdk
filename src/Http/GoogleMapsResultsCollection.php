@@ -16,7 +16,8 @@ use Biscolab\GoogleMaps\Abstracts\AbstractCollection;
  * Class GoogleMapsResultsCollection
  * @package Biscolab\GoogleMaps\Http
  */
-class GoogleMapsResultsCollection extends AbstractCollection {
+class GoogleMapsResultsCollection extends AbstractCollection
+{
 
 	/**
 	 * @var string
@@ -26,9 +27,10 @@ class GoogleMapsResultsCollection extends AbstractCollection {
 	/**
 	 * @param $item
 	 *
-	 * @return GeocodingResult
+	 * @return GoogleMapsResult
 	 */
-	protected function parseItem($item) {
+	protected function parseItem($item): GoogleMapsResult
+	{
 
 		$item_class = $this->item_class;
 

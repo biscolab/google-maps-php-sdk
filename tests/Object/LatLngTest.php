@@ -8,22 +8,24 @@
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
-namespace Biscolab\geocode\Tests;
+namespace BiscolabBiscolab\GoogleMaps\Tests\Object;
 
 use Biscolab\GoogleMaps\Fields\LatLngFields;
 use Biscolab\GoogleMaps\Object\LatLng;
-use PHPUnit\Framework\TestCase;
+use Biscolab\GoogleMaps\Tests\TestCase;
 
 /**
  * Class LatLngTest
  * @package Biscolab\geocode\Tests
  */
-class LatLngTest extends TestCase {
+class LatLngTest extends TestCase
+{
 
 	/**
 	 * @test
 	 */
-	public function testLatLngSetterGetter() {
+	public function testLatLngSetterGetter()
+	{
 
 		$lat_lng = new LatLng();
 

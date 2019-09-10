@@ -23,7 +23,8 @@ use Biscolab\GoogleMaps\Fields\AddressComponentFields;
  * @method array getTypes()
  * @package Biscolab\GoogleMaps\Object
  */
-class AddressComponent extends AbstractObject {
+class AddressComponent extends AbstractObject
+{
 
 	/**
 	 * @var string

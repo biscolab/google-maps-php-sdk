@@ -10,13 +10,18 @@
 
 namespace Biscolab\GoogleMaps\Http;
 
-use Biscolab\GoogleMaps\Object\AbstractObject;
-
 /**
  * Class GoogleMapsRequest
  * @package Biscolab\GoogleMaps\Http
  */
-class GoogleMapsRequest {
+class GoogleMapsRequest
+{
+
+	/**
+	 * @var string
+	 * @since 0.5.0
+	 */
+	protected $endpoint = null;
 
 	/**
 	 * @var array
@@ -26,24 +31,29 @@ class GoogleMapsRequest {
 	/**
 	 * GoogleMapsRequest constructor.
 	 *
-	 * @param array $params
+	 * @param array       $params
+	 * @param null|string $endpoint
 	 */
-	public function __construct(array $params = []) {
+	public function __construct(array $params = [], ?string $endpoint = null)
+	{
 
 		if ($params) {
 			foreach ($params as $param_name => $param_value) {
-				$this->addParam($param_name, $param_value);
+				$this->setParam($param_name, $param_value);
 			}
 		}
+
+		$this->endpoint = $endpoint;
 	}
 
 	/**
-	 * @param string         $param_name
-	 * @param AbstractObject $param_value
+	 * @param string $param_name
+	 * @param mixed  $param_value
 	 *
 	 * @return GoogleMapsRequest
 	 */
-	public function addParam(string $param_name, $param_value): GoogleMapsRequest {
+	public function setParam(string $param_name, $param_value): GoogleMapsRequest
+	{
 
 		$this->params[$param_name] = $param_value;
 
@@ -53,7 +63,8 @@ class GoogleMapsRequest {
 	/**
 	 * @return string
 	 */
-	public function getQuery(): string {
+	public function getQuery(): string
+	{
 
 		$params = [];
 
@@ -62,6 +73,24 @@ class GoogleMapsRequest {
 		}
 
 		return http_build_query($params);
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getParams(): array
+	{
+
+		return $this->params;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public function getEndpoint(): ?string
+	{
+
+		return $this->endpoint;
 	}
 
 }

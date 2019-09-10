@@ -8,10 +8,10 @@
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
-use \Biscolab\GoogleMaps\Api\Geocoding;
-use \Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
-use \Biscolab\GoogleMaps\Object\LatLng;
-use \Biscolab\GoogleMaps\Fields\LatLngFields;
+use Biscolab\GoogleMaps\Api\Geocoding;
+use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
+use Biscolab\GoogleMaps\Fields\LatLngFields;
+use Biscolab\GoogleMaps\Object\LatLng;
 
 // Run "composer install" command or change with your actual autoload.php file
 require '../../vendor/autoload.php';

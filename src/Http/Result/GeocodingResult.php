@@ -20,11 +20,11 @@ use Biscolab\GoogleMaps\Object\Geometry;
  *
  * Standard and Reverse Geocoding have the same Response/Result format
  *
- * @method Address getAddressComponents
- * @method string getFormattedAddress
- * @method Geometry getGeometry
- * @method string getPlaceId
- * @method array getTypes
+ * @method Address getAddressComponents()
+ * @method string getFormattedAddress()
+ * @method Geometry getGeometry()
+ * @method string getPlaceId()
+ * @method array getTypes()
  * @method GeocodingResult setAddressComponents($args)
  * @method GeocodingResult setFormattedAddress($args)
  * @method GeocodingResult setGeometry($args)
@@ -32,7 +32,8 @@ use Biscolab\GoogleMaps\Object\Geometry;
  * @method GeocodingResult setTypes($args)
  * @package Biscolab\GoogleMaps\Http\Result
  */
-class GeocodingResult extends GoogleMapsResult {
+class GeocodingResult extends GoogleMapsResult
+{
 
 	/**
 	 * @var Address
@@ -73,7 +74,8 @@ class GeocodingResult extends GoogleMapsResult {
 	/**
 	 * @return Address
 	 */
-	public function getAddress(): Address {
+	public function getAddress(): Address
+	{
 
 		return $this->getAddressComponents();
 	}

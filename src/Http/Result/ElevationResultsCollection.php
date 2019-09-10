@@ -18,7 +18,8 @@ use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
  *
  * @since   0.3.0
  */
-class ElevationResultsCollection extends GoogleMapsResultsCollection {
+class ElevationResultsCollection extends GoogleMapsResultsCollection
+{
 
 	/**
 	 * @var string

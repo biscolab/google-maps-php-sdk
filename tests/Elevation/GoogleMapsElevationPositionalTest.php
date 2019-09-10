@@ -8,7 +8,7 @@
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
-namespace Biscolab\geocode\Tests;
+namespace Biscolab\geocode\Tests\Elevation;
 
 use Biscolab\GoogleMaps\Api\Elevation;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
@@ -19,9 +19,10 @@ use Biscolab\GoogleMaps\Http\Result\ElevationResultsCollection;
 use Biscolab\GoogleMaps\Object\Location;
 use Biscolab\GoogleMaps\Values\GoogleMapsResponseStatusValues;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
+use Biscolab\GoogleMaps\Tests\TestCase;
 
-class GoogleMapsElevationPositionalTest extends TestCase {
+class GoogleMapsElevationPositionalTest extends TestCase
+{
 
 	/**
 	 * @var Elevation
@@ -48,7 +49,8 @@ class GoogleMapsElevationPositionalTest extends TestCase {
 	 */
 	protected $mock_response_ko;
 
-	public function setUp() {
+	public function setUp()
+	{
 
 		// This is the sample value from Google Maps official documentation
 		$default_response_OK = [
@@ -87,19 +89,24 @@ class GoogleMapsElevationPositionalTest extends TestCase {
 		$this->mock_response_ko = new Response(200, [], \GuzzleHttp\json_encode($default_response_KO));
 	}
 
-	public function testCheckElevationConfig() {
+	public function testCheckElevationConfig()
+	{
 
-		$this->assertEquals(Elevation::SERVICE_ENDPOINT, $this->elevation_with_key->getGoogleMapsApi()->getServiceEndpoint());
+		$this->assertEquals(Elevation::SERVICE_ENDPOINT,
+			$this->elevation_with_key->getGoogleMapsApi()->getServiceEndpoint());
 		$this->assertEquals('MyKey', $this->elevation_with_key->getGoogleMapsApi()->getKey());
 		$this->assertEquals('', $this->elevation_no_key->getGoogleMapsApi()->getKey());
 	}
 
-	public function testCheckElevationConfigWithSensor() {
+	public function testCheckElevationConfigWithSensor()
+	{
 
 		$this->assertEquals('true', $this->elevation_with_sensor->getGoogleMapsApi()->getSensor());
 	}
 
-	public function testParseLocationsSingle() {
+	public function testParseLocationsSingle()
+	{
+
 		$parsed_locations = $this->elevation_with_key->parseLocations(new Location([
 			LatLngFields::LAT => 39.73915360,
 			LatLngFields::LNG => -104.98470340,
@@ -108,7 +115,9 @@ class GoogleMapsElevationPositionalTest extends TestCase {
 		$this->assertEquals('39.7391536,-104.9847034', $parsed_locations);
 	}
 
-	public function testParseLocationsMulti() {
+	public function testParseLocationsMulti()
+	{
+
 		$parsed_locations = $this->elevation_with_key->parseLocations([
 			new Location([
 				LatLngFields::LAT => 39.73915360,
@@ -123,7 +132,8 @@ class GoogleMapsElevationPositionalTest extends TestCase {
 		$this->assertEquals('39.7391536,-104.9847034|50.123,99.456', $parsed_locations);
 	}
 
-	public function testCheckElevationResponseOk() {
+	public function testCheckElevationResponseOk()
+	{
 
 		$response = new GoogleMapsResponse($this->mock_response_ok);
 
@@ -142,7 +152,8 @@ class GoogleMapsElevationPositionalTest extends TestCase {
 
 	}
 
-	public function testResponseKO() {
+	public function testResponseKO()
+	{
 
 		$this->expectException(RequestException::class);
 		new GoogleMapsResponse($this->mock_response_ko);

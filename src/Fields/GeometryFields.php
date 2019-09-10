@@ -14,7 +14,8 @@ namespace Biscolab\GoogleMaps\Fields;
  * Class GeometryFields
  * @package Biscolab\GoogleMaps\Fields
  */
-class GeometryFields {
+class GeometryFields
+{
 
 	/**
 	 * string: location

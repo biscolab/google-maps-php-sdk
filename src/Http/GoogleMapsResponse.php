@@ -20,7 +20,8 @@ use GuzzleHttp\Psr7\Response;
  * Class GoogleMapsResponse
  * @package Biscolab\GoogleMaps\Http
  */
-class GoogleMapsResponse {
+class GoogleMapsResponse
+{
 
 	/**
 	 * @var Response
@@ -28,12 +29,20 @@ class GoogleMapsResponse {
 	protected $response = null;
 
 	/**
+	 * contains an array of places, with information about each.
+	 * The Places API returns up to 20 establishment results per query.
+	 * Additionally, political results may be returned which serve to identify the area of the request.
+	 *
 	 * @var array
+	 * @see https://developers.google.com/places/web-service/search#PlaceSearchResults
 	 */
 	protected $results = null;
 
 	/**
+	 * contains metadata on the request.
+	 *
 	 * @var string
+	 * @see https://developers.google.com/places/web-service/search#PlaceSearchStatusCodes
 	 */
 	protected $status = null;
 
@@ -48,16 +57,31 @@ class GoogleMapsResponse {
 	protected $array_response = null;
 
 	/**
-	 * @var int
+	 * @var null|array
 	 */
 	protected $http_status_code = null;
+
+	/**
+	 * may contain a set of attributions about this listing which must be displayed to the user (some listings may not have attribution).
+	 *
+	 * @var null|array
+	 * @since 0.5.0
+	 */
+	protected $html_attributions = null;
+
+	/**
+	 * @var null|string
+	 * @since 0.5.0
+	 */
+	protected $next_page_token = null;
 
 	/**
 	 * GoogleMapsResponse constructor.
 	 *
 	 * @param Response $response
 	 */
-	public function __construct(Response $response) {
+	public function __construct(Response $response)
+	{
 
 		$this->setResponse($response);
 
@@ -71,7 +95,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return GoogleMapsResponse
 	 */
-	public function setResponse(Response $response): GoogleMapsResponse {
+	public function setResponse(Response $response): GoogleMapsResponse
+	{
 
 		$this->response = $response;
 
@@ -84,15 +109,12 @@ class GoogleMapsResponse {
 	 * @throws RequestException
 	 * @throws ResponseException
 	 */
-	protected function parseResponse(): GoogleMapsResponse {
+	protected function parseResponse(): GoogleMapsResponse
+	{
 
 		$json_response = $this->response->getBody()->getContents();
 		$array_response = $this->toArray($json_response);
-
-		if (is_null($array_response[GoogleMapsResponseFields::RESULTS])) {
-			throw new ResponseException('Missing "results" in GoogleMapsApi Response');
-		}
-		$this->setResults($array_response[GoogleMapsResponseFields::RESULTS]);
+		$results = null;
 
 		if (empty($array_response[GoogleMapsResponseFields::STATUS])) {
 			throw new ResponseException('Missing "status" in GoogleMapsApi Response');
@@ -104,23 +126,34 @@ class GoogleMapsResponse {
 			if (!empty($array_response[GoogleMapsResponseFields::ERROR_MESSAGE])) {
 				$error_message = $array_response[GoogleMapsResponseFields::ERROR_MESSAGE];
 				$this->setErrorMessage($error_message);
+			} elseif (!empty($array_response[GoogleMapsResponseFields::STATUS])) {
+				$error_message .= ': ' . $array_response[GoogleMapsResponseFields::STATUS];
+				$this->setErrorMessage($error_message);
 			}
 			throw new RequestException($error_message);
 
 		}
 
+		if (!empty($array_response[GoogleMapsResponseFields::RESULTS])) {
+			$results = $array_response[GoogleMapsResponseFields::RESULTS];
+
+		} elseif (!empty($array_response[GoogleMapsResponseFields::CANDIDATES])) {
+			$results = $array_response[GoogleMapsResponseFields::CANDIDATES];
+
+		} else {
+			throw new ResponseException('Missing "results" in GoogleMapsApi Response');
+		}
+		$this->setResults($results);
+
+		if (!empty($array_response[GoogleMapsResponseFields::HTML_ATTRIBUTIONS])) {
+			$this->setHtmlAttributions($array_response[GoogleMapsResponseFields::HTML_ATTRIBUTIONS]);
+		}
+
+		if (!empty($array_response[GoogleMapsResponseFields::NEXT_PAGE_TOKEN])) {
+			$this->setNextPageToken($array_response[GoogleMapsResponseFields::NEXT_PAGE_TOKEN]);
+		}
+
 		return $this;
-	}
-
-	/**
-	 * Check HTTP status code (silent/No exceptions!)
-	 * @return int
-	 */
-	protected function checkHttpStatusCode(): int {
-
-		$this->http_status_code = $this->response->getStatusCode();
-
-		return $this->http_status_code;
 	}
 
 	/**
@@ -128,7 +161,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return array
 	 */
-	public function toArray(string $json_response): array {
+	public function toArray(string $json_response): array
+	{
 
 		$this->array_response = json_decode($json_response, true);
 
@@ -136,29 +170,10 @@ class GoogleMapsResponse {
 	}
 
 	/**
-	 * @return array
-	 */
-	public function getResults() {
-
-		return $this->results;
-	}
-
-	/**
-	 * @param array $results
-	 *
-	 * @return $this
-	 */
-	public function setResults(array $results) {
-
-		$this->results = $results;
-
-		return $this;
-	}
-
-	/**
 	 * @return string
 	 */
-	public function getStatus(): string {
+	public function getStatus(): string
+	{
 
 		return $this->status;
 	}
@@ -168,7 +183,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return GoogleMapsResponse
 	 */
-	public function setStatus(string $status) {
+	public function setStatus(string $status)
+	{
 
 		$this->status = $status;
 
@@ -176,9 +192,44 @@ class GoogleMapsResponse {
 	}
 
 	/**
+	 * Check HTTP status code (silent/No exceptions!)
+	 * @return int
+	 */
+	protected function checkHttpStatusCode(): int
+	{
+
+		$this->http_status_code = $this->response->getStatusCode();
+
+		return $this->http_status_code;
+	}
+
+	/**
 	 * @return array
 	 */
-	public function getArrayResponse(): array {
+	public function getResults()
+	{
+
+		return $this->results;
+	}
+
+	/**
+	 * @param array $results
+	 *
+	 * @return $this
+	 */
+	public function setResults(array $results)
+	{
+
+		$this->results = $results;
+
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getArrayResponse(): array
+	{
 
 		return $this->array_response;
 	}
@@ -188,7 +239,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return GoogleMapsResponse
 	 */
-	public function setArrayResponse(array $array_response): GoogleMapsResponse {
+	public function setArrayResponse(array $array_response): GoogleMapsResponse
+	{
 
 		$this->array_response = $array_response;
 
@@ -198,7 +250,8 @@ class GoogleMapsResponse {
 	/**
 	 * @return mixed
 	 */
-	public function getErrorMessage() {
+	public function getErrorMessage()
+	{
 
 		return $this->error_message;
 	}
@@ -208,7 +261,8 @@ class GoogleMapsResponse {
 	 *
 	 * @return GoogleMapsResponse
 	 */
-	public function setErrorMessage($error_message): GoogleMapsResponse {
+	public function setErrorMessage($error_message): GoogleMapsResponse
+	{
 
 		$this->error_message = $error_message;
 
@@ -218,9 +272,54 @@ class GoogleMapsResponse {
 	/**
 	 * @return int
 	 */
-	public function getHttpStatusCode(): int {
+	public function getHttpStatusCode(): int
+	{
 
 		return intval($this->http_status_code);
+	}
+
+	/**
+	 * @return array|null
+	 */
+	public function getHtmlAttributions(): ?array
+	{
+
+		return $this->html_attributions;
+	}
+
+	/**
+	 * @param array|null $html_attributions
+	 *
+	 * @return GoogleMapsResponse
+	 */
+	public function setHtmlAttributions(?array $html_attributions): GoogleMapsResponse
+	{
+
+		$this->html_attributions = $html_attributions;
+
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getNextPageToken(): string
+	{
+
+		return $this->next_page_token ?? '';
+	}
+
+	/**
+	 * @param $next_page_token
+	 *
+	 * @return GoogleMapsResponse
+	 */
+	public function setNextPageToken($next_page_token): GoogleMapsResponse
+	{
+
+		$this->next_page_token = $next_page_token;
+
+		return $this;
 	}
 
 }
