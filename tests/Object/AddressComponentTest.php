@@ -8,12 +8,12 @@
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
-namespace Biscolab\geocode\Tests;
+namespace BiscolabBiscolab\GoogleMaps\Tests\Object;
 
 use Biscolab\GoogleMaps\Fields\AddressComponentFields;
 use Biscolab\GoogleMaps\Object\Address;
 use Biscolab\GoogleMaps\Object\AddressComponent;
-use PHPUnit\Framework\TestCase;
+use Biscolab\GoogleMaps\Tests\TestCase;
 
 /**
  * Class AddressComponentTest

@@ -8,14 +8,14 @@
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
-namespace Biscolab\geocode\Tests;
+namespace Biscolab\GoogleMaps\Tests\Object;
 
 use Biscolab\GoogleMaps\Fields\LatLngBoundsFields;
 use Biscolab\GoogleMaps\Fields\LatLngFields;
 use Biscolab\GoogleMaps\Object\LatLng;
 use Biscolab\GoogleMaps\Object\LatLngBounds;
 use Biscolab\GoogleMaps\Object\Viewport;
-use PHPUnit\Framework\TestCase;
+use Biscolab\GoogleMaps\Tests\TestCase;
 
 /**
  * Class ViewportTest

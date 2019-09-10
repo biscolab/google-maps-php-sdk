@@ -8,7 +8,7 @@
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
-namespace Biscolab\geocode\Tests;
+namespace BiscolabBiscolab\GoogleMaps\Tests\Geocoding;
 
 use Biscolab\GoogleMaps\Api\Geocoding;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
@@ -17,7 +17,7 @@ use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\Result\GeocodingResultsCollection;
 use Biscolab\GoogleMaps\Values\GoogleMapsResponseStatusValues;
 use GuzzleHttp\Psr7\Response;
-use PHPUnit\Framework\TestCase;
+use Biscolab\GoogleMaps\Tests\TestCase;
 use function Biscolab\GoogleMaps\camel2Snake;
 use function Biscolab\GoogleMaps\snake2Camel;
 
