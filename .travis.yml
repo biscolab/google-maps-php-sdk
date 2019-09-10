@@ -3,14 +3,13 @@ language: php
 php:
   - 7.1
   - 7.2
-  - hhvm
+  - 7.3
 
 before_script:
   - travis_retry composer self-update
   - travis_retry composer install --prefer-source --no-interaction
-  - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
 
-matrix:
-  allow_failures:
-    - php: hhvm
+script:
+  - vendor/bin/phpunit --exclude-group http
+
 fast_finish: true
