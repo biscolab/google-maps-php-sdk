@@ -139,4 +139,40 @@ class GoogleMapsResultFields
 	 */
 	const NEXT_PAGE_TOKEN = 'next_page_token';
 
+	/**
+	 * @var string reviews
+	 * @since 0.6.0
+	 */
+	const REVIEWS = 'reviews';
+
+	/**
+	 * @var string utc_offset
+	 * @since 0.6.0
+	 */
+	const UTC_OFFSET = 'utc_offset';
+
+	/**
+	 * @var string website
+	 * @since 0.6.0
+	 */
+	const WEBSITE = 'website';
+
+	/**
+	 * @var string international_phone_number
+	 * @since 0.6.0
+	 */
+	const INTERNATIONAL_PHONE_NUMBER = 'international_phone_number';
+
+	/**
+	 * @var string formatted_phone_number
+	 * @since 0.6.0
+	 */
+	const FORMATTED_PHONE_NUMBER = 'formatted_phone_number';
+
+	/**
+	 * @var string adr_address
+	 * @since 0.6.0
+	 */
+	const ADR_ADDRESS = 'adr_address';
+
 }

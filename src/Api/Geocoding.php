@@ -33,7 +33,7 @@ class Geocoding extends Api
 	/**
 	 * @var string
 	 */
-	protected $result_collection = GeocodingResultsCollection::class;
+	protected $result_collection_type = GeocodingResultsCollection::class;
 
 	/**
 	 * @param string $literal_address

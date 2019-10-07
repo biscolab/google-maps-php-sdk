@@ -15,6 +15,7 @@ use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\GoogleMapsApi;
 use Biscolab\GoogleMaps\Http\GoogleMapsRequest;
 use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
+use Biscolab\GoogleMaps\Http\GoogleMapsResult;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 
 /**
@@ -37,7 +38,12 @@ abstract class Api
 	/**
 	 * @var string
 	 */
-	protected $result_collection = '';
+	protected $result_type = '';
+
+	/**
+	 * @var string
+	 */
+	protected $result_collection_type = '';
 
 	/**
 	 * @var GoogleMapsResponse
@@ -87,14 +93,14 @@ abstract class Api
 	 * @param array       $params
 	 * @param null|string $endpoint
 	 *
-	 * @return GoogleMapsResultsCollection
+	 * @return GoogleMapsResult|GoogleMapsResultsCollection
 	 */
-	public function callApi(array $params, ?string $endpoint = null): GoogleMapsResultsCollection
+	public function callApi(array $params, ?string $endpoint = null)
 	{
 
 		$this->createRequest($params, $endpoint);
 
-		return $this->getResultsCollections();
+		return $this->getResponseResult();
 	}
 
 	/**
@@ -112,16 +118,22 @@ abstract class Api
 	}
 
 	/**
-	 * @return GoogleMapsResultsCollection
+	 * @return GoogleMapsResult|GoogleMapsResultsCollection
 	 */
-	public function getResultsCollections(): GoogleMapsResultsCollection
+	public function getResponseResult()
 	{
 
+		$result = $this->getResponse()->getResult();
+		if ($result) {
+			$result_type = $this->result_type;
+
+			return new $result_type($result);
+		}
 		$results = $this->getResponse()->getResults();
 
-		$result_collection_class = $this->result_collection;
+		$result_collection_type_class = $this->result_collection_type;
 
-		return new $result_collection_class($results);
+		return new $result_collection_type_class($results);
 	}
 
 	/**
@@ -160,6 +172,19 @@ abstract class Api
 	/**
 	 * @return GoogleMapsResultsCollection
 	 */
+	public function getSingleResult(): GoogleMapsResultsCollection
+	{
+
+		$results = $this->getResponse()->getResults();
+
+		$result_collection_type_class = $this->result_collection_type;
+
+		return new $result_collection_type_class($results);
+	}
+
+	/**
+	 * @return GoogleMapsResultsCollection
+	 */
 	public function getNextPage(): GoogleMapsResultsCollection
 	{
 
@@ -167,7 +192,7 @@ abstract class Api
 			$this->request->setParam(GoogleMapsRequestFields::NEXT_PAGE_TOKEN, $this->response->getNextPageToken());
 		}
 
-		return $this->getResultsCollections();
+		return $this->getResponseResult();
 	}
 
 	/**

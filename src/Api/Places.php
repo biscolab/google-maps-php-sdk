@@ -15,8 +15,10 @@ use Biscolab\GoogleMaps\Enum\PlaceServicesEndpoints;
 use Biscolab\GoogleMaps\Exception\InvalidArgumentException;
 use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Fields\GoogleMapsResultFields;
+use Biscolab\GoogleMaps\Http\GoogleMapsResult;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 use Biscolab\GoogleMaps\Http\Result\PlaceResultsCollection;
+use Biscolab\GoogleMaps\Http\Result\PlacesResult;
 use Biscolab\GoogleMaps\Object\Location;
 use Biscolab\GoogleMaps\Utils\Config;
 use Biscolab\GoogleMaps\Values\PlaceInputTypeValues;
@@ -40,7 +42,12 @@ class Places extends Api
 	/**
 	 * @var string
 	 */
-	protected $result_collection = PlaceResultsCollection::class;
+	protected $result_type = PlacesResult::class;
+
+	/**
+	 * @var string
+	 */
+	protected $result_collection_type = PlaceResultsCollection::class;
 
 	/**
 	 * @param string     $query
@@ -95,10 +102,10 @@ class Places extends Api
 	 * @param array  $params
 	 * @param string $endpoint
 	 *
-	 * @return GoogleMapsResultsCollection
+	 * @return GoogleMapsResult|GoogleMapsResultsCollection
 	 * @since   0.5.0
 	 */
-	public function makeApiCall(array $params, string $endpoint): GoogleMapsResultsCollection
+	public function makeApiCall(array $params, string $endpoint)
 	{
 
 		return $this->callApi($params, $endpoint);
@@ -235,6 +242,25 @@ class Places extends Api
 		]);
 
 		return $this->makeApiCall($params, PlaceServicesEndpoints::TEXTSEARCH);
+	}
+
+	/**
+	 * @param string     $place_id
+	 * @param array|null $params
+	 *
+	 * @return GoogleMapsResult
+	 * @see https://developers.google.com/places/web-service/details
+	 * @since v0.6.0
+	 */
+	public function details(string $place_id, ?array $params = []): GoogleMapsResult
+	{
+
+		$params = array_merge($params, [
+			GoogleMapsRequestFields::PLACE_ID => $place_id
+		]);
+
+		return $this->makeApiCall($params, PlaceServicesEndpoints::DETAILS);
+
 	}
 
 }

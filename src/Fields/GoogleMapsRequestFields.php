@@ -158,4 +158,22 @@ class GoogleMapsRequestFields
 	 * @since 0.5.0
 	 */
 	const NEXT_PAGE_TOKEN = 'next_page_token';
+
+	/**
+	 * @var string photoreference
+	 * @since 0.6.0
+	 */
+	const PHOTOREFERENCE = 'photoreference';
+
+	/**
+	 * @var string maxwidth
+	 * @since 0.6.0
+	 */
+	const MAXWIDTH = 'maxwidth';
+
+	/**
+	 * @var string maxheight
+	 * @since 0.6.0
+	 */
+	const MAXHEIGHT = 'maxheight';
 }

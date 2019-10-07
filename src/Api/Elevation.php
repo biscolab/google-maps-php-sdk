@@ -36,7 +36,7 @@ class Elevation extends Api
 	/**
 	 * @var string
 	 */
-	protected $result_collection = ElevationResultsCollection::class;
+	protected $result_collection_type = ElevationResultsCollection::class;
 
 	/**
 	 * Positional Requests

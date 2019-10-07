@@ -17,6 +17,7 @@ use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Fields\LatLngFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\Result\PlaceResultsCollection;
+use Biscolab\GoogleMaps\Http\Result\PlacesResult;
 use Biscolab\GoogleMaps\Object\Geometry;
 use Biscolab\GoogleMaps\Object\Location;
 use Biscolab\GoogleMaps\Object\Photo;
@@ -495,6 +496,16 @@ class GoogleMapsPlacesTest extends TestCase
 		$this->assertEquals(20, $result->count());
 		$this->assertEquals("ChIJxXSgfDyuEmsR3X5VXGjBkFg", $result->first()->getPlaceId());
 		$this->assertTrue($this->place_with_key->responseHasNewPage());
+
+	}
+
+	/**
+	 * @test
+	 */
+	public function testPlaceDetails() {
+		$result = $this->place_with_key->details("ChIJN1t_tDeuEmsRUsoyG83frY4");
+		$this->assertInstanceOf(PlacesResult::class, $result);
+		$this->assertEquals('4f89212bf76dde31f092cfc14d7506555d85b5c7', $result->getId());
 
 	}
 

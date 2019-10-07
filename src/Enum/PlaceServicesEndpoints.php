@@ -31,4 +31,9 @@ class PlaceServicesEndpoints
 	 * @var string
 	 */
 	const TEXTSEARCH = "textsearch";
+
+	/**
+	 * @var string
+	 */
+	const DETAILS = "details";
 }

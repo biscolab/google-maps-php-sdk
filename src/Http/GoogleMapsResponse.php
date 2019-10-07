@@ -29,6 +29,15 @@ class GoogleMapsResponse
 	protected $response = null;
 
 	/**
+	 * Single result
+	 * When the Places service returns results from a details request, it places them within a single result
+	 *
+	 * @var array
+	 * @see https://developers.google.com/places/web-service/details#PlaceDetailsResults
+	 */
+	protected $result = null;
+
+	/**
 	 * contains an array of places, with information about each.
 	 * The Places API returns up to 20 establishment results per query.
 	 * Additionally, political results may be returned which serve to identify the area of the request.
@@ -114,6 +123,7 @@ class GoogleMapsResponse
 
 		$json_response = $this->response->getBody()->getContents();
 		$array_response = $this->toArray($json_response);
+		$result = null;
 		$results = null;
 
 		if (empty($array_response[GoogleMapsResponseFields::STATUS])) {
@@ -140,9 +150,13 @@ class GoogleMapsResponse
 		} elseif (!empty($array_response[GoogleMapsResponseFields::CANDIDATES])) {
 			$results = $array_response[GoogleMapsResponseFields::CANDIDATES];
 
+		}elseif (!empty($array_response[GoogleMapsResponseFields::RESULT])) {
+			$result = $array_response[GoogleMapsResponseFields::RESULT];
+
 		} else {
 			throw new ResponseException('Missing "results" in GoogleMapsApi Response');
 		}
+		$this->setResult($result);
 		$this->setResults($results);
 
 		if (!empty($array_response[GoogleMapsResponseFields::HTML_ATTRIBUTIONS])) {
@@ -217,10 +231,34 @@ class GoogleMapsResponse
 	 *
 	 * @return $this
 	 */
-	public function setResults(array $results)
+	public function setResults(?array $results)
 	{
 
 		$this->results = $results;
+
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 * @since v0.6.0
+	 */
+	public function getResult()
+	{
+
+		return $this->result;
+	}
+
+	/**
+	 * @param array $result
+	 *
+	 * @return $this
+	 * @since v0.6.0
+	 */
+	public function setResult(?array $result)
+	{
+
+		$this->result = $result;
 
 		return $this;
 	}
