@@ -11,14 +11,16 @@
 namespace Biscolab\GoogleMaps\Api;
 
 use Biscolab\GoogleMaps\Abstracts\Api;
-use Biscolab\GoogleMaps\Config\Util;
 use Biscolab\GoogleMaps\Enum\PlaceServicesEndpoints;
 use Biscolab\GoogleMaps\Exception\InvalidArgumentException;
 use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Fields\GoogleMapsResultFields;
+use Biscolab\GoogleMaps\Http\GoogleMapsResult;
 use Biscolab\GoogleMaps\Http\GoogleMapsResultsCollection;
 use Biscolab\GoogleMaps\Http\Result\PlaceResultsCollection;
+use Biscolab\GoogleMaps\Http\Result\PlacesResult;
 use Biscolab\GoogleMaps\Object\Location;
+use Biscolab\GoogleMaps\Utils\Config;
 use Biscolab\GoogleMaps\Values\PlaceInputTypeValues;
 use Biscolab\GoogleMaps\Values\RankByValues;
 
@@ -40,7 +42,12 @@ class Places extends Api
 	/**
 	 * @var string
 	 */
-	protected $result_collection = PlaceResultsCollection::class;
+	protected $result_type = PlacesResult::class;
+
+	/**
+	 * @var string
+	 */
+	protected $result_collection_type = PlaceResultsCollection::class;
 
 	/**
 	 * @param string     $query
@@ -95,10 +102,10 @@ class Places extends Api
 	 * @param array  $params
 	 * @param string $endpoint
 	 *
-	 * @return GoogleMapsResultsCollection
+	 * @return GoogleMapsResult|GoogleMapsResultsCollection
 	 * @since   0.5.0
 	 */
-	public function makeApiCall(array $params, string $endpoint): GoogleMapsResultsCollection
+	public function makeApiCall(array $params, string $endpoint)
 	{
 
 		return $this->callApi($params, $endpoint);
@@ -134,29 +141,15 @@ class Places extends Api
 	 *
 	 * @return GoogleMapsResultsCollection
 	 */
-	public function findNearbyPlaceByRadius(Location $location, int $radius, ?array $params = []): GoogleMapsResultsCollection
-	{
+	public function findNearbyPlaceByRadius(
+		Location $location,
+		int $radius,
+		?array $params = []
+	): GoogleMapsResultsCollection {
 
 		$params = array_merge($params, [
 			GoogleMapsRequestFields::LOCATION => $location,
-			GoogleMapsRequestFields::RADIUS => $radius
-		]);
-
-		return $this->findNearbyPlace($params);
-	}
-
-	/**
-	 * @param Location $location
-	 * @param array    $params
-	 *
-	 * @return GoogleMapsResultsCollection
-	 */
-	public function findNearbyPlaceByDistance(Location $location, array $params): GoogleMapsResultsCollection
-	{
-
-		$params = array_merge($params, [
-			GoogleMapsRequestFields::LOCATION => $location,
-			GoogleMapsRequestFields::RANKBY => RankByValues::DISTANCE
+			GoogleMapsRequestFields::RADIUS   => $radius
 		]);
 
 		return $this->findNearbyPlace($params);
@@ -205,12 +198,29 @@ class Places extends Api
 			throw new InvalidArgumentException(GoogleMapsRequestFields::RADIUS . ' field is required');
 		}
 
-		if (!empty($params[GoogleMapsRequestFields::RADIUS]) && floatval($params[GoogleMapsRequestFields::RADIUS]) > Util::MAX_PLACE_RADIUS_VALUE) {
+		if (!empty($params[GoogleMapsRequestFields::RADIUS]) && floatval($params[GoogleMapsRequestFields::RADIUS]) > Config::MAX_PLACE_RADIUS_VALUE) {
 // 			The maximum allowed radius is 50 000 meters.
-			throw new InvalidArgumentException(GoogleMapsRequestFields::RADIUS . ' must be lower than ' . Util::MAX_PLACE_RADIUS_VALUE);
+			throw new InvalidArgumentException(GoogleMapsRequestFields::RADIUS . ' must be lower than ' . Config::MAX_PLACE_RADIUS_VALUE);
 		}
 
 		return $this->makeApiCall($params, PlaceServicesEndpoints::NEARBYSEARCH);
+	}
+
+	/**
+	 * @param Location $location
+	 * @param array    $params
+	 *
+	 * @return GoogleMapsResultsCollection
+	 */
+	public function findNearbyPlaceByDistance(Location $location, array $params): GoogleMapsResultsCollection
+	{
+
+		$params = array_merge($params, [
+			GoogleMapsRequestFields::LOCATION => $location,
+			GoogleMapsRequestFields::RANKBY   => RankByValues::DISTANCE
+		]);
+
+		return $this->findNearbyPlace($params);
 	}
 
 	/**
@@ -232,6 +242,25 @@ class Places extends Api
 		]);
 
 		return $this->makeApiCall($params, PlaceServicesEndpoints::TEXTSEARCH);
+	}
+
+	/**
+	 * @param string     $place_id
+	 * @param array|null $params
+	 *
+	 * @return GoogleMapsResult
+	 * @see https://developers.google.com/places/web-service/details
+	 * @since v0.6.0
+	 */
+	public function details(string $place_id, ?array $params = []): GoogleMapsResult
+	{
+
+		$params = array_merge($params, [
+			GoogleMapsRequestFields::PLACE_ID => $place_id
+		]);
+
+		return $this->makeApiCall($params, PlaceServicesEndpoints::DETAILS);
+
 	}
 
 }

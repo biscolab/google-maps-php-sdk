@@ -14,6 +14,7 @@ use Biscolab\GoogleMaps\Fields\GoogleMapsResultFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResult;
 use Biscolab\GoogleMaps\Object\Geometry;
 use Biscolab\GoogleMaps\Object\PhotoCollection;
+use Biscolab\GoogleMaps\Object\ReviewCollection;
 
 /**
  * Class PlacesResult
@@ -103,24 +104,60 @@ class PlacesResult extends GoogleMapsResult
 	protected $permanently_closed = false;
 
 	/**
+	 * @var ReviewCollection
+	 */
+	protected $reviews = null;
+
+	/**
+	 * @var int
+	 */
+	protected $utc_offset = 0;
+
+	/**
+	 * @var string
+	 */
+	protected $website = '';
+
+	/**
+	 * @var string
+	 */
+	protected $international_phone_number = '';
+
+	/**
+	 * @var string
+	 */
+	protected $formatted_phone_number = '';
+
+	/**
+	 * @var string
+	 */
+	protected $adr_address = '';
+
+	/**
 	 * @var array
 	 */
 	protected $typeCheck = [
-		GoogleMapsResultFields::FORMATTED_ADDRESS  => 'string',
-		GoogleMapsResultFields::NAME               => 'string',
-		GoogleMapsResultFields::GEOMETRY           => Geometry::class,
-		GoogleMapsResultFields::ICON               => 'string',
-		GoogleMapsResultFields::ID                 => 'string',
-		GoogleMapsResultFields::PHOTOS             => PhotoCollection::class,
-		GoogleMapsResultFields::PLACE_ID           => 'string',
-		GoogleMapsResultFields::REFERENCE          => 'string',
-		GoogleMapsResultFields::VICINITY           => 'string',
-		GoogleMapsResultFields::TYPES              => 'array',
-		GoogleMapsResultFields::OPENING_HOURS      => 'json',
-		GoogleMapsResultFields::PRICE_LEVEL        => 'int',
-		GoogleMapsResultFields::RATING             => 'float',
-		GoogleMapsResultFields::PERMANENTLY_CLOSED => 'bool',
-		GoogleMapsResultFields::PLUS_CODE          => 'array',
+		GoogleMapsResultFields::FORMATTED_ADDRESS          => 'string',
+		GoogleMapsResultFields::NAME                       => 'string',
+		GoogleMapsResultFields::GEOMETRY                   => Geometry::class,
+		GoogleMapsResultFields::ICON                       => 'string',
+		GoogleMapsResultFields::ID                         => 'string',
+		GoogleMapsResultFields::PHOTOS                     => PhotoCollection::class,
+		GoogleMapsResultFields::PLACE_ID                   => 'string',
+		GoogleMapsResultFields::REFERENCE                  => 'string',
+		GoogleMapsResultFields::VICINITY                   => 'string',
+		GoogleMapsResultFields::TYPES                      => 'array',
+		GoogleMapsResultFields::OPENING_HOURS              => 'json',
+		GoogleMapsResultFields::PRICE_LEVEL                => 'int',
+		GoogleMapsResultFields::RATING                     => 'float',
+		GoogleMapsResultFields::PERMANENTLY_CLOSED         => 'bool',
+		GoogleMapsResultFields::PLUS_CODE                  => 'array',
+		GoogleMapsResultFields::REVIEWS                    => ReviewCollection::class,
+		GoogleMapsResultFields::UTC_OFFSET                 => 'int',
+		GoogleMapsResultFields::WEBSITE                    => 'string',
+		GoogleMapsResultFields::INTERNATIONAL_PHONE_NUMBER => 'string',
+		GoogleMapsResultFields::FORMATTED_PHONE_NUMBER     => 'string',
+		GoogleMapsResultFields::ADR_ADDRESS                => 'string',
 	];
 
 	/**

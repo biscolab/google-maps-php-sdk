@@ -1,10 +1,10 @@
 <?php
 /**
  * Copyright (c) 2019 - present
- * Google Maps PHP - PhotoCollection.php
+ * Google Maps PHP - ReviewCollection.php
  * author: Roberto Belotti - roby.belotti@gmail.com
  * web : robertobelotti.com, github.com/biscolab
- * Initial version created on: 28/8/2019
+ * Initial version created on: 12/9/2019
  * MIT license: https://github.com/biscolab/google-maps-php/blob/master/LICENSE
  */
 
@@ -13,23 +13,24 @@ namespace Biscolab\GoogleMaps\Object;
 use Biscolab\GoogleMaps\Abstracts\AbstractCollection;
 
 /**
- * Class PhotoCollection
+ * Class ReviewCollection
  * @package Biscolab\GoogleMaps\Object
+ * @since v0.6.0
  */
-class PhotoCollection extends AbstractCollection
+class ReviewCollection extends AbstractCollection
 {
 
 	/**
 	 * @var string
 	 */
-	protected $item_class = Photo::class;
+	protected $item_class = Review::class;
 
 	/**
 	 * @param $item
 	 *
-	 * @return Photo
+	 * @return Review
 	 */
-	protected function parseItem($item): Photo
+	protected function parseItem($item): Review
 	{
 
 		return ($item instanceof $this->item_class) ? $item : new $this->item_class($item);

@@ -23,6 +23,12 @@ class GoogleMapsResponseFields
 	const RESULTS = 'results';
 
 	/**
+	 * @var string result
+	 * @since v0.6.0
+	 */
+	const RESULT = 'result';
+
+	/**
 	 * @var string status
 	 */
 	const STATUS = 'status';
