@@ -501,6 +501,7 @@ class GoogleMapsPlacesTest extends TestCase
 
 	/**
 	 * @test
+	 * @group http
 	 */
 	public function testPlaceDetails() {
 		$result = $this->place_with_key->details("ChIJN1t_tDeuEmsRUsoyG83frY4");
