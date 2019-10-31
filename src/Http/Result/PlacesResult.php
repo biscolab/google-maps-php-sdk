@@ -20,7 +20,7 @@ use Biscolab\GoogleMaps\Object\ReviewCollection;
 /**
  * Class PlacesResult
  *
- * @method Address getAddressComponents()
+ * @method Address[] getAddressComponents()
  * @method PhotoCollection getPhotos()
  * @method Geometry getGeometry()
  * @method string getFormattedAddress()
@@ -40,7 +40,7 @@ use Biscolab\GoogleMaps\Object\ReviewCollection;
 class PlacesResult extends GoogleMapsResult
 {
   	/**
-	 * @var Address
+	 * @var Address[]
 	 */
 	protected $address_components = null;
 
