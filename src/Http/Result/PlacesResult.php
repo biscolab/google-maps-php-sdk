@@ -19,6 +19,7 @@ use Biscolab\GoogleMaps\Object\ReviewCollection;
 /**
  * Class PlacesResult
  *
+ * @method Address getAddressComponents()
  * @method PhotoCollection getPhotos()
  * @method Geometry getGeometry()
  * @method string getFormattedAddress()
@@ -37,6 +38,10 @@ use Biscolab\GoogleMaps\Object\ReviewCollection;
  */
 class PlacesResult extends GoogleMapsResult
 {
+  	/**
+	 * @var Address
+	 */
+	protected $address_components = null;
 
 	/**
 	 * @var null|string
@@ -137,6 +142,7 @@ class PlacesResult extends GoogleMapsResult
 	 * @var array
 	 */
 	protected $typeCheck = [
+		GoogleMapsResultFields::ADDRESS_COMPONENTS         => Address::class,
 		GoogleMapsResultFields::FORMATTED_ADDRESS          => 'string',
 		GoogleMapsResultFields::NAME                       => 'string',
 		GoogleMapsResultFields::GEOMETRY                   => Geometry::class,
