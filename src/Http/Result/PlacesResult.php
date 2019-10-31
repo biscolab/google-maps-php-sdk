@@ -12,6 +12,7 @@ namespace Biscolab\GoogleMaps\Http\Result;
 
 use Biscolab\GoogleMaps\Fields\GoogleMapsResultFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResult;
+use Biscolab\GoogleMaps\Object\Address;
 use Biscolab\GoogleMaps\Object\Geometry;
 use Biscolab\GoogleMaps\Object\PhotoCollection;
 use Biscolab\GoogleMaps\Object\ReviewCollection;
