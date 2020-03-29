@@ -176,4 +176,10 @@ class GoogleMapsRequestFields
 	 * @since 0.6.0
 	 */
 	const MAXHEIGHT = 'maxheight';
+
+	/**
+	 * @var string timestamp
+	 * @since 0.7.0
+	 */
+	const TIMESTAMP = 'timestamp';
 }
