@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - present
  * Google Maps PHP - TimeZone.php
@@ -13,7 +14,6 @@ namespace Biscolab\GoogleMaps\Api;
 use Biscolab\GoogleMaps\Abstracts\Api;
 use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResult;
-use Biscolab\GoogleMaps\Http\Result\ElevationResultsCollection;
 use Biscolab\GoogleMaps\Http\Result\TimeZoneResult;
 use Biscolab\GoogleMaps\Object\Location;
 
