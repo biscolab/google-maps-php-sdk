@@ -175,4 +175,28 @@ class GoogleMapsResultFields
 	 */
 	const ADR_ADDRESS = 'adr_address';
 
+	/**
+	 * @var string dstOffset
+	 * @since 0.7.0
+	 */
+	const DST_OFFSET = 'dstOffset';
+
+	/**
+	 * @var string rawOffset
+	 * @since 0.7.0
+	 */
+	const RAW_OFFSET = 'rawOffset';
+
+	/**
+	 * @var string timeZoneId
+	 * @since 0.7.0
+	 */
+	const TIMEZONE_ID = 'timeZoneId';
+
+	/**
+	 * @var string timeZoneName
+	 * @since 0.7.0
+	 */
+	const TIMEZONE_NAME = 'timeZoneName';
+
 }
