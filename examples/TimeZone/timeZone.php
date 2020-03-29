@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - present
  * Google Maps PHP - timeZone.php
@@ -22,8 +23,8 @@ $timezone = new TimeZone([
 ]);
 
 // https://developers.google.com/maps/documentation/timezone/start#sample-request
-$location = new Location([LatLngFields::LAT => 39.6034810, LatLngFields::LNG => -119.6822510]);
-$timestamp = 1331161200;
+$location = new Location([LatLngFields::LAT => 38.908133, LatLngFields::LNG => -77.047119]);
+$timestamp = 1458000000;
 $results = $timezone->get($location, $timestamp);
 
 // get dstOffset: should be 3600
