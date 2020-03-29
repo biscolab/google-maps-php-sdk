@@ -175,7 +175,7 @@ abstract class AbstractObject
 
 		$camel_field = (empty($match[0])) ? '' : $match[0];
 
-		$snake_field = camel2Snake($camel_field);
+		$snake_field = $this->getFieldName($camel_field);
 
 		$field_type = (empty($this->typeCheck[$snake_field])) ? null : $this->typeCheck[$snake_field];
 
@@ -187,6 +187,17 @@ abstract class AbstractObject
 					return $this->$snake_field;
 			}
 		}
+	}
+
+	/**
+	 * @param string $initial_field_name
+	 *
+	 * @return string
+	 */
+	protected function getFieldName(string $initial_field_name): string
+	{
+
+		return camel2Snake($initial_field_name);
 	}
 
 }
