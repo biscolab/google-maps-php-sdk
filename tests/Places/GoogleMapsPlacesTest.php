@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - present
  * Google Maps PHP - GoogleMapsPlacesTest.phpp
@@ -221,10 +222,14 @@ class GoogleMapsPlacesTest extends TestCase
 	public function testCheckPlaceConfig()
 	{
 
-		$this->assertEquals(Places::SERVICE_ENDPOINT,
-			$this->place_with_key->getGoogleMapsApi()->getServiceEndpoint());
-		$this->assertEquals(getenv("API_KEY"),
-			$this->place_with_key->getGoogleMapsApi()->getKey());
+		$this->assertEquals(
+			Places::SERVICE_ENDPOINT,
+			$this->place_with_key->getGoogleMapsApi()->getServiceEndpoint()
+		);
+		$this->assertEquals(
+			getenv("API_KEY"),
+			$this->place_with_key->getGoogleMapsApi()->getKey()
+		);
 		$this->assertEquals('', $this->place_no_key->getGoogleMapsApi()->getKey());
 	}
 
@@ -365,7 +370,6 @@ class GoogleMapsPlacesTest extends TestCase
 		$this->assertEquals(20, $result->count());
 		$this->assertEquals("ChIJP3Sa8ziYEmsRUKgyFmh9AQM", $result->current()->getPlaceId());
 		$this->assertTrue($this->place_with_key->responseHasNewPage());
-
 	}
 
 	/**
@@ -494,20 +498,19 @@ class GoogleMapsPlacesTest extends TestCase
 		$result = $this->place_with_key->textSearch("restaurants in Sydney");
 		$this->assertInstanceOf(PlaceResultsCollection::class, $result);
 		$this->assertEquals(20, $result->count());
-		$this->assertEquals("ChIJxXSgfDyuEmsR3X5VXGjBkFg", $result->first()->getPlaceId());
+		$this->assertEquals("ChIJ99ankzyuEmsRVn5J48X-ok0", $result->first()->getPlaceId());
 		$this->assertTrue($this->place_with_key->responseHasNewPage());
-
 	}
 
 	/**
 	 * @test
 	 * @group http
 	 */
-	public function testPlaceDetails() {
+	public function testPlaceDetails()
+	{
 		$result = $this->place_with_key->details("ChIJN1t_tDeuEmsRUsoyG83frY4");
 		$this->assertInstanceOf(PlacesResult::class, $result);
 		$this->assertEquals('4f89212bf76dde31f092cfc14d7506555d85b5c7', $result->getId());
-
 	}
 
 	/**
@@ -523,7 +526,7 @@ class GoogleMapsPlacesTest extends TestCase
 		]);
 
 		$first_result = $result->first();
-		$first_result_array = $first_result ->toArray();
+		$first_result_array = $first_result->toArray();
 
 		$this->assertArrayHasKey("photos", $first_result_array);
 		$this->assertArrayHasKey("geometry", $first_result_array);
@@ -555,7 +558,5 @@ class GoogleMapsPlacesTest extends TestCase
 		$this->assertTrue(is_numeric($first_result->getRating()));
 		$this->assertTrue(is_bool($first_result->getPermanentlyClose()));
 		$this->assertTrue(is_array($first_result->getPlusCode()));
-
 	}
-
 }
