@@ -2,7 +2,7 @@
     "name": "biscolab/google-maps-php-sdk",
     "description": "Google Maps PHP SDK.",
     "license": "MIT",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "keywords": [
         "google",
         "maps",
@@ -46,4 +46,3 @@
         "test-no-http": "phpunit --exclude-group http"
     }
 }
-    
