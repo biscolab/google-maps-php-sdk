@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>TimeZone · Google Maps PHP SDK</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="The Time Zone API provides time offset data for locations on the surface of the earth"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="TimeZone · Google Maps PHP SDK"/><meta property="og:type" content="website"/><meta property="og:url" content="https://gmaps-php-docs.biscolab.com//"/><meta property="og:description" content="The Time Zone API provides time offset data for locations on the surface of the earth"/><meta property="og:image" content="https://gmaps-php-docs.biscolab.com/img/biscolab_white.png"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://gmaps-php-docs.biscolab.com/img/biscolab_white.png"/><link rel="shortcut icon" href="/img/favicon.png"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-5439279-37"></script><script>
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments); }
+              gtag('js', new Date());
+              gtag('config', 'UA-5439279-37');
+            </script><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="https://unpkg.com/vanilla-back-to-top@7.1.14/dist/vanilla-back-to-top.min.js"></script><script>
+        document.addEventListener('DOMContentLoaded', function() {
+          addBackToTop(
+            {"zIndex":100}
+          )
+        });
+        </script><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/biscolab_white.svg" alt="Google Maps PHP SDK"/><h2 class="headerTitleWithLogo">Google Maps PHP SDK</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/getting-started" target="_self">Docs</a></li><li class=""><a href="https://biscolab.com/google-maps-php-reference/" target="_self">API</a></li><li class=""><a href="https://github.com/biscolab/google-maps-php-sdk" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Services</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/getting-started">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/docs/get-api-key">Get API key</a></li><li class="navListItem"><a class="navItem" href="/docs/installation">Installation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Services</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/geocoding">Geocoding</a></li><li class="navListItem"><a class="navItem" href="/docs/elevation">Elevation</a></li><li class="navListItem"><a class="navItem" href="/docs/places">Places</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/timezone">TimeZone</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Contribute</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/contributing">Contributing</a></li><li class="navListItem"><a class="navItem" href="/docs/code-of-conduct">Code of conduct</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Help</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/examples">Examples</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 class="postHeaderTitle">TimeZone</h1></header><article><div><span><p>The Time Zone API provides time offset data for locations on the surface of the earth</p>
+<p><a href="https://developers.google.com/maps/documentation/timezone/start" target="_blank">Official Google TimeZone documentation</a></p>
+<h2><a class="anchor" aria-hidden="true" id="initialize-timezone-object"></a><a href="#initialize-timezone-object" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Initialize TimeZone Object</h2>
+<p>First of all replace <code>YOUR_API_KEY</code> with your actual API key.</p>
+<pre><code class="hljs css language-php"><span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Api</span>\<span class="hljs-title">TimeZone</span>;
+<span class="hljs-keyword">use</span> <span class="hljs-title">Biscolab</span>\<span class="hljs-title">GoogleMaps</span>\<span class="hljs-title">Enum</span>\<span class="hljs-title">GoogleMapsApiConfigFields</span>;
+
+$timezone = <span class="hljs-keyword">new</span> TimeZone([
+    GoogleMapsApiConfigFields::KEY =&gt; <span class="hljs-string">'YOUR_API_KEY'</span>
+]);
+
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="get-result"></a><a href="#get-result" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Get result</h2>
+<p>Go to complete <a href="https://biscolab.com/google-maps-php-reference/Biscolab/GoogleMaps/Api/TimeZone.html" target="_blank">SDK reference</a></p>
+<h3><a class="anchor" aria-hidden="true" id="by-location-and-timestamp"></a><a href="#by-location-and-timestamp" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>By location and timestamp</h3>
+<pre><code class="hljs css language-php">
+$result = $timezone-&gt;get($location, $timestamp, $language);
+
+</code></pre>
+<p><code>get</code> accepts 3 arguments</p>
+<table>
+<thead>
+<tr><th>Name</th><th>Requested</th><th>Type</th><th>Description</th><th></th></tr>
+</thead>
+<tbody>
+<tr><td><code>$location</code></td><td>Yes</td><td>Biscolab\GoogleMaps\Object\Location</td><td>Represents the location to look up</td></tr>
+<tr><td><code>$timestamp</code></td><td>Yes</td><td>integer</td><td>The Time Zone API uses the <code>$timestamp</code> to determine whether or not Daylight Savings should be applied, based on the time zone of the <code>$location</code></td></tr>
+<tr><td><code>$language</code></td><td>No</td><td>string</td><td>The language in which to return results</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="use-result"></a><a href="#use-result" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use result</h2>
+<p>Result is an instance of <code>Biscolab\GoogleMaps\Http\Result\TimeZoneResult</code> class and has the following methods:</p>
+<table>
+<thead>
+<tr><th>Method name</th><th>Return Type</th></tr>
+</thead>
+<tbody>
+<tr><td><code>getDdstOffset()</code></td><td><code>int</code></td></tr>
+<tr><td><code>getRawOffset()</code></td><td><code>int</code></td></tr>
+<tr><td><code>getTimeZoneId()</code></td><td><code>string</code></td></tr>
+<tr><td><code>getTimeZoneName()</code></td><td><code>string</code></td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/places"><span class="arrow-prev">← </span><span>Places</span></a><a class="docs-next button" href="/docs/contributing"><span>Contributing</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#initialize-timezone-object">Initialize TimeZone Object</a></li><li><a href="#get-result">Get result</a><ul class="toc-headings"><li><a href="#by-location-and-timestamp">By location and timestamp</a></li></ul></li><li><a href="#use-result">Use result</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/" class="nav-home"><img src="/img/biscolab_white.svg" alt="Google Maps PHP SDK" width="32" height="32"/></a><div><h5>Docs</h5><a href="/docs/getting-started">Getting Started</a><a href="/docs/geocoding">Geocoding</a><a href="/docs/elevation">Elevation</a><a href="/docs/places">Place</a></div><div><h5>Community</h5><a href="https://biscolab.com/google-maps-php-reference" target="_blank">Complete reference</a><a href="https://github.com/biscolab/google-maps-php-sdk/issues" target="_blank">Issue tracker</a></div><div><h5>More</h5><a class="github-button" href="https://github.com/biscolab/google-maps-php-sdk" aria-label="Star biscolab/google-maps-php-sdk on GitHub">Github</a></div></section><section class="copyright">Copyright © 2020 Roberto Belotti</section></footer></div></body></html>
