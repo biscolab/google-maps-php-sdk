@@ -22,7 +22,7 @@ use Biscolab\GoogleMaps\Object\ReviewCollection;
  * @method PhotoCollection getPhotos()
  * @method Geometry getGeometry()
  * @method string getFormattedAddress()
- * @method string getAddressComponents()
+ * @method array getAddressComponents()
  * @method string getName()
  * @method string getIcon()
  * @method string getId()
