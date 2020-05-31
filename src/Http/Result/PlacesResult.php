@@ -22,6 +22,7 @@ use Biscolab\GoogleMaps\Object\ReviewCollection;
  * @method PhotoCollection getPhotos()
  * @method Geometry getGeometry()
  * @method string getFormattedAddress()
+ * @method string getAddressComponents()
  * @method string getName()
  * @method string getIcon()
  * @method string getId()
@@ -42,6 +43,11 @@ class PlacesResult extends GoogleMapsResult
 	 * @var null|string
 	 */
 	protected $formatted_address = null;
+        
+	/**
+	 * @var array
+	 */
+	protected $address_components = [];
 
 	/**
 	 * @var string
@@ -138,6 +144,7 @@ class PlacesResult extends GoogleMapsResult
 	 */
 	protected $typeCheck = [
 		GoogleMapsResultFields::FORMATTED_ADDRESS          => 'string',
+		GoogleMapsResultFields::ADDRESS_COMPONENTS         => 'array',
 		GoogleMapsResultFields::NAME                       => 'string',
 		GoogleMapsResultFields::GEOMETRY                   => Geometry::class,
 		GoogleMapsResultFields::ICON                       => 'string',
