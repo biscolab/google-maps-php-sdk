@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - GoogleMapsGeocodingHttpTestp
@@ -55,10 +56,14 @@ class GoogleMapsGeocodingHttpTest extends TestCase
 	public function testCheckGeocodingConfig()
 	{
 
-		$this->assertEquals(Geocoding::SERVICE_ENDPOINT,
-			$this->geocoding_with_key->getGoogleMapsApi()->getServiceEndpoint());
-		$this->assertEquals(getenv("API_KEY"),
-			$this->geocoding_with_key->getGoogleMapsApi()->getKey());
+		$this->assertEquals(
+			Geocoding::SERVICE_ENDPOINT,
+			$this->geocoding_with_key->getGoogleMapsApi()->getServiceEndpoint()
+		);
+		$this->assertEquals(
+			getenv("API_KEY"),
+			$this->geocoding_with_key->getGoogleMapsApi()->getKey()
+		);
 		$this->assertEquals('', $this->geocoding_no_key->getGoogleMapsApi()->getKey());
 	}
 
@@ -91,7 +96,50 @@ class GoogleMapsGeocodingHttpTest extends TestCase
 		$this->assertArrayHasKey('types', $array_result);
 
 		$this->assertArrayHasKey('location', $array_result['geometry']);
+	}
 
+	/**
+	 * @test
+	 * @group http
+	 */
+	public function testCheckGeocodingFromAddressWithRegion()
+	{
+
+		/** @var GeocodingResultsCollection $result */
+		$result = $this->geocoding_with_key->getByAddress('sliema', 'es');
+
+		$this->assertNotNull($result);
+
+		$array_result = $result->first()->toArray();
+		$this->assertArrayHasKey('address_components', $array_result);
+		$this->assertArrayHasKey('geometry', $array_result);
+		$this->assertArrayHasKey('place_id', $array_result);
+		$this->assertArrayHasKey('formatted_address', $array_result);
+		$this->assertArrayHasKey('types', $array_result);
+
+		$this->assertArrayHasKey('location', $array_result['geometry']);
+	}
+
+	/**
+	 * @test
+	 * @group http
+	 */
+	public function testCheckGeocodingFromAddressWithLAnguage()
+	{
+
+		/** @var GeocodingResultsCollection $result */
+		$result = $this->geocoding_with_key->setLanguage('es')->getByAddress('sliema');
+
+		$this->assertNotNull($result);
+
+		$array_result = $result->first()->toArray();
+		$this->assertArrayHasKey('address_components', $array_result);
+		$this->assertArrayHasKey('geometry', $array_result);
+		$this->assertArrayHasKey('place_id', $array_result);
+		$this->assertArrayHasKey('formatted_address', $array_result);
+		$this->assertArrayHasKey('types', $array_result);
+
+		$this->assertArrayHasKey('location', $array_result['geometry']);
 	}
 
 	/**
@@ -103,6 +151,29 @@ class GoogleMapsGeocodingHttpTest extends TestCase
 
 		/** @var GeocodingResultsCollection $result */
 		$result = $this->geocoding_with_key->getReverse(new LatLng([
+			LatLngFields::LAT => '12',
+			LatLngFields::LNG => '22',
+		]));
+
+		$this->assertNotNull($result);
+
+		$array_result = $result->first()->toArray();
+		$this->assertArrayHasKey('address_components', $array_result);
+		$this->assertArrayHasKey('geometry', $array_result);
+		$this->assertArrayHasKey('place_id', $array_result);
+		$this->assertArrayHasKey('formatted_address', $array_result);
+		$this->assertArrayHasKey('types', $array_result);
+	}
+
+	/**
+	 * @test
+	 * @group http
+	 */
+	public function testCheckGeocodingFromLatLngWithLanguage()
+	{
+
+		/** @var GeocodingResultsCollection $result */
+		$result = $this->geocoding_with_key->setLanguage('es')->getReverse(new LatLng([
 			LatLngFields::LAT => '12',
 			LatLngFields::LNG => '22',
 		]));

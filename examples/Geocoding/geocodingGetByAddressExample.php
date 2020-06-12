@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - geocodingGetByAddressExample.php
@@ -25,6 +26,8 @@ $geocoding = new Geocoding([
 // see https://developers.google.com/maps/documentation/geocoding/start
 $address = '1600 Amphitheatre Parkway, Mountain View, CA';
 $results_by_address = $geocoding->getByAddress($address);
+// Since v0.8.0 you can set response language
+// $results_by_address = $geocoding->setLanguage('es')->getByAddress($address);
 
 // Get number of results
 $results_by_address->count();
@@ -39,3 +42,22 @@ $location = $first_result->getGeometry()->getLocation();
 // Get place ID
 $place_id = $first_result->getPlaceId();
 
+
+// Get data starting from a literal address using region
+// "region" will only influence, not fully restrict, results from the geocoder
+$results_by_address_with_region = $geocoding->getByAddress($address, 'es');
+// Since v0.8.0 you can set response language
+// $results_by_address = $geocoding->setLanguage('es')->getByAddress($address, 'es');
+
+// Get number of results
+$results_by_address_with_region->count();
+
+// Get first result
+/** @var \Biscolab\GoogleMaps\Http\Result\GeocodingResult $first_result */
+$first_result = $results_by_address_with_region->current();
+
+// Get result Geometry and then get location (latitude and longitude)
+$location = $first_result->getGeometry()->getLocation();
+
+// Get place ID
+$place_id = $first_result->getPlaceId();
