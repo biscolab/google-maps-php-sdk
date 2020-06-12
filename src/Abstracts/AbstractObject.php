@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - AbstractObject.php
@@ -109,6 +110,7 @@ abstract class AbstractObject
 			case 'float':
 			case 'array':
 			case 'json':
+			case 'bool':
 				return $field_value;
 			default:
 				return ($field_value instanceof $field_type) ? $field_value : new $field_type($field_value);
@@ -199,5 +201,4 @@ abstract class AbstractObject
 
 		return camel2Snake($initial_field_name);
 	}
-
 }

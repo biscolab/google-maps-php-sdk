@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - GoogleMapsGeocodingTest.php
@@ -13,6 +14,7 @@ namespace BiscolabBiscolab\GoogleMaps\Tests\Geocoding;
 use Biscolab\GoogleMaps\Api\Geocoding;
 use Biscolab\GoogleMaps\Enum\GoogleMapsApiConfigFields;
 use Biscolab\GoogleMaps\Exception\RequestException;
+use Biscolab\GoogleMaps\Fields\GoogleMapsRequestFields;
 use Biscolab\GoogleMaps\Http\GoogleMapsResponse;
 use Biscolab\GoogleMaps\Http\Result\GeocodingResultsCollection;
 use Biscolab\GoogleMaps\Values\GoogleMapsResponseStatusValues;
@@ -172,8 +174,10 @@ class GoogleMapsGeocodingTest extends TestCase
 	public function testCheckGeocodingConfig()
 	{
 
-		$this->assertEquals(Geocoding::SERVICE_ENDPOINT,
-			$this->geocoding_with_key->getGoogleMapsApi()->getServiceEndpoint());
+		$this->assertEquals(
+			Geocoding::SERVICE_ENDPOINT,
+			$this->geocoding_with_key->getGoogleMapsApi()->getServiceEndpoint()
+		);
 		$this->assertEquals('MyKey', $this->geocoding_with_key->getGoogleMapsApi()->getKey());
 		$this->assertEquals('', $this->geocoding_no_key->getGoogleMapsApi()->getKey());
 	}
@@ -208,7 +212,6 @@ class GoogleMapsGeocodingTest extends TestCase
 		$this->assertEquals(8, $address->count());
 
 		$this->assertEquals(200, $response->getHttpStatusCode());
-
 	}
 
 	public function testResponseKO()
@@ -230,4 +233,9 @@ class GoogleMapsGeocodingTest extends TestCase
 		$this->assertEquals('testFieldName', snake2Camel('test_field_name'));
 	}
 
+	public function testPrepareParams()
+	{
+		$this->geocoding_with_key->setLanguage('es');
+		$this->assertArrayHasKey(GoogleMapsRequestFields::LANGUAGE, $this->geocoding_with_key->prepareParams([]));
+	}
 }
