@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - GoogleMapsRequestFields.php
@@ -182,4 +183,10 @@ class GoogleMapsRequestFields
 	 * @since 0.7.0
 	 */
 	const TIMESTAMP = 'timestamp';
+
+	/**
+	 * @var string region
+	 * @since 0.8.0
+	 */
+	const REGION = 'region';
 }
