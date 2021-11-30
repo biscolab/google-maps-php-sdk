@@ -133,8 +133,6 @@ class GoogleMapsResponse
 
 		if ($this->getStatus() != GoogleMapsResponseStatusValues::OK) {
 			$error_message = 'Something went wrong';
-			if($this->getStatus() === 'INVALID_REQUEST'){
-			print_r($array_response);die();}
 			if (!empty($array_response[GoogleMapsResponseFields::ERROR_MESSAGE])) {
 				$error_message = $array_response[GoogleMapsResponseFields::ERROR_MESSAGE];
 				$this->setErrorMessage($error_message);
