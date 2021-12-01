@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2019 - present
  * Google Maps PHP - TimeZoneTest.php
@@ -42,7 +43,7 @@ class TimeZoneTest extends TestCase
 	 */
 	protected $mock_time_zone_response_ko;
 
-	public function setUp()
+	public function setUp(): void
 	{
 
 		$this->time_zone_with_key = new TimeZone([
@@ -73,10 +74,14 @@ class TimeZoneTest extends TestCase
 	public function testCheckTimeZoneConfig()
 	{
 
-		$this->assertEquals(TimeZone::SERVICE_ENDPOINT,
-			$this->time_zone_with_key->getGoogleMapsApi()->getServiceEndpoint());
-		$this->assertEquals(getenv("API_KEY"),
-			$this->time_zone_with_key->getGoogleMapsApi()->getKey());
+		$this->assertEquals(
+			TimeZone::SERVICE_ENDPOINT,
+			$this->time_zone_with_key->getGoogleMapsApi()->getServiceEndpoint()
+		);
+		$this->assertEquals(
+			getenv("API_KEY"),
+			$this->time_zone_with_key->getGoogleMapsApi()->getKey()
+		);
 		$this->assertEquals('', $this->time_zone_no_key->getGoogleMapsApi()->getKey());
 	}
 
@@ -168,5 +173,4 @@ class TimeZoneTest extends TestCase
 		$this->assertEquals("America/Los_Angeles", $result->getTimeZoneId());
 		$this->assertEquals("Pacific Daylight Time", $result->getTimeZoneName());
 	}
-
 }

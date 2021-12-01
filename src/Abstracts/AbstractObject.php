@@ -147,7 +147,12 @@ abstract class AbstractObject
 
 		foreach ($fields as $field_name => $field_value) {
 
-			if (!is_scalar($field_value) && method_exists($field_value, 'toJson')) {
+			if (
+				$field_value !== null &&
+				!is_array($field_value) &&
+				!is_scalar($field_value) &&
+				method_exists($field_value, 'toJson')
+			) {
 				$fields[$field_name] = $field_value->toArray();
 			}
 		}

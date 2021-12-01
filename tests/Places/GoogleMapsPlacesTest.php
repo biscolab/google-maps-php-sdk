@@ -51,7 +51,7 @@ class GoogleMapsPlacesTest extends TestCase
 	 */
 	protected $mock_nearby_search_response_ok;
 
-	public function setUp()
+	public function setUp(): void
 	{
 
 		$this->place_with_key = new Places([
@@ -498,7 +498,6 @@ class GoogleMapsPlacesTest extends TestCase
 		$result = $this->place_with_key->textSearch("restaurants in Sydney");
 		$this->assertInstanceOf(PlaceResultsCollection::class, $result);
 		$this->assertEquals(20, $result->count());
-		$this->assertEquals("ChIJxXSgfDyuEmsR3X5VXGjBkFg", $result->first()->getPlaceId());
 		$this->assertTrue($this->place_with_key->responseHasNewPage());
 	}
 
@@ -510,7 +509,7 @@ class GoogleMapsPlacesTest extends TestCase
 	{
 		$result = $this->place_with_key->details("ChIJN1t_tDeuEmsRUsoyG83frY4");
 		$this->assertInstanceOf(PlacesResult::class, $result);
-		$this->assertEquals('4f89212bf76dde31f092cfc14d7506555d85b5c7', $result->getId());
+		$this->assertEquals('ChIJN1t_tDeuEmsRUsoyG83frY4', $result->getPlaceId());
 	}
 
 	/**
