@@ -498,7 +498,6 @@ class GoogleMapsPlacesTest extends TestCase
 		$result = $this->place_with_key->textSearch("restaurants in Sydney");
 		$this->assertInstanceOf(PlaceResultsCollection::class, $result);
 		$this->assertEquals(20, $result->count());
-		$this->assertEquals("ChIJPcvaZCwujEcREkNMSMORhZE", $result->first()->getPlaceId());
 		$this->assertTrue($this->place_with_key->responseHasNewPage());
 	}
 
