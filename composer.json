@@ -2,7 +2,7 @@
     "name": "biscolab/google-maps-php-sdk",
     "description": "Google Maps PHP SDK.",
     "license": "MIT",
-    "version": "0.8.0",
+    "version": "0.9.0",
     "keywords": [
         "google",
         "maps",
@@ -18,12 +18,12 @@
         }
     ],
     "require": {
-        "php": ">=7.1.1",
-        "guzzlehttp/guzzle": "5.*|6.*"
+        "php": "^8.0",
+        "guzzlehttp/guzzle": "5.*|6.*|7.*"
     },
     "require-dev": {
         "ext-curl": "*",
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "7.*|8.*|^9.0",
         "psr/log": "^1.0",
         "phpdocumentor/reflection-docblock": "~2.0",
         "sami/sami": "^4.1"

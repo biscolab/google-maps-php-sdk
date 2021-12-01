@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - GoogleMapsElevationSampledTest.php
@@ -49,7 +50,7 @@ class GoogleMapsElevationSampledTest extends TestCase
 	 */
 	protected $mock_response_ko;
 
-	public function setUp()
+	public function setUp(): void
 	{
 
 		// This is the sample value from Google Maps official documentation
@@ -111,7 +112,6 @@ class GoogleMapsElevationSampledTest extends TestCase
 		$this->assertArrayHasKey('resolution', $array_result);
 
 		$this->assertEquals(200, $response->getHttpStatusCode());
-
 	}
 
 	public function testExceptionIfPathItemsLessThanTwoArray()
@@ -144,15 +144,16 @@ class GoogleMapsElevationSampledTest extends TestCase
 
 		$this->expectException(InvalidArgumentException::class);
 		$this->elevation_with_key->getBySampledPath([
-			new Location([
-				LatLngFields::LAT => 39.73915360,
-				LatLngFields::LNG => -104.9847034,
-			],
+			new Location(
+				[
+					LatLngFields::LAT => 39.73915360,
+					LatLngFields::LNG => -104.9847034,
+				],
 				new Location([
 					LatLngFields::LAT => 50.123,
 					LatLngFields::LNG => 99.456,
-				]))
+				])
+			)
 		], 0);
 	}
-
 }

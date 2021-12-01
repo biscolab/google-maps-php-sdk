@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - GoogleMapsElevationHttpTest.php author: Roberto Belotti - roby.belotti@gmail.com
@@ -34,7 +35,7 @@ class GoogleMapsElevationHttpTest extends TestCase
 	 */
 	protected $elevation_with_sensor;
 
-	public function setUp()
+	public function setUp(): void
 	{
 
 		$this->elevation_with_key = new Elevation([
@@ -54,10 +55,14 @@ class GoogleMapsElevationHttpTest extends TestCase
 	public function testCheckElevationConfig()
 	{
 
-		$this->assertEquals(Elevation::SERVICE_ENDPOINT,
-			$this->elevation_with_key->getGoogleMapsApi()->getServiceEndpoint());
-		$this->assertEquals(getenv("API_KEY"),
-			$this->elevation_with_key->getGoogleMapsApi()->getKey());
+		$this->assertEquals(
+			Elevation::SERVICE_ENDPOINT,
+			$this->elevation_with_key->getGoogleMapsApi()->getServiceEndpoint()
+		);
+		$this->assertEquals(
+			getenv("API_KEY"),
+			$this->elevation_with_key->getGoogleMapsApi()->getKey()
+		);
 		$this->assertEquals('', $this->elevation_no_key->getGoogleMapsApi()->getKey());
 	}
 
@@ -92,7 +97,6 @@ class GoogleMapsElevationHttpTest extends TestCase
 		$this->assertEquals(39.73915360, $array_result['location']['lat']);
 		$this->assertEquals(-104.9847034, $array_result['location']['lng']);
 		$this->assertEquals(1608.6379394531, $array_result['elevation']);
-
 	}
 
 	/**
@@ -133,7 +137,6 @@ class GoogleMapsElevationHttpTest extends TestCase
 		$this->assertEquals(50.123, $array_last_result['location']['lat']);
 		$this->assertEquals(99.456, $array_last_result['location']['lng']);
 		$this->assertEquals(2013.5008544922, $array_last_result['elevation']);
-
 	}
 
 	/**
@@ -174,7 +177,6 @@ class GoogleMapsElevationHttpTest extends TestCase
 		$this->assertEquals(50.123, $array_last_result['location']['lat']);
 		$this->assertEquals(99.456, $array_last_result['location']['lng']);
 		$this->assertEquals(2013.5008544922, $array_last_result['elevation']);
-
 	}
 
 	/**
@@ -217,6 +219,5 @@ class GoogleMapsElevationHttpTest extends TestCase
 		$this->assertEquals(50.123, $array_last_result['location']['lat']);
 		$this->assertEquals(99.456, $array_last_result['location']['lng']);
 		$this->assertEquals(2013.5008544922, $array_last_result['elevation']);
-
 	}
 }

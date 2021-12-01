@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - AbstractCollection.php
@@ -190,7 +191,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
 	 *
 	 * @return mixed|null
 	 */
-	public function current()
+	public function current(): mixed
 	{
 
 		return $this->get($this->index);
@@ -201,7 +202,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
 	 *
 	 * @return mixed|null
 	 */
-	public function next()
+	public function next(): void
 	{
 
 		++$this->index;
@@ -212,7 +213,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
 	 *
 	 * @return mixed|null
 	 */
-	public function key()
+	public function key(): mixed
 	{
 
 		return $this->index;
@@ -223,7 +224,7 @@ abstract class AbstractCollection implements \Iterator, \Countable
 	 *
 	 * @return mixed|null
 	 */
-	public function valid()
+	public function valid(): bool
 	{
 
 		return !empty($this->current());
@@ -234,10 +235,9 @@ abstract class AbstractCollection implements \Iterator, \Countable
 	 *
 	 * @return mixed|null
 	 */
-	public function rewind()
+	public function rewind(): void
 	{
 
-		return $this->index = 0;
+		$this->index = 0;
 	}
-
 }
