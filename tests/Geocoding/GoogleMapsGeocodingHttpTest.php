@@ -36,7 +36,7 @@ class GoogleMapsGeocodingHttpTest extends TestCase
 	 */
 	protected $geocoding_with_sensor;
 
-	public function setUp()
+	public function setUp(): void
 	{
 
 		$this->geocoding_with_key = new Geocoding([

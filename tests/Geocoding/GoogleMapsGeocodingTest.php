@@ -51,7 +51,7 @@ class GoogleMapsGeocodingTest extends TestCase
 	 */
 	protected $mock_response_ko;
 
-	public function setUp()
+	public function setUp(): void
 	{
 
 		// This is the sample value from Google Maps official documentation

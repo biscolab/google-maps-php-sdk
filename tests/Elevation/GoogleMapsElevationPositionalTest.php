@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright (c) 2018 - present
  * Google Maps PHP - GoogleMapsElevationPositionalTesttionalTest.php
@@ -49,7 +50,7 @@ class GoogleMapsElevationPositionalTest extends TestCase
 	 */
 	protected $mock_response_ko;
 
-	public function setUp()
+	public function setUp(): void
 	{
 
 		// This is the sample value from Google Maps official documentation
@@ -92,8 +93,10 @@ class GoogleMapsElevationPositionalTest extends TestCase
 	public function testCheckElevationConfig()
 	{
 
-		$this->assertEquals(Elevation::SERVICE_ENDPOINT,
-			$this->elevation_with_key->getGoogleMapsApi()->getServiceEndpoint());
+		$this->assertEquals(
+			Elevation::SERVICE_ENDPOINT,
+			$this->elevation_with_key->getGoogleMapsApi()->getServiceEndpoint()
+		);
 		$this->assertEquals('MyKey', $this->elevation_with_key->getGoogleMapsApi()->getKey());
 		$this->assertEquals('', $this->elevation_no_key->getGoogleMapsApi()->getKey());
 	}
@@ -149,7 +152,6 @@ class GoogleMapsElevationPositionalTest extends TestCase
 		$this->assertArrayHasKey('resolution', $array_result);
 
 		$this->assertEquals(200, $response->getHttpStatusCode());
-
 	}
 
 	public function testResponseKO()
@@ -158,5 +160,4 @@ class GoogleMapsElevationPositionalTest extends TestCase
 		$this->expectException(RequestException::class);
 		new GoogleMapsResponse($this->mock_response_ko);
 	}
-
 }
